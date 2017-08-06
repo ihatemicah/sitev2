@@ -1,0 +1,38 @@
+
+/* ----------- iPhone 6 & Lower ( for now ) ----------- */
+
+/* Portrait and Landscape */
+
+@media only screen
+  /*and (min-device-width: 414px)*/
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and ( orientation: portrait) {
+  /*Top Section Start*/
+
+  .intro {
+    height: 100vh;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .title > a > p {
+    display: none;
+  }
+
+  .intro > h1 {
+    font-size: 1.7rem;
+  }
+
+  .intro-paragraph > p {
+    width: 80%;
+    font-size: 1.4rem;
+  }
+
+  .mobile-nav {
+    display: block !important;
+  }
+}
+/* TODO : iPhone 5 Resolution*/
