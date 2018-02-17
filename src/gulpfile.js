@@ -36,14 +36,14 @@ gulp.task('css', function () {
     .pipe(gulp.dest('../build/styles'));
 });
 
-// Uglify CSS
+// Minify CSS (packs for file size.)
 gulp.task('minify-css', () => {
   return gulp.src('.../build/styles/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('.../build/styles'));
 });
 
-// Browsersync
+// Browsersync (best for testing during development.)
 gulp.task('browser-sync',['css'],function() {
     browserSync.init(["styles/*.css", "js/*.js"], {
         server: {
@@ -55,7 +55,7 @@ gulp.task('browser-sync',['css'],function() {
     //  Add watcher to javascript director
 });
 
- // Default Task
+ // Default Task (runs all of this stuff.)
 gulp.task('default', ['scripts','sass','css','minify-css','browser-sync']);
 
 
