@@ -16,7 +16,7 @@ gulp.task('scripts', function() {
       .pipe(concat('all.js'))
       .pipe(rename({suffix: '.min'}))
       .pipe(uglify())
-      .pipe(gulp.dest('../build/js'));
+      .pipe(gulp.dest('../docs/js'));
 });
 
 // Compile SASS Files
@@ -33,14 +33,14 @@ gulp.task('sass:watch', function () {
 gulp.task('css', function () {
   return gulp.src(['styles/*.css','node_modules/normalize.css/normalize.css'])
     .pipe(concatCss("all.css"))
-    .pipe(gulp.dest('../build/styles'));
+    .pipe(gulp.dest('../docs/styles'));
 });
 
 // Minify CSS (packs for file size.)
 gulp.task('minify-css', () => {
-  return gulp.src('.../build/styles/*.css')
+  return gulp.src('.../docs/styles/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('.../build/styles'));
+    .pipe(gulp.dest('.../docs/styles'));
 });
 
 // Browsersync (best for testing during development.)
@@ -50,8 +50,8 @@ gulp.task('browser-sync',['css'],function() {
             baseDir: "./"
         }
     });
-    gulp.watch([".../build/styles/*.css","styles/*.css","sass/**/*.scss"],['css','sass'])
-    gulp.watch([".../build/*.html","*.html"]).on('change', browserSync.reload);
+    gulp.watch([".../docs/styles/*.css","styles/*.css","sass/**/*.scss"],['css','sass'])
+    gulp.watch([".../docs/*.html","*.html"]).on('change', browserSync.reload);
     //  Add watcher to javascript director
 });
 
