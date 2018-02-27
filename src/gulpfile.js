@@ -59,7 +59,7 @@ gulp.task('browser-sync',function() {
             baseDir: "./"
         }
     });
-    gulp.watch([".../docs/styles/*.css","styles/*.css","sass/**/*.scss"],['css','sass'])
+    gulp.watch([".../docs/styles/*.css","styles/*.css","sass/**/*.scss"])
     gulp.watch([".../docs/*.html","*.html"]).on('change', browserSync.reload);
     //  Add watcher to javascript director
 });
