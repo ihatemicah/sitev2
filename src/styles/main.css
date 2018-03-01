@@ -5,13 +5,37 @@ html {
   /* System Fonts as used by Medium and WordPress */
   body {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    color: #2D2C34;
+    background-color: #fff;
   }
-
+a {
+  color: inherit;
+}
+a:hover{
+  color: #6B6978;
+}
 /* /////////////////// */
 
 .navigation-1 {
   margin: 6% 0% 0% 4%;
+  font-size: 1.2rem;
 }
 .navigation-2 {
   margin: 6% 0% 0% 4%;
+  word-spacing: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.navigation-1 > a:first-child {
+  font-weight: 700;
+}
+.navigation-2 > a:nth-child(2){
+  font-weight: 700;
+}
+
+/* /////////////////// */
+
+.intro-paragraph{
+  font-size: 1.7rem;
+  margin: 20% 0 0 0;
 }
