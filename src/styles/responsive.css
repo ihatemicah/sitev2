@@ -18,5 +18,17 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and ( orientation: portrait) {
 
+  .intro-paragraph {
+    font-size: 1.3rem;
+    margin: 20% 0 0 4%;
+  }
+
+  .navigation-1 , .navigation-2 {
+    font-size: 1.0rem;
+
+  }
+  .navigation-2 {
+    margin: 6% 0% 0% 0%;
+  }
 
 }

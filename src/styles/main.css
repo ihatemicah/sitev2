@@ -39,3 +39,44 @@ a:hover{
   font-size: 1.7rem;
   margin: 20% 0 0 0;
 }
+
+
+
+
+/* /////////////////// */
+
+.project-container {
+  margin: 25% 0 0 0;
+}
+
+
+.project-image {
+  transform-origin: 50% 50%;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.project-image:hover{
+  transform: scale(1.08);
+  transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.image-container{
+  display:block;
+  overflow:hidden;
+  transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.image-container:hover{
+  transform: scale(0.98);
+  transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+}
+
+
+
+#yogi-tea {
+  /* just incase we need to modify the container  */
+}
