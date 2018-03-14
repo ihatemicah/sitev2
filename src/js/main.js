@@ -6,4 +6,7 @@ sr.reveal('.em-thinking_face',{delay: 400});
 sr.reveal('.em-video_game',{delay: 600});
 sr.reveal('.em-mage',{delay: 1000});
 
-sr.reveal('.project-container',{delay: 100});
+sr.reveal('.yogi-tea',{delay: 400});
+sr.reveal('.anime-poster',{delay:800});
+sr.reveal('.from-them'),{delay:2000};
+sr.reveal('.from-me'),{delay:4000};
