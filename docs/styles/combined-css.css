@@ -8131,12 +8131,18 @@ a:hover{
 
 /* /////////////////// */
 
+.right-col{
+  margin-top: 4rem;
+}
+
+
 .project-container {
   margin: 25% 0 0 0;
 }
 
-.project-title{
-  font-weight: 700;
+.project{
+  margin-bottom: 4rem;
+  margin-bottom: 64px
 }
 
 .project-image {
@@ -8163,24 +8169,49 @@ a:hover{
   transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-.description{
-  margin: 3% 0 0 0;
+.image-container img{
+  display:block;
+  width:100%;
+  height: auto;
+  
 }
+/* /////////////////// */
+
+.projectsmall{
+  width:60%;
+  margin-left:15%;
+}
+
+.projectbig{
+  /* width: 80%; */
+}
+
+
 
 /* /////////////////// */
 
-.yogi-tea {
-  /* Class for the yogi tea */
-}
 
 .anime-poster{
   margin: 20% 0 0 0;
 }
-.anime-poster > a > div > img{
-  max-width: 80%;
+
+/* Needed after every imessage */
+#ring{
+  clear:both;
 }
 
+
+
 /* /////////////////// */
+
+#imessage-from{
+  margin-left: 15%;
+}
+
+#imessage-me{
+  margin-right:22%;
+}
+
 .imessage{
   margin: 20% 0 0 0;
 }
@@ -8224,6 +8255,8 @@ a:hover{
 	border-radius:25px;
 	color: black;
   float: left;
+  margin-bottom: 4rem;
+  margin-bottom: 64px;
 }
 .from-them:after {
 		content:"";
@@ -8248,6 +8281,10 @@ a:hover{
 		border-bottom-right-radius: 16px 14px;
 		-webkit-transform:translate(0, -2px);
 	}
+
+
+
+  /* /////////////////// */
 
 
 
