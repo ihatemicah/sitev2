@@ -48,6 +48,7 @@ a:hover{
 
 
 .project-container {
+  max-width: 1980px;
   margin: 25% 0 0 0;
 }
 
@@ -84,7 +85,7 @@ a:hover{
   display:block;
   width:100%;
   height: auto;
-  
+
 }
 /* /////////////////// */
 
