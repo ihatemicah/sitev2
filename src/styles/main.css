@@ -208,3 +208,34 @@ h3{
 
 
   /* /////////////////// */
+  .social-container{
+    margin:0 0% 0 8%;
+    font-size: 1.7rem;
+  }
+
+  .social-content{
+    font-weight: 400;
+  }
+
+  .social-link{
+    font-weight: 600;
+  }
+
+
+
+  /* /////////////////// */
+
+  .custom-footer {
+    border-top: 1px #000 solid;
+    padding: 2% 0 1% 0;
+  }
+
+  .footer-content{
+    text-align:center;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+
+
+  /* /////////////////// */

@@ -13,6 +13,7 @@ sr.reveal('#ring',{delay:1000});
 sr.reveal('#team-hex',{delay:1000});
 sr.reveal('.from-them'),{delay:2000};
 sr.reveal('.from-me'),{delay:4000};
+sr.reveal('#social-media',{delay:1000});
 
 
 $(document).on("scroll", function() {
