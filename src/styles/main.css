@@ -44,6 +44,9 @@ h3{
   margin: 20% 0 0 0;
 }
 
+.intro-paragraph > h1 {
+  font-weight: 600;
+}
 /* /////////////////// */
 
 .right-col{
@@ -239,3 +242,28 @@ h3{
 
 
   /* /////////////////// */
+  /* Start of details page. */
+
+  .team-hex-hero > img{
+    max-width:100%;
+  }
+
+  .product-details{
+    margin: auto;
+    display:block;
+  }
+
+  .product-detail-text-1{
+    margin:0 20% 10% 0;
+  }
+
+  .product-detail-text-2{
+    margin: 0 0 10% 20%;
+  }
+
+  .product-detail-text-1> h4{
+      font-weight:600;
+    }
+  .product-detail-text-2> h4{
+      font-weight:600;
+    }
