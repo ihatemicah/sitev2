@@ -49,4 +49,30 @@
   .social-content , .social-link{
     font-size: 1.3rem;
   }
+
+  .detailed-intro-paragraph{
+    font-size: 1.3rem;
+    margin-left: 10%;
+  }
+
+  .detailed-intro-subparagraph{
+    font-size: 1.3rem;
+    margin-left: 2%;
+  }
+
+  .team-hex-hero > img {
+    max-width:100%;
+  }
+
+  .product-detail-text-1 {
+    margin: 0 0 5% 0;
+  }
+
+  .product-detail-text-2 {
+    margin: 0 0 5% 0;
+  }
+
+
+
+
 }

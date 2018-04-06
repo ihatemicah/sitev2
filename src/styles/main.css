@@ -245,7 +245,9 @@ h3{
   /* Start of details page. */
 
   .team-hex-hero > img{
-    max-width:100%;
+    max-width:80%;
+    margin:auto;
+    display:block;
   }
 
   .product-details{
@@ -254,11 +256,11 @@ h3{
   }
 
   .product-detail-text-1{
-    margin:0 20% 10% 0;
+    /* margin:0 20% 10% 0; */
   }
 
   .product-detail-text-2{
-    margin: 0 0 10% 20%;
+    /* margin: 0 0 10% 20%; */
   }
 
   .product-detail-text-1> h4{
@@ -267,3 +269,15 @@ h3{
   .product-detail-text-2> h4{
       font-weight:600;
     }
+
+  .detailed-intro-paragraph {
+      font-size: 1.7rem;
+      margin: 15% 0 5% 0%
+    }
+
+    .detailed-intro-subparagraph {
+        font-size: 1.7rem;
+        margin: auto;
+        display:block;
+        /* margin: 0 0 0 21.5%; */
+      }
