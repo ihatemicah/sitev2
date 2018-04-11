@@ -76,3 +76,66 @@
 
 
 }
+
+
+/* Half the windowed screen */
+@media only screen
+  and (min-device-width: 958px){
+    .detailed-intro-subparagraph{
+      margin-left:13%;
+    }
+  }
+  /* Regular Laptops */
+  @media only screen
+    and (min-device-width: 1024px){
+
+      .product-details{
+        max-width: 77%;
+      }
+
+      .detailed-intro-subparagraph{
+        margin-left:13%;
+      }
+
+      .product-detail-text-1{
+        margin-bottom: 10%;
+      }
+
+      .product-detail-text-2{
+        margin-bottom: 10%;
+      }
+    }
+
+    /* For MCP Laptops Zoomed Out Lol */
+    @media only screen
+      and (min-device-width: 1916px){
+
+
+        .detailed-intro-subparagraph{
+          margin-left:16%;
+        }
+
+        .product-detail-text-1{
+          margin: 0 0 10% 20%;
+        }
+
+        .product-detail-text-2{
+          margin: 0 0 10% 20%;
+        }
+
+      }
+
+    /* For 4k Monitors */
+    @media only screen
+      and (min-device-width: 2560px){
+
+        .project-page{
+          max-width: 70%;
+          margin:auto;
+        }
+
+        .detailed-intro-subparagraph{
+          margin-left:15%;
+        }
+
+      }

@@ -244,6 +244,9 @@ h3{
   /* /////////////////// */
   /* Start of details page. */
 
+
+
+
   .team-hex-hero > img{
     max-width:80%;
     margin:auto;
@@ -279,5 +282,4 @@ h3{
         font-size: 1.7rem;
         margin: auto;
         display:block;
-        /* margin: 0 0 0 21.5%; */
       }
