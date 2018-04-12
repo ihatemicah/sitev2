@@ -47,3 +47,27 @@ if (mobile === false) { // check for desktop
     var pixels = $(document).scrollTop()
     $("#right-move").css("margin-top", pixels * 0.00);
        }
+
+
+//  Scew page on scrolling. - also the selector.
+const section = document.querySelector("#scew-animation")
+
+let currentPixel = window.pageYOffset
+
+// Finds where the new position is.
+const looper = function() {
+  const newPixel =  window.pageYOffset
+  const diff = newPixel - currentPixel
+
+  // Speed of scew
+  const speed = diff * 0.25
+
+  section.style.transform = "skewY(" + speed + "deg)"
+
+  currentPixel = newPixel
+
+  requestAnimationFrame(looper)
+}
+
+
+$(document).ready(looper);

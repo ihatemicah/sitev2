@@ -8333,6 +8333,11 @@ h3{
   /* /////////////////// */
   /* Start of details page. */
 
+  #scew-animation{
+    transition: 1s;
+    will-change: transform;
+  }
+
 
 
 
@@ -8364,8 +8369,12 @@ h3{
 
   .detailed-intro-paragraph {
       font-size: 1.7rem;
-      margin: 15% 0 5% 0%
+      margin: 15% 0 5% 0%;
     }
+
+  .detailed-intro-paragraph > h1 {
+    font-weight: 600;
+  }
 
     .detailed-intro-subparagraph {
         font-size: 1.7rem;
@@ -8378,8 +8387,7 @@ h3{
 /* This is where we will setup all of the responsive breakpoints for the website.
 
  TODO -
- [ ] Don't use device specific breakpoints..
-   - https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
+
 
 
  */
@@ -8446,9 +8454,6 @@ h3{
   .product-detail-text-2 {
     margin: 0 0 5% 0;
   }
-
-
-
 
 }
 

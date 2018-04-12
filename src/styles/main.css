@@ -244,6 +244,11 @@ h3{
   /* /////////////////// */
   /* Start of details page. */
 
+  #scew-animation{
+    transition: 1s;
+    will-change: transform;
+  }
+
 
 
 
@@ -275,8 +280,12 @@ h3{
 
   .detailed-intro-paragraph {
       font-size: 1.7rem;
-      margin: 15% 0 5% 0%
+      margin: 15% 0 5% 0%;
     }
+
+  .detailed-intro-paragraph > h1 {
+    font-weight: 600;
+  }
 
     .detailed-intro-subparagraph {
         font-size: 1.7rem;
