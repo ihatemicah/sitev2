@@ -3,7 +3,7 @@ html {
   height: 100%; }
 
   /* System Fonts as used by Medium and WordPress */
-  body {
+body {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     color: #2D2C34;
     background-color: #fff;
@@ -16,6 +16,10 @@ a:hover{
 }
 
 h3{
+  font-weight: 600;
+}
+
+strong{
   font-weight: 600;
 }
 /* /////////////////// */
@@ -31,10 +35,10 @@ h3{
 }
 
 .navigation-1 > a:first-child {
-  font-weight: 700;
+  font-weight: 600;
 }
 .navigation-2 > a:nth-child(2){
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* /////////////////// */
@@ -287,8 +291,41 @@ h3{
     font-weight: 600;
   }
 
-    .detailed-intro-subparagraph {
-        font-size: 1.7rem;
-        margin: auto;
-        display:block;
-      }
+  .detailed-intro-subparagraph {
+      font-size: 1.7rem;
+      margin: auto;
+      display:block;
+    }
+
+      /* ###############  */
+
+ .about-me {
+   font-size: 1.7rem;
+   margin: 20% 0 0 0;
+ }
+
+ .about-me > p {
+   margin: 0 0 10% 0;
+ }
+
+.totoro{
+  z-index: 0;
+  position:absolute;
+  top: 40%;
+  right:-12%;
+}
+
+.totoro > img {
+  max-width: 40%;
+}
+
+.akira{
+  z-index: 0;
+  position:absolute;
+  top: 80%;
+  right:65%;
+}
+
+.akira > img {
+  max-width: 40%;
+}
