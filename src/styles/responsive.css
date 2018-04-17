@@ -71,6 +71,16 @@
     margin: 0 0 5% 0;
   }
 
+  .background-gifs{
+    display: none;
+  }
+
+  .about-me{
+    font-size: 1.2rem;
+    margin-left: 5%;
+
+  }
+
 }
 
 
@@ -125,7 +135,7 @@
     @media only screen
       and (min-device-width: 2560px){
 
-        .project-page{
+        .high-res-page{
           max-width: 70%;
           margin:auto;
         }
@@ -133,5 +143,6 @@
         .detailed-intro-subparagraph{
           margin-left:15%;
         }
+
 
       }
