@@ -8419,6 +8419,23 @@ strong{
   max-width: 40%;
 }
 
+/* ###############  */
+.image-gallery{
+  margin:auto;
+}
+
+
+
+.gallery-image > img {
+  display:block;
+  margin: 0 auto;
+  padding-bottom: 5%;
+}
+.gallery-image > p {
+  text-align:center;
+  padding-bottom: 5%;
+}
+
 
 
 /* This is where we will setup all of the responsive breakpoints for the website.

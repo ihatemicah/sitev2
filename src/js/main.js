@@ -23,7 +23,13 @@ sr.reveal('.product-detail-text-1',{delay:1500});
 sr.reveal('.product-detail-text-2',{delay:1500});
 
 // About me.
-sr.reveal('.about-me',{delay:1000})
+sr.reveal('.about-me',{delay:1000});
+
+// Tons of projects.
+  // Need to figure out the bug on how we can get this to load instantly.
+sr.reveal('.image-gallery');
+sr.reveal('.detailed-intro-paragraph');
+
 
 // Detect mobile
 var mobile = false;
