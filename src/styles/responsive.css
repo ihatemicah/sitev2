@@ -144,5 +144,19 @@
           margin-left:15%;
         }
 
+        .totoro{
+          z-index: 0;
+          position:absolute;
+          top: 40%;
+          right:12%;
+        }
+
+        .akira{
+          z-index: 0;
+          position:absolute;
+          top: 80%;
+          right:65%;
+        }
+
 
       }
