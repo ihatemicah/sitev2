@@ -8091,9 +8091,20 @@ body {
   }
 a {
   color: inherit;
+  transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 a:hover{
   color: #6B6978;
+}
+
+.underline-link {
+  border-bottom: 1px solid #2D2C34;
+  padding-bottom: 5px;
+  transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.underline-link:hover{
+  border-bottom: 1px solid #6B6978;
 }
 
 h3{
@@ -8415,8 +8426,6 @@ strong{
 .image-gallery{
   margin:auto;
 }
-
-
 
 .gallery-image > img {
   display:block;

@@ -17,10 +17,10 @@ sr.reveal('.from-me',{delay:500});
 sr.reveal('#social-media',{delay:400});
 
   // Detailed page.
-sr.reveal('.team-hex-hero',{delay:800});
-sr.reveal('.detailed-intro-subparagraph',{delay:1000});
-sr.reveal('.product-detail-text-1',{delay:1500});
-sr.reveal('.product-detail-text-2',{delay:1500});
+sr.reveal('.team-hex-hero',{delay:400});
+sr.reveal('.detailed-intro-subparagraph',{delay:400});
+sr.reveal('.product-detail-text-1',{delay:400});
+sr.reveal('.product-detail-text-2',{delay:400});
 
   // About me.
 sr.reveal('.about-me',{delay:1000});
