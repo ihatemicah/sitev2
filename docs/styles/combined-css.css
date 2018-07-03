@@ -8358,6 +8358,10 @@ strong{
     margin: auto;
     display:block;
   }
+  .detailed-header{
+    margin:auto;
+    display:block;
+  }
 
   .product-detail-text-1{
     /* margin:0 20% 10% 0; */
@@ -8385,8 +8389,6 @@ strong{
 
   .detailed-intro-subparagraph {
       font-size: 1.7rem;
-      margin: auto;
-      display:block;
     }
 
       /* ###############  */
@@ -8490,12 +8492,12 @@ strong{
 
   .detailed-intro-paragraph{
     font-size: 1.3rem;
-    margin-left: 10%;
+    /* margin-left: 10%; */
   }
 
   .detailed-intro-subparagraph{
     font-size: 1.3rem;
-    margin-left: 2%;
+    /* margin-left: 2%; */
   }
 
   .team-hex-hero > img {
@@ -8527,19 +8529,19 @@ strong{
 @media only screen
   and (min-device-width: 958px){
     .detailed-intro-subparagraph{
-      margin-left:13%;
+      /* margin-left:13%; */
     }
   }
   /* Regular Laptops */
   @media only screen
     and (min-device-width: 1024px){
 
-      .product-details{
+      /* .product-details{
         max-width: 77%;
-      }
+      } */
 
       .detailed-intro-subparagraph{
-        margin-left:13%;
+        /* margin-left:13%; */
       }
 
       .product-detail-text-1{
@@ -8557,7 +8559,7 @@ strong{
 
 
         .detailed-intro-subparagraph{
-          margin-left:16%;
+          /* margin-left:16%; */
         }
 
         .product-detail-text-1{
@@ -8580,7 +8582,7 @@ strong{
         }
 
         .detailed-intro-subparagraph{
-          margin-left:15%;
+          /* margin-left:15%; */
         }
 
         .totoro{

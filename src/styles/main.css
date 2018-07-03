@@ -277,6 +277,10 @@ strong{
     margin: auto;
     display:block;
   }
+  .detailed-header{
+    margin:auto;
+    display:block;
+  }
 
   .product-detail-text-1{
     /* margin:0 20% 10% 0; */
@@ -304,8 +308,6 @@ strong{
 
   .detailed-intro-subparagraph {
       font-size: 1.7rem;
-      margin: auto;
-      display:block;
     }
 
       /* ###############  */
