@@ -8439,17 +8439,13 @@ strong{
   padding-bottom: 5%;
 }
 
+.case-study-image{
+  padding-bottom: 2%;
+}
+
 
 
 /* This is where we will setup all of the responsive breakpoints for the website.
-
- TODO -
-
-
-
- */
-
-
 /* ----------- iPhone 6 & Lower ( for now ) ----------- */
 
 @media only screen
@@ -8519,30 +8515,25 @@ strong{
   .about-me{
     font-size: 1.2rem;
     margin-left: 5%;
-
   }
-
+  .high-res-page{
+    /* This fixes the padding alignment issues on mobile + tablet. */
+    margin:0 4% 0 4%;
+  }
 }
 
 
 /* Half the windowed screen */
 @media only screen
-  and (min-device-width: 958px){
-    .detailed-intro-subparagraph{
-      /* margin-left:13%; */
-    }
+  and (min-device-width: 768px) and (max-device-width: 1024px){
+        .high-res-page{
+          margin:0 4% 0 4%;
+        }\
+        /*  Need to fix this view on the iPad Pro */
   }
   /* Regular Laptops */
   @media only screen
     and (min-device-width: 1024px){
-
-      /* .product-details{
-        max-width: 77%;
-      } */
-
-      .detailed-intro-subparagraph{
-        /* margin-left:13%; */
-      }
 
       .product-detail-text-1{
         margin-bottom: 10%;
@@ -8552,25 +8543,6 @@ strong{
         margin-bottom: 10%;
       }
     }
-
-    /* For MCP Laptops Zoomed Out Lol */
-    @media only screen
-      and (min-device-width: 1916px){
-
-
-        .detailed-intro-subparagraph{
-          /* margin-left:16%; */
-        }
-
-        .product-detail-text-1{
-          margin: 0 0 10% 20%;
-        }
-
-        .product-detail-text-2{
-          margin: 0 0 10% 20%;
-        }
-
-      }
 
     /* For 4k Monitors */
     @media only screen

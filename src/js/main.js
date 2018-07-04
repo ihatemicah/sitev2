@@ -31,7 +31,7 @@ sr.reveal('.image-gallery');
 sr.reveal('.detailed-intro-paragraph');
 
 
-// Detect mobile
+// Detect mobile for turning off the parralax.
 var mobile = false;
 
 function isMobile() {
@@ -69,7 +69,7 @@ const looper = function() {
   const diff = newPixel - currentPixel
 
   // Speed of scew
-  const speed = diff * 0.25
+  const speed = diff * 0.05
 
   section.style.transform = "skewY(" + speed + "deg)"
 
