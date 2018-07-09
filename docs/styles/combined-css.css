@@ -8443,6 +8443,11 @@ strong{
   padding-bottom: 2%;
 }
 
+.project-description {
+  padding-top: 1%;
+  font-size: 1.2rem;
+}
+
 
 
 /* This is where we will setup all of the responsive breakpoints for the website.
@@ -8519,6 +8524,11 @@ strong{
   .high-res-page{
     /* This fixes the padding alignment issues on mobile + tablet. */
     margin:0 4% 0 4%;
+  }
+
+  .project-description {
+    padding-top: 1%;
+    font-size: 1rem;
   }
 }
 

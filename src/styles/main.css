@@ -361,3 +361,8 @@ strong{
 .case-study-image{
   padding-bottom: 2%;
 }
+
+.project-description {
+  padding-top: 1%;
+  font-size: 1.2rem;
+}

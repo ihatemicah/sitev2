@@ -75,6 +75,11 @@
     /* This fixes the padding alignment issues on mobile + tablet. */
     margin:0 4% 0 4%;
   }
+
+  .project-description {
+    padding-top: 1%;
+    font-size: 1rem;
+  }
 }
 
 
