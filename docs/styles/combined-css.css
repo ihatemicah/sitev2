@@ -8094,7 +8094,8 @@ a {
   transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 a:hover{
-  color: #6B6978;
+  /* color: #6B6978; */
+  color: #2A28EE;
 }
 
 .underline-link {
@@ -8325,14 +8326,14 @@ strong{
   /* /////////////////// */
 
   .custom-footer {
-    border-top: 1px #000 solid;
+    /* Removing for the time being. 😭 */
+    /* border-top: 1px #000 solid; */
     padding: 2% 0 1% 0;
   }
 
   .footer-content{
     text-align:center;
     font-weight: 600;
-    text-decoration: underline;
   }
 
 
@@ -8344,9 +8345,6 @@ strong{
     transition: 1s;
     will-change: transform;
   }
-
-
-
 
   .team-hex-hero > img{
     max-width:80%;
@@ -8437,6 +8435,7 @@ strong{
 .gallery-image > p {
   text-align:center;
   padding-bottom: 5%;
+  color: #57586e;
 }
 
 .case-study-image{
@@ -8446,6 +8445,13 @@ strong{
 .project-description {
   padding-top: 1%;
   font-size: 1.2rem;
+  max-width: 60%;
+  color: #57586e;
+}
+
+.case-study-description{
+  max-width: 60%;
+  color: #57586e;
 }
 
 
@@ -8529,6 +8535,11 @@ strong{
   .project-description {
     padding-top: 1%;
     font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .case-study-description{
+    max-width:100%;
   }
 }
 
