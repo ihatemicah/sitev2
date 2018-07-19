@@ -372,3 +372,9 @@ strong{
   max-width: 60%;
   color: #57586e;
 }
+
+.duo-image-content > img{
+  max-width:100%;
+  margin: auto;
+  display:block;
+}

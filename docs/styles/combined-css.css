@@ -8454,6 +8454,12 @@ strong{
   color: #57586e;
 }
 
+.duo-image-content > img{
+  max-width:100%;
+  margin: auto;
+  display:block;
+}
+
 
 
 /* This is where we will setup all of the responsive breakpoints for the website.
