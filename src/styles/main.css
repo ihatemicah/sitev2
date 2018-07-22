@@ -373,8 +373,13 @@ strong{
   color: #57586e;
 }
 
-.duo-image-content > img{
-  max-width:100%;
-  margin: auto;
-  display:block;
+.duo-image-content{
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.duo-image-content > img {
+padding: 1%;
 }
