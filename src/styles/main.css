@@ -27,6 +27,11 @@ a:hover{
   border-bottom: 1px solid #6B6978;
 }
 
+
+h1 {
+  font-weight: 600;
+}
+
 h3{
   font-weight: 600;
 }
@@ -274,10 +279,12 @@ strong{
   .product-details{
     margin: auto;
     display:block;
+    /* Killed this for the same reason (aligning text) */
   }
   .detailed-header{
     margin:auto;
     display:block;
+    /* Killed this so I can align the text headers. */
   }
 
   .product-detail-text-1{
@@ -306,6 +313,7 @@ strong{
 
   .detailed-intro-subparagraph {
       font-size: 1.7rem;
+      text-align:center;
     }
 
       /* ###############  */
@@ -359,6 +367,12 @@ strong{
 
 .case-study-image{
   padding-bottom: 2%;
+}
+
+.image-description {
+  text-align: center;
+  color: #57586e;
+  padding: 2% 0 2% 0;
 }
 
 .project-description {
