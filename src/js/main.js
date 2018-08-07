@@ -31,6 +31,10 @@ sr.reveal('.image-gallery');
 sr.reveal('.detailed-intro-paragraph');
 
 
+// Item page
+sr.reveal ('.item',{delay:400});
+
+
 // Detect mobile for turning off the parralax.
 var mobile = false;
 
