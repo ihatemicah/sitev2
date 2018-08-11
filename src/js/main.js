@@ -35,7 +35,7 @@ sr.reveal('.detailed-intro-paragraph');
 sr.reveal ('.item',{delay:400});
 
 // Footer
-// sr.reveal('.custom-footer',{delay:400});
+//  sr.reveal('.related-projects-animation',{delay:400});
 
 
 // Detect mobile for turning off the parralax.
