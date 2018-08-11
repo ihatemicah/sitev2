@@ -8335,14 +8335,13 @@ strong{
   /* /////////////////// */
 
   .custom-footer {
-    /* Removing for the time being. 😭 */
-    /* border-top: 1px #000 solid; */
     padding: 2% 0 1% 0;
   }
 
   .footer-content{
     text-align:center;
     font-weight: 600;
+    padding: 0 0 2% 0;
   }
 
 
@@ -8490,6 +8489,16 @@ padding: 1%;
 .item img {
   display:block;
   margin: auto;
+}
+
+.related-projects{
+  text-align: center;
+  padding: 2% 0 0 0;
+}
+
+.related-projects-img{
+  margin: auto;
+  display:block;
 }
 
 
