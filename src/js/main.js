@@ -34,6 +34,9 @@ sr.reveal('.detailed-intro-paragraph');
 // Item page
 sr.reveal ('.item',{delay:400});
 
+// Footer
+sr.reveal('.custom-footer',{delay:400});
+
 
 // Detect mobile for turning off the parralax.
 var mobile = false;
