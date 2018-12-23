@@ -38,7 +38,7 @@
   }
 
   .social-content , .social-link{
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .detailed-intro-paragraph{
@@ -84,6 +84,19 @@
 
   .case-study-description{
     max-width:100%;
+  }
+
+  .email-input {
+    width: 70%;
+    text-align:left;
+  }
+
+  .control:last-of-type {
+    margin-top:4% ;
+  }
+
+  .button.is-link {
+    width: 70%;
   }
 }
 

@@ -8319,7 +8319,7 @@ strong{
   /* /////////////////// */
   .social-container{
     margin:0 0% 0 8%;
-    font-size: 1.7rem;
+    font-size: 1rem;
   }
 
   .social-content{
@@ -8328,6 +8328,10 @@ strong{
 
   .social-link{
     font-weight: 600;
+  }
+
+  .social-link:last-of-type{
+  margin-bottom: 1%;
   }
 
 
@@ -8502,6 +8506,34 @@ padding: 1%;
 }
 
 
+/* EMAIL NEWSLETTER STYLES */
+
+.control {
+  text-align: left;
+}
+  .control:last-of-type {
+    margin-top:.6% ;
+  }
+
+.email-input {
+  width: 15%;
+  text-align:left;
+}
+
+  .email-input:active{
+    border-color: #2A28EE;
+  }
+  .email-input:focus {
+    border-color: #2A28EE;
+  }
+
+.button.is-link {
+  border-color: #dbdbdb;
+  color: #787878;
+  text-decoration: none;
+}
+
+
 /* This is where we will setup all of the responsive breakpoints for the website.
 /* ----------- iPhone 6 & Lower ( for now ) ----------- */
 
@@ -8540,7 +8572,7 @@ padding: 1%;
   }
 
   .social-content , .social-link{
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .detailed-intro-paragraph{
@@ -8586,6 +8618,19 @@ padding: 1%;
 
   .case-study-description{
     max-width:100%;
+  }
+
+  .email-input {
+    width: 70%;
+    text-align:left;
+  }
+
+  .control:last-of-type {
+    margin-top:4% ;
+  }
+
+  .button.is-link {
+    width: 70%;
   }
 }
 
