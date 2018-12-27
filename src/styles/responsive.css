@@ -87,7 +87,7 @@
   }
 
   .email-input {
-    width: 70%;
+    width: 100%;
     text-align:left;
   }
 
@@ -96,7 +96,15 @@
   }
 
   .button.is-link {
-    width: 70%;
+    width: 100%;
+  }
+  
+  .social-container {
+    margin-left: 0;
+  }
+
+  .from-them {
+    margin-right: 30%;
   }
 }
 

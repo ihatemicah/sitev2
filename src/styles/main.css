@@ -237,7 +237,7 @@ strong{
 
   /* /////////////////// */
   .social-container{
-    margin:0 0% 0 8%;
+    margin-left:15%;
     font-size: 1rem;
   }
 
@@ -277,41 +277,33 @@ strong{
     will-change: transform;
   }
 
-  .team-hex-hero > img{
-    max-width:80%;
-    margin:auto;
-    display:block;
+  .project-image-container {
+    margin-bottom: 5%;
   }
 
   .product-details{
-    margin: auto;
     display:block;
     /* Killed this for the same reason (aligning text) */
   }
   .detailed-header{
-    margin:auto;
     display:block;
     /* Killed this so I can align the text headers. */
   }
-
-  .product-detail-text-1{
-    /* margin:0 20% 10% 0; */
+  .product-detail-text {
+    margin-bottom: 5%;
   }
 
-  .product-detail-text-2{
-    /* margin: 0 0 10% 20%; */
-  }
-
-  .product-detail-text-1> h4{
+  .product-detail-text> h4{
       font-weight:600;
     }
-  .product-detail-text-2> h4{
-      font-weight:600;
+
+    .product-detail-text > h4:last-of-type{
+      margin-top: 2%;
     }
 
   .detailed-intro-paragraph {
       font-size: 1.7rem;
-      margin: 15% 0 5% 0%;
+      margin: 15% 0% 5% 0%;
     }
 
   .detailed-intro-paragraph > h1 {
@@ -320,7 +312,6 @@ strong{
 
   .detailed-intro-subparagraph {
       font-size: 1.7rem;
-      text-align:center;
     }
 
 
@@ -371,8 +362,16 @@ strong{
 }
 
 .case-study-image{
-  padding-bottom: 2%;
+  /* padding-bottom: 2%;
+  margin: auto;
+  display: block;
+  width: 90%; */
 }
+
+  .case-study-image > img {
+    width:100%;
+    display:block;
+  }
 
 .image-description {
   text-align: center;
@@ -435,7 +434,7 @@ padding: 1%;
   }
 
 .email-input {
-  width: 15%;
+  width: 40%;
   text-align:left;
 }
 
