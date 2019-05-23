@@ -25,6 +25,7 @@ sr.reveal('.project-image-container',{delay:400});
 
   // About me.
 sr.reveal('.about-me',{delay:1000});
+sr.reveal('.profile-image',{delay:1000});
 
 // Tons of projects.
   // Need to figure out the bug on how we can get this to load instantly.

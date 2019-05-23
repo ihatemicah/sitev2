@@ -268,9 +268,12 @@ strong{
 
   .label {
     font-family: 'Libre Baskerville', serif;
-    font-weight: 400;
+    font-weight: 600;
   }
 
+  .label:not(:last-child) {
+    margin-bottom: 3%;
+  }
   /* /////////////////// */
 
   .custom-footer {
@@ -334,7 +337,7 @@ strong{
 
  .about-me {
    font-size: 1.7rem;
-   margin: 20% 0 20% 0;
+   margin: 5% 0 0 0;
  }
 
  .about-me > p {
@@ -453,6 +456,7 @@ padding: 1%;
 .email-input {
   width: 40%;
   text-align:left;
+  padding: 3% 0 3% 3%;
 }
 
   .email-input:active{
@@ -466,4 +470,9 @@ padding: 1%;
   border-color: #dbdbdb;
   color: #787878;
   text-decoration: none;
+}
+
+
+.profile-image{
+  margin: 4% 0 0 0;
 }
