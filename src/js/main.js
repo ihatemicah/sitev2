@@ -87,3 +87,8 @@ const looper = function() {
   requestAnimationFrame(looper)
 }
 $(document).ready(looper);
+
+// Chocolat lightbox plugin
+$(document).ready(function(){
+  $('.chocolat-parent').Chocolat();
+});
