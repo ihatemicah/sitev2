@@ -887,6 +887,7 @@ sr.reveal('.team-hex-hero',{delay:400});
 sr.reveal('.detailed-intro-subparagraph',{delay:400});
 sr.reveal('.product-detail-text',{delay:400});
 sr.reveal('.project-image-container',{delay:400});
+sr.reveal('.chocolat-parent',{delay:400});
 
 
   // About me.
@@ -903,7 +904,7 @@ sr.reveal('.detailed-intro-paragraph');
 sr.reveal ('.item',{delay:400});
 
 // Footer
-//  sr.reveal('.related-projects-animation',{delay:400});
+ sr.reveal('.custom-footer',{delay:400});
 
 
 // Detect mobile for turning off the parralax.
