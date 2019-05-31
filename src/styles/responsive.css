@@ -120,7 +120,7 @@
 /* Half the windowed screen */
 @media only screen
   and (min-device-width: 768px) and (max-device-width: 1024px){
-    .intro-paragraph{
+    /* .intro-paragraph{
       padding: 0% 10%;
     }
     
@@ -133,7 +133,7 @@
     }
 
     .about-me {
-      padding: 0 10%;
+      padding: 0 10%; */
     }
   }
   /* Regular Laptops */

@@ -874,25 +874,25 @@ sr.reveal('.em-thinking_face',{delay: 400});
 sr.reveal('.em-video_game',{delay: 600});
 sr.reveal('.em-mage',{delay: 1000});
 
-sr.reveal('#yogi-tea',{delay: 400});
-sr.reveal('#anime-poster',{delay:400});
-sr.reveal('#ring',{delay:500});
-sr.reveal('#team-hex',{delay:400});
-sr.reveal('.from-them',{delay:400});
-sr.reveal('.from-me',{delay:500});
-sr.reveal('#social-media',{delay:400});
+sr.reveal('#yogi-tea',{delay: 200});
+sr.reveal('#anime-poster',{delay:200});
+sr.reveal('#ring',{delay:200});
+sr.reveal('#team-hex',{delay:200});
+sr.reveal('.from-them',{delay:200});
+sr.reveal('.from-me',{delay:200});
+sr.reveal('#social-media',{delay:200});
 
   // Detailed page.
-sr.reveal('.team-hex-hero',{delay:400});
-sr.reveal('.detailed-intro-subparagraph',{delay:400});
-sr.reveal('.product-detail-text',{delay:400});
-sr.reveal('.project-image-container',{delay:400});
-sr.reveal('.chocolat-parent',{delay:400});
+sr.reveal('.team-hex-hero',{delay:200});
+sr.reveal('.detailed-intro-subparagraph',{delay:200});
+sr.reveal('.product-detail-text',{delay:200});
+sr.reveal('.project-image-container',{delay:200});
+sr.reveal('.chocolat-parent',{delay:200});
 
 
   // About me.
-sr.reveal('.about-me',{delay:1000});
-sr.reveal('.profile-image',{delay:1000});
+sr.reveal('.about-me',{delay:200});
+sr.reveal('.profile-image',{delay:200});
 
 // Tons of projects.
   // Need to figure out the bug on how we can get this to load instantly.
