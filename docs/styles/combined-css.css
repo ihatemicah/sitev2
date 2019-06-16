@@ -8227,6 +8227,11 @@ strong{
   height: auto;
 
 }
+
+.footer{
+  background-color: #ECF3FF;
+  padding: 3em 1.5em 3em;
+}
 /* /////////////////// */
 
 .projectsmall{
