@@ -1,12 +1,15 @@
 /* HTML Document Tags.*/
+
+
 html {
-  height: 100%; 
+  /* overflow:hidden; */
+  /* height: 100%;  */
 }
 
-  /* System Fonts as used by Medium and WordPress */
+
 body {
     font-family: 'Roboto', sans-serif;
-
+    height: 100%;
     color: #2D2C34;
     background-color: #fff;
     transition:all .500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); 
@@ -34,8 +37,9 @@ a:hover{
 }
 
 .container{
-  overflow: hidden;
+  overflow:hidden;
 }
+
 h1 {
   font-weight: 600;
   font-family: 'Libre Baskerville', serif;
