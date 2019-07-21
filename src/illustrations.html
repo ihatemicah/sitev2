@@ -11,13 +11,6 @@
         </script>
         <!--
         (/・・)ノ Hey fellow developer, if you're looking at this now just wanted to let you know this is a total work in progress.. and I thought I'd share some of the TODO's that I'll be approaching.
-        TODO:
-        [ ] - Build in a lightbox funtionality for all images.
-        [ ] - Create a resource page (mindfulness resources, some design resources, a lot of stuff to bring SEO.)
-        [ ] - Freebies section ( all of my social media content).
-        [ ] - Figure out a better way to list out newsletter articles.
-        [ ] - Refactor the site onto React. 
-        [ ] - Create a cleaner about me section. (move it from an individual page to bottom of projects.)
           -->
         <!-- Primary Meta Tags -->
         <meta charset="utf-8">	        
@@ -50,7 +43,7 @@
           <link rel="stylesheet" href="styles/emoji.css">
           <link rel="stylesheet" href="styles/chocolat.css" type="text/css" media="screen" charset="utf-8">
           <!-- endbuild -->
-          <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Roboto:400,700&display=swap" rel="stylesheet">
           <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
           <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
           <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
@@ -63,53 +56,110 @@
     </head>
 <body>
 <!-- build:html index.html  -->
+<!-- TODO: 
+ X - Create new illustration page header. 
+-->
 <div class="container">
-    <div class="container columns">
-        <div class="navigation-1 column is-offset-2-fullhd is-offset-1-desktop is-offset-1-mobile">
-          <a href="index.html"> Micah Carroll </a>
-          <p> Designer </p>
-        </div>
-        <div class="navigation-2 column is-3 is-offset-1-mobile">
-          <a href="aboutme.html">About Me</a>
-          <a href="https://kit.com/MultiMicah" target="_blank">My Kit</a>
-        </div>
+  <div class="columns">
+      <div class="navigation-1 column">
+        <a href="index.html"> Micah Carroll </a>
+        <p> Designer </p>
       </div>
-  <!-- Navigation End. -->
-  <div class="high-res-page">
-  <div class="container columns">
-    <div class="column is-offset-1  detailed-intro-paragraph">
-      <h1> Illustrations </h1>
-      <p> Random explorations </p>
-      <p class="project-description"> Here's a collection of my illustration work. </p>
-    </div>
-  </div>
-  <div class="container columns image-gallery">
-      <div class="column gallery-image">
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/4448442/maplestorymushroom.png">
-          <p> Maplestory is my favorite childhood game. </p>
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/4370678/ring-social-design.png">
-          <p> I like to make silly phone illustrations. </p>
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/4357591/potion_green.png">
-          <p> Playing so much mmorpg's i like potions. </p>
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/4061375/dango.jpg">
-          <p> This was an interesting idea so i went ahead and did it. </p>
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/3992759/chat-bubbbles.jpg">
-          <p> When you get no reply D: </p>
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/3970678/doggie-doodle.jpg">
-          <p> When you can't make a decision right away. </p>
-          <img src="https://cdn.dribbble.com/users/971133/screenshots/3798809/sillyface.png">
-          <p> My first sticker. </p>
+      <div class="navigation-2 column is-2">
+        <a href="aboutme.html">About Me</a>
+        <a href="https://kit.com/MultiMicah" target="_blank">My Kit</a>
       </div>
   </div>
 </div>
 
-  <footer class="custom-footer">
-    <div class="footer-content">
-      <a href="aboutme.html"> <p> about me </p> </a>
+<div class="container">
+    <div class="columns">
+      <div class="column  detailed-intro-paragraph">
+        <h1> Illustrations</h1>
+        <p>Exploration based.</p>
+        <p class="project-description"> One thing I've always dreamt about is just becoming an overall better "illustrator" so occasionally here and there I tune into doodling.</p>
+      </div>
     </div>
-  </footer>
+    <div class="project-page-image-header chocolat-parent">
+      <div class="columns">
+        <div class="column">
+        <figure class="image">
+              <a class="chocolat-image" href="img/illustrations-page/illustrations-header-img.jpg">
+              <img src="img/illustrations-page/illustrations-header-img.jpg">
+              </a>
+              <figcaption> This is where the illustration image would go.</figcaption>
+          </figure>
+          </div>
+        </div>
+    </div>
 </div>
 
+<hr>
+
+
+<div class="container">
+  <div class="columns is-centered">
+      <div class="column is-8 gallery-image">
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="img/illustrations-page/maplestory-mushroom.png">
+              <img src="img/illustrations-page/maplestory-mushroom.png">
+              </a>
+              <figcaption> Growing up I dropped <strong>HOURS</strong> into maplestory.</figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/6752741/dribbble_shot_-_house_illustration_2x.png">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/6752741/dribbble_shot_-_house_illustration_2x.png">
+              </a>
+              <figcaption> House illustration as an empty state for some work at Ring.</figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/5995165/apple-device-ilustrations.jpg">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/5995165/apple-device-ilustrations.jpg">
+              </a>
+              <figcaption> I challenged myself to 100 days of illustration and the first 10 days were these apple devices. </figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/5822085/stick-up-cam-phone-tool.jpg">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/5822085/stick-up-cam-phone-tool.jpg">
+              </a>
+              <figcaption> Another fun illustration for Ring.</figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/5400712/email_invoice_icons.jpg">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/5400712/email_invoice_icons.jpg">
+              </a>
+              <figcaption> These were used within an ecommerce campaign at ring.</figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/4043987/maplestory-claw-together-animation.gif">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/4043987/maplestory-claw-together-animation.gif">
+              </a>
+              <figcaption> Back in the good ole maple days.</figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/3971326/moon-illustration.jpg">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/3971326/moon-illustration.jpg">
+              </a>
+              <figcaption> I did a series of grumpy characters awhile back and that was a blast.</figcaption>
+          </figure>
+          <figure class="image chocolat-parent">
+              <a class="chocolat-image" href="https://cdn.dribbble.com/users/971133/screenshots/3893128/pill-poppin.jpg">
+              <img src="https://cdn.dribbble.com/users/971133/screenshots/3893128/pill-poppin.jpg">
+              </a>
+              <figcaption> Experimenting with colors for the most part.</figcaption>
+          </figure>
+      </div>
+  </div>
+</div>
+<!-- I hate to include this break but, did it to avoid extra padding. -->
+<br> 
+<footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <a href="https://gumroad.com/l/life-quest" target="_blank">Hey, I created a <strong>PDF of exercises</strong> I went through with my mentor and more if you're curious. </a>
+      </p>
+    </div>
+</footer>
   <!-- endbuild -->
 <!-- build:js js/production.js  -->
 <script src="js/scrollreveal.js"></script>

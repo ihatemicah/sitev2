@@ -26,6 +26,11 @@ a:hover{
   color: #2A28EE;
 }
 
+.footer {
+  background-color: #ECF3FF;
+  padding: 3em 1.5em 3em;
+}
+
 .underline-link {
   border-bottom: 1px solid #2D2C34;
   padding-bottom: 5px;
@@ -96,6 +101,7 @@ ol {
 /* /////////////////// */
 
 .intro-paragraph{
+  font-family: 'Libre Baskerville' , serif;
   font-size: 1.7rem;
   margin: 20% 0 0 0;
 }
@@ -382,9 +388,7 @@ ol {
   max-width: 40%;
 }
 
-.image-gallery{
-  margin:auto;
-}
+
 
 .gallery-image > img {
   display:block;
@@ -464,7 +468,7 @@ padding: 1%;
 /* EMAIL NEWSLETTER STYLES */
 
 .control {
-  text-align: left;
+  text-align: center;
 }
   .control:last-of-type {
     margin-top:.6% ;
@@ -472,8 +476,8 @@ padding: 1%;
 
 .email-input {
   width: 40%;
-  text-align:left;
-  padding: 3% 0 3% 3%;
+  text-align:center;
+  padding: 3% 3% 3% 3%;
 }
 
   .email-input:active{
@@ -502,6 +506,7 @@ padding: 1%;
 }
 
 figcaption{
+  padding: 2% 0 0 0;
   color:rgba(45, 44, 52, 0.5);
   text-align: center;
 }
@@ -515,3 +520,6 @@ figcaption{
   margin: 2% 0% 5% 0%;
 }
 
+#social-media{
+  text-align:center;
+}

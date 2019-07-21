@@ -48,8 +48,9 @@
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/responsive.css">
         <link rel="stylesheet" href="styles/emoji.css">
+        <link rel="stylesheet" href="styles/chocolat.css" type="text/css" media="screen" charset="utf-8">
         <!-- endbuild -->
-        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Roboto:400,700&display=swap" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
@@ -62,29 +63,35 @@
     </head>
 <body>
 <!-- build:html index.html  -->
-  <!-- Navigation bar start.  -->
   <div class="container">
-      <div class="container columns">
-          <div class="navigation-1 column is-offset-2-fullhd is-offset-1-desktop is-offset-1-mobile">
-            <a href="index.html"> Micah Carroll </a>
-            <p> Designer </p>
-          </div>
-          <div class="navigation-2 column is-3 is-offset-1-mobile">
-            <a href="aboutme.html">About Me</a>
-            <a href="https://kit.com/MultiMicah" target="_blank">My Kit</a>
-          </div>
+    <div class="columns">
+        <div class="navigation-1 column">
+          <a href="index.html"> Micah Carroll </a>
+          <p> Designer </p>
+        </div>
+        <div class="navigation-2 column is-2">
+          <a href="aboutme.html">About Me</a>
+          <a href="https://kit.com/MultiMicah" target="_blank">My Kit</a>
+        </div>
+    </div>
+  </div> 
+
+  <div class="project-page-image chocolat-parent">
+    <div class="columns is-centered">
+      <div class="column is-5">
+      <figure class="image">
+            <a class="chocolat-image" href="img/metadata-image-1a.jpg">
+            <img src="img/metadata-image-1a.jpg">
+            </a>
+            <figcaption> ––– </figcaption>
+        </figure>
+        </div>
       </div>
-  <!-- Navigation End. -->
-  <!-- Intro paragraph start -->
-
-   <div class="container columns is-centered profile-image">
-     <div class="column has-text-centered ">
-      <img src="img/metadata-image-1a.jpg" alt="Micah Carroll - Personal Profile Image.">
-     </div>
   </div>
-
-    <div class="container columns">
-      <div class="column is-offset-1-desktop is-offset-1-mobile is-offset-1-tablet is-three-quarters-fullhd is-offset-2-fullhd  about-me">
+  
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 about-me">
         <p>
             (*ゝω・)ﾉ  I'm <strong>Micah</strong> and currently I'm interested in <strong>Product Design, Front End Development, Design Systems, and Illustration</strong>.
         </p>
@@ -109,7 +116,7 @@
         </p>
       </div>
     </div>
-</div>
+  </div>
   <!-- endbuild -->
 <!-- build:js js/production.js  -->
 <script src="js/scrollreveal.js"></script>
