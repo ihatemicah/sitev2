@@ -12,7 +12,7 @@
         <!--
         (/・・)ノ Hey fellow developer, if you're looking at this now just wanted to let you know this is a total work in progress.. and I thought I'd share some of the TODO's that I'll be approaching.
         TODO:
-        [ ] - Build in a lightbox funtionality for all images.
+        [ x ] - Build in a lightbox funtionality for all images.
         [ ] - Create a resource page (mindfulness resources, some design resources, a lot of stuff to bring SEO.)
         [ ] - Freebies section ( all of my social media content).
         [ ] - Figure out a better way to list out newsletter articles.
@@ -30,7 +30,7 @@
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta name="revisit-after" content="30 days">
-        <meta name="author" content="Nuno Coelho Santos">
+        <meta name="author" content="Micah Carroll">
         <meta property="og:url" content="https://micahcarroll.com">
         <meta property="og:title" content="Micah Carroll - Design and Mindfulness. ">
         <meta property="og:description" content="(`･ω･´)9 - Hey, this is my portfolio site to stash my design work ranging from product design, illustration, and UI/UX content. At the same time I'll be hosting resources that I create relating to personal development and mindfulness. Anyways thanks for dropping by :).">
@@ -44,7 +44,7 @@
         <meta property="twitter:description" content="(`･ω･´)9 - Hey, this is my portfolio site to stash my design work ranging from product design, illustration, and UI/UX content. At the same time I'll be hosting resources that I create relating to personal development and mindfulness. Anyways thanks for dropping by :).">
         <meta property="twitter:image" content="www.micahcarroll.com/img/metadata-image-1a.jpg">
           <link rel="stylesheet" href="styles/combined-css.css">
-          <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Roboto:400,700&display=swap" rel="stylesheet">
           <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
           <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
           <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
@@ -58,110 +58,164 @@
 <body>
 <!-- build:html index.html  -->
 <div class="container">
-    <div class="container columns">
-        <div class="navigation-1 column is-offset-2-fullhd is-offset-1-desktop is-offset-1-mobile is-offset-1-tablet">
+    <div class="columns">
+        <div class="navigation-1 column">
           <a href="index.html"> Micah Carroll </a>
           <p> Designer </p>
         </div>
-        <div class="navigation-2 column is-3 is-offset-1-mobile">
+        <div class="navigation-2 column is-2">
           <a href="aboutme.html">About Me</a>
           <a href="https://kit.com/MultiMicah" target="_blank">My Kit</a>
         </div>
     </div>
-
-    <div class="container">
-        <div class="columns">
-          <div class="column is-offset-2-fullhd is-offset-1-desktop is-offset-1-mobile is-offset-1-tablet detailed-intro-paragraph">
-            <h1> Ring Design System</h1>
-            <p>Web Design System</p>
-            <p class="project-description"> During my time at Ring, as a side project I spent a bit of time working on developing a web design system that can pair with the application's design system.</p>
-          </div>
-        </div>
-      </div>
-  
-      <div class="container project-page chocolat-parent">
-          <div class="columns is-centered">
-              <div class="column has-text-centered">
-                <a class="chocolat-image" href="img/ring-design-system/image-01.jpg">
-                <img src="img/ring-design-system/image-01.jpg">            
-                </a>
-              </div>
+</div>
+<div class="container">
+          <div class="columns">
+            <div class="column  detailed-intro-paragraph">
+              <h1> Ring Design System</h1>
+              <p>Web Design System</p>
+              <p class="project-description"> During my time at Ring, as a side project I spent a bit of time working on developing a web design system that can pair with the application's design system.</p>
             </div>
-        </div>
-
-        <div class="container">
+          </div>
+          <div class="project-page-image-header chocolat-parent">
             <div class="columns">
-              <div class="column is-offset-2-fullhd is-offset-1-desktop is-offset-1-mobile is-offset-1-tablet detailed-intro-subparagraph">
-                  <h1> Brief Description </h1>
-                    <div class="product-detail-text">
-                    <h4> Client. </h4>
-                    <p class="case-study-description"> Ring.  </p>
-                    <h4> Audience. </h4>
-                    <p class="case-study-description"> First things first, the designers and developers at Ring – then the design community. </p>
-                    </div>
+              <div class="column">
+              <figure class="image">
+                    <a class="chocolat-image" href="img/ring-design-system/image-01.jpg">
+                    <img src="img/ring-design-system/image-01.jpg">
+                    </a>
+                    <figcaption> When starting the system, we begun with typography.</figcaption>
+                </figure>
+                </div>
               </div>
+          </div>
+          <div class="text-container">
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <h2 class="description-header"> Overview. </h2>
+                    <p> After being on the marketing team for a year, we had some transfers in leadership alongside design and there was a need to refine the website as a direct request from the CEO. 
+                      <br>
+                      <br>  
+                      Together with another designer on the team we decided to tackle building out a very ground level design system that could be used by the devs and get us on the right foot for a bright future.
+                      <br>
+                      <br>
+                      This project was the start of my interest within product design and just overall working with developers to build out a design system. 
+                    </p>
+                </div>
+                <div class="column is-2">
+                  <h2 class="description-header"> Role. </h2>
+                  <p> UI Designer</p>
+                  <h2 class="description-header""> Teammates.</h2>
+                  <p> <a href="http://tarabeiser.com/" target="_blank"> Tara Beiser</a></p> 
+                </div>
+            </div>
+          </div>
+</div>
+<hr>    
+<div class="container"> 
+  
+          <div class="columns is-centered">
+            <div class="column">
+              <h1 class="description-title"> Research & UX Portion</h1>              
             </div>
           </div>
 
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <p>
+                  We did a level of research looking over several design systems and took track of the features that we have and the features that could be quickly implemented while working alongside development. 
+              </p>
 
-          <div class="container project-page chocolat-parent">
-              <div class="columns is-centered">
-                  <div class="column has-text-centered">
-                    <a class="chocolat-image" href="img/ring-design-system/image-02.jpg">
-                    <img src="img/ring-design-system/image-02.jpg">            
-                    </a>
-                    <a class="chocolat-image" href="img/ring-design-system/image-03.jpg">
-                    <img src="img/ring-design-system/image-03.jpg" alt="">
-                    </a>
-                  </div>
-                </div>
             </div>
-        
 
-            <div class="container">
-                <div class="columns">
-                  <div class="column is-offset-2-fullhd is-offset-1-desktop  is-offset-1-mobile is-offset-1-tablet detailed-intro-subparagraph">
-                      <h1> Goals and Experience </h1>
-                        <div class="product-detail-text">
-                        <h4> Goal for project. </h4>
-                        <p class="case-study-description"> To help onboard new designers with creating consistent designs within the company and a css framework for the developers.  </p>
-                        <h4> My experience. </h4>
-                        <p class="case-study-description"> This was one of my most humbling experiences here at ring. balancing the knowledge between the development and design as well as keeping the entire team up to date on the why. </p>
-                        </div>
-                  </div>
+          </div> 
+
+          <div class="project-page-image chocolat-parent">
+            <div class="columns is-centered">
+              <div class="column is-8">
+              <figure class="image">
+                    <a class="chocolat-image" href="img/ring-design-system/image-02.jpg">
+                    <img src="img/ring-design-system/image-02.jpg">
+                    </a>
+                    <figcaption> Colors quickly came second. </figcaption>
+                </figure>
                 </div>
               </div>
+          </div>
           
-              <div class="container project-page chocolat-parent">
-                  <div class="columns is-centered">
-                      <div class="column has-text-centered">
-                        <a class="chocolat-image" href="img/ring-design-system/image-02.jpg">
-                        <img src="img/ring-design-system/image-04.jpg">            
-                        </a>
-                        <a class="chocolat-image" href="img/ring-design-system/image-03.jpg">
-                        <img src="img/ring-design-system/image-05.jpg" alt="">
-                        </a>
-                      </div>
-                    </div>
+          <!-- <div class="columns is-centered">
+              <div class="column">
+                <h1 class="description-title"> Goals and Experience</h1>              
+              </div>
+          </div> -->
+
+          <div class="columns is-centered">
+                <div class="column is-8">
+                    <h2 class="description-header"> Goal for Project </h2>
+                    <p> To help create a refined UI style for the entire ecommerce platform at ring as well as lead the direction of all web applications. </p>
                 </div>
-  
-  
-                <div class="container">
-                    <div class="columns">
-                      <div class="column is-offset-2-fullhd is-offset-1-desktop is-offset-1-mobile is-offset-1-tablet  detailed-intro-subparagraph">
-                          <h1> The Outcome </h1>
-                            <div class="product-detail-text">
-                            <h4> Challenges? </h4>
-                            <p class="case-study-description"> 
-                                1. During building the design system the marketing team at Ring also needed to create pages based on our older system.
-                                <br>2. Making the small increments needed to be applied to the live website while keeping the feel of the brand.
-                                <br>3. Leading the team making sure everyone is synced with the updates to the system.  </p>  </p>
-                            <h4> Did we accomplish this? </h4>
-                            <p class="case-study-description"> Currently this is still a work in progress, for implmentation on the production website. </p>
-                            </div>
-                      </div>
-                    </div>
+          </div>
+
+          <div class="columns is-centered">
+                <div class="column is-8">
+                    <h2 class="description-header"> My Experience </h2>
+                    <p> For this being my first attempt at building a design system to be used by a corperation there was a lot that surprised me. </p>
+                    <br>
+                    <ol>
+                      <li> <strong>Stakeholders</strong> often need to know deadlines and exactly how it will be implemented.</li>
+                      <li>Sometimes dividing up the work can be slightly complicated depending on the <strong>designer's strengths.</strong></li>
+                      <li> <strong>Design systems are living pieces of a brand</strong> and will always change and grow (sometimes hard to explain to stakeholders)</li>
+                    </ol>
+                </div>
+          </div>
+
+          <div class="project-page-image chocolat-parent">
+              <div class="columns is-centered">
+                <div class="column is-8">
+                <figure class="image">
+                      <a class="chocolat-image" href="img/ring-design-system/image-04.jpg">
+                      <img src="img/ring-design-system/image-04.jpg">
+                      </a>
+                      <figcaption> Iconography was a huge task, and majority was created to match up with the ring app. </figcaption>
+                  </figure>
                   </div>
+                </div>
+          </div>
+          
+          <div class="project-page-image chocolat-parent">
+              <div class="columns is-centered">
+                <div class="column is-8">
+                <figure class="image">
+                      <a class="chocolat-image" href="img/ring-design-system/image-05.jpg">
+                      <img src="img/ring-design-system/image-05.jpg">
+                      </a>
+                      <figcaption> Illustrations were also something we pitched moving forward, which you can see live now. </figcaption>
+                  </figure>
+                  </div>
+                </div>
+          </div>
+
+          <div class="columns is-centered">
+              <div class="column">
+                <h1 class="description-title"> The Outcome</h1>              
+              </div>
+          </div>
+
+          <div class="columns is-centered">
+              <div class="column is-8">
+                <p>This project got cut because leadership did not find it valuable having our remote developers also work on building out a prototype alongside production of the marketing website. <strong>(from my assumption, just a lack of resources at the time)</strong></p>
+                <br>
+                <p> At most I learnt about all of the small little things that I could have never thought of while building out a design system. In the long run this first attempt at building out a design system with developers and other designers helped out massively with my other projects.  </p>
+              </div>
+          </div>
+
+          <!-- <div class="columns is-centered">
+              <div class="column is-8">
+                  <h2 class="description-header"> Accomplishments? </h2>
+                  <p> This was one of my most humbling experiences here at ring. balancing the knowledge between the development and design as well as keeping the entire team up to date on the why. </p>
+              </div>
+          </div> -->
+
 <footer class="custom-footer">
     <div class="footer-content">
        <p> Other Projects </p> 
@@ -195,9 +249,7 @@
     </div>
   </div>
 </footer>
-</div>
-  <!-- Footer end -->
-
+</div> 
   <!-- endbuild -->
 <script src="js/production.js"></script>
 </body>

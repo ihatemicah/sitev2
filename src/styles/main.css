@@ -1,11 +1,15 @@
 /* HTML Document Tags.*/
+
+
 html {
-  height: 100%; 
+  /* overflow:hidden; */
+  /* height: 100%;  */
 }
 
-  /* System Fonts as used by Medium and WordPress */
+
 body {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
     color: #2D2C34;
     background-color: #fff;
     transition:all .500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); 
@@ -22,6 +26,11 @@ a:hover{
   color: #2A28EE;
 }
 
+.footer {
+  background-color: #ECF3FF;
+  padding: 3em 1.5em 3em;
+}
+
 .underline-link {
   border-bottom: 1px solid #2D2C34;
   padding-bottom: 5px;
@@ -33,14 +42,17 @@ a:hover{
 }
 
 .container{
-  max-width: 2560px;
-  width: 100%;
-  overflow: hidden;
+  overflow:hidden;
 }
-
 
 h1 {
   font-weight: 600;
+  font-family: 'Libre Baskerville', serif;
+}
+
+h2 {
+  font-weight: 600;
+  font-family: 'Libre Baskerville', serif;
 }
 
 h3{
@@ -54,9 +66,15 @@ h4{
 strong{
   font-weight: 600;
 }
+
+ol {
+  list-style-position: outside;
+  list-style-type: upper-roman;
+}
 /* /////////////////// */
 
 .navigation-1 {
+  font-family: 'Libre Baskerville',serif;
   margin: 6% 0% 0% 0%;
   font-size: 1.1rem;
 }
@@ -70,19 +88,20 @@ strong{
   }
   
 .navigation-2 {
+  font-family: 'Libre Baskerville',serif;
   margin: 6% 0% 0% 0%;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-size: 1.1rem;
 }
 
 .navigation-2 > a{
-  /* hot fix for navigation padding */
-  display:inline-block;
-  padding: 0 2% 0 0;
+  display:flex;
+
 }
 /* /////////////////// */
 
 .intro-paragraph{
+  font-family: 'Libre Baskerville' , serif;
   font-size: 1.7rem;
   margin: 20% 0 0 0;
 }
@@ -157,11 +176,6 @@ strong{
   width:60%;
   margin-left:15%;
 }
-
-.projectbig{
-  /* width: 80%; */
-}
-
 
 
 /* /////////////////// */
@@ -302,15 +316,11 @@ strong{
     padding: 0 0 2% 0;
   }
 
-
-
-  /* /////////////////// */
-  /* Start of details page. */
-
-
-
-  .project-page {
-    margin-bottom: 5%;
+  .project-page-image-header{
+    margin: 0% 0% 5% 0%;
+  }
+  .project-page-image {
+    margin: 5% 0 5% 0;
   }
 
   .product-details{
@@ -334,7 +344,6 @@ strong{
     }
 
   .detailed-intro-paragraph {
-      font-family: 'Libre Baskerville', serif;
       font-size: 1.7rem;
       margin: 10% 0% 5% 0%;
     }
@@ -384,9 +393,7 @@ strong{
   max-width: 40%;
 }
 
-.image-gallery{
-  margin:auto;
-}
+
 
 .gallery-image > img {
   display:block;
@@ -466,7 +473,7 @@ padding: 1%;
 /* EMAIL NEWSLETTER STYLES */
 
 .control {
-  text-align: left;
+  text-align: center;
 }
   .control:last-of-type {
     margin-top:.6% ;
@@ -474,8 +481,8 @@ padding: 1%;
 
 .email-input {
   width: 40%;
-  text-align:left;
-  padding: 3% 0 3% 3%;
+  text-align:center;
+  padding: 3% 3% 3% 3%;
 }
 
   .email-input:active{
@@ -493,4 +500,31 @@ padding: 1%;
 
 .profile-image{
   margin: 4% 0 0 0;
+}
+
+
+/* Padding Work */
+
+.description-header{
+  color:rgba(45, 44, 52, 0.5);
+  padding: 1% 0 1% 0;
+}
+
+figcaption{
+  padding: 2% 0 0 0;
+  color:rgba(45, 44, 52, 0.5);
+  text-align: center;
+}
+.description-title {
+  padding: 2% 0  0;
+  text-align:center;
+  font-size: 1.7rem;
+}
+
+.text-container {
+  margin: 2% 0% 5% 0%;
+}
+
+#social-media{
+  text-align:center;
 }
