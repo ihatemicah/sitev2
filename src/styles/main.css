@@ -1,12 +1,5 @@
 /* HTML Document Tags.*/
 
-
-html {
-  /* overflow:hidden; */
-  /* height: 100%;  */
-}
-
-
 body {
     font-family: 'Roboto', sans-serif;
     height: 100%;
@@ -16,6 +9,7 @@ body {
     -o-transition:all .500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); 
     -moz-transition:all .500ms cubic-bezier(0.445, 0.05, 0.55, 0.95); 
     -webkit-transition:all .500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    overflow:hidden;
   }
 a {
   color: inherit;
@@ -41,7 +35,7 @@ a:hover{
   border-bottom: 1px solid #6B6978;
 }
 
-.container{
+.overflow-class {
   overflow:hidden;
 }
 
@@ -123,7 +117,7 @@ ol {
 
 .project-container {
   max-width: 1980px;
-  margin: 25% auto;
+  margin: 15% auto;
 }
 
 .project{
@@ -526,5 +520,13 @@ figcaption{
 }
 
 #social-media{
+  margin: 10% 0% 10% 0%;
   text-align:center;
+}
+#navigation-homepage {
+  padding: 0 10%;
+}
+
+#navigation {
+  padding: 0 4%;
 }
