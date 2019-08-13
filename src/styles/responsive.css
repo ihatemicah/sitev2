@@ -121,28 +121,14 @@
   .text-container {
     padding: 0 3%;
   }
+
+  #text-section {
+    padding: 0 3%;
+  }
 }
 
 
-/* Half the windowed screen */
-@media only screen
-  and (min-device-width: 768px) and (max-device-width: 1024px){
-    /* .intro-paragraph{
-      padding: 0% 10%;
-    }
-    
-    .detailed-intro-paragraph{
-      padding: 0 10%;
-    }
 
-    .detailed-intro-subparagraph {
-      padding: 0 10%;
-    }
-
-    .about-me {
-      padding: 0 10%; */
-    }
-  }
   /* Regular Laptops */
 @media only screen
   and (min-device-width: 1024px){
