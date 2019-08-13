@@ -32,6 +32,7 @@ sr.reveal('.profile-image',{delay:200});
   // Need to figure out the bug on how we can get this to load instantly.
 sr.reveal('.image-gallery');
 sr.reveal('.detailed-intro-paragraph');
+sr.reveal('#text-section',{delay:200});
 
 
 // Item page
