@@ -8097,7 +8097,6 @@ a {
   transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 a:hover{
-  /* color: #6B6978; */
   color: #2A28EE;
 }
 
@@ -8122,12 +8121,12 @@ a:hover{
 
 h1 {
   font-weight: 600;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Inter', serif;
 }
 
 h2 {
   font-weight: 600;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Inter', serif;
 }
 
 h3{
@@ -8149,13 +8148,13 @@ ol {
 /* /////////////////// */
 
 .navigation-1 {
-  font-family: 'Libre Baskerville',serif;
+  font-family: 'Inter',serif;
   margin: 6% 0% 0% 0%;
   font-size: 1.1rem;
 }
 
   .navigation-1 > a {
-    font-weight: 700;
+    font-weight: 800;
   }
 
   .navigation-1 > p {
@@ -8163,7 +8162,7 @@ ol {
   }
   
 .navigation-2 {
-  font-family: 'Libre Baskerville',serif;
+  font-family: 'Inter',serif;
   margin: 6% 0% 0% 0%;
   justify-content: space-between;
   font-size: 1.1rem;
@@ -8176,7 +8175,7 @@ ol {
 /* /////////////////// */
 
 .intro-paragraph{
-  font-family: 'Libre Baskerville' , serif;
+  font-family: 'Inter' , serif;
   font-size: 1.7rem;
   margin: 20% 0 0 0;
 }
@@ -8220,7 +8219,7 @@ ol {
 }
 
 .project-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Inter', serif;
   }
 
 .image-container{
@@ -8363,7 +8362,7 @@ ol {
 
   .social-link{
     font-weight: 600;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', serif;
     margin-top: 2%;
   }
 
@@ -8372,7 +8371,7 @@ ol {
   }
 
   .label {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', serif;
     font-weight: 600;
   }
 
