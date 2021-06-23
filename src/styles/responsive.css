@@ -1,0 +1,30 @@
+@media only screen and (max-width: 375px) {
+    .landingpage-projects-container-desktop {
+     display:none;
+     }
+    .landingpage-projects-header-desktop {
+       display:none;
+     }
+    .landingpage-projects-header-mobile {
+       display: block;
+     }
+    .landingpage-projects-container-mobile {
+     display:block;
+     }
+     .spotify-listening-desktop {
+        display:none;
+      }
+      .spotify-listening-mobile {
+        display:inline-block;
+      }
+      .navbar-brand {
+        display:none;
+      }
+      .homepage-back-button {
+        display:none;
+      }
+      .homepage-back-button-mobile {
+        display:inline-block;
+      }
+   }
+

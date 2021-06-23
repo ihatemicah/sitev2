@@ -12,3 +12,4 @@ New website, working on some fun stuff, going to document all of it for the comm
 
 ---
 # TODO's
+- Create a sticky navigation bar.

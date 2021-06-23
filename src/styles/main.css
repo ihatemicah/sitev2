@@ -19,3 +19,190 @@ a:hover{
   color: #2A28EE;
 }
 
+hr {
+  border-bottom: 1px solid #000;
+}
+
+.navbar-start {
+  align-items: center;
+}
+.navbar-end-flex {
+  display:flex;
+  flex-wrap:wrap;
+}
+.spotify-listening-desktop {
+  display:inline-block;
+  overflow: hidden;
+  color: #bababa;
+}
+.spotify-listening-mobile {
+  color: #bababa;
+  overflow:hidden;
+  display: none;
+}
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: content-box;
+  padding-left:100%;
+}
+.ticker {
+  animation-duration: 10s;
+  display:inline-block;
+  padding-right: 100%;
+  white-space: nowrap;
+      -webkit-animation-iteration-count: infinite; 
+            animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+     -webkit-animation-name: ticker;
+           animation-name: ticker;
+      -webkit-animation-duration: duration;
+            animation-duration: duration;
+}
+.ticker-item {
+  display: inline-block;
+}
+/* Animation Right Here */
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+.homepage-back-button {
+  transition: ease .5s;
+  padding: 5px 25px 5px 25px;
+  border-radius: 42px;
+  background-color: #EDEDED;
+}
+.homepage-back-button:hover {
+   transition: ease .5s;
+   background-color: #E1E1E1;
+}
+.homepage-back-button-mobile {
+  display:none;
+  transition: ease .5s;
+  padding: 5px 25px 5px 25px;
+  border-radius: 42px;
+  background-color: #EDEDED;
+}
+/* MOBILE BREAKPOINTS & VIEW  */
+
+
+.landing-page-big-text {
+  /*  Figure out what size this should be rem for scaling  */
+  font-size:126px;
+  font-weight: bold;
+  color:#000;
+}
+.landing-description{
+ color: #000;
+}
+.read-more {
+  cursor: pointer;
+  font-weight: 600;
+  vertical-align: middle;
+  margin: 0 0 0 8px;
+  padding: 0 0 4px 0;
+  border:none;
+  border-bottom: 1.5px solid #bababa;
+  background-color:transparent;
+  transition: ease .5s;
+
+}
+.read-more:hover{
+  transition: ease .5s;
+  color: #000;
+  border-bottom: 1.5px solid #000;
+}
+#reading-more {
+  color: #000;
+  display:none;
+  background-color: #FAFAFA;
+  border-radius: 5px;
+  margin: 0 0 24px 0;
+}
+
+
+#reading-more img {
+  width: 100%;
+  border-radius: 4px;
+}
+.small-about-description {
+  padding: 24px 0 0 24px;
+}
+.small-header {
+  color: #000;
+  font-weight: 600;
+}
+
+.read-more-work-letter-padding {
+  padding: 2px 0 0 0; 
+}
+
+
+.social-links {
+  color: #000;
+  border-bottom: #000 solid 1px;
+}
+
+.small-extra-padding {
+  padding: 24px 0 0 0;
+  display:inline-block;
+}
+
+.projects-header-small {
+  display:flex;
+  margin-top: -50px;
+}
+.landing-project-container {
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
+/* WIP HOVER EFFECT - First Container*/
+.hover-effect-link {
+  transition: ease .5s;
+  display:inline-block;
+}
+.hover-effect-link:hover {
+  transition: ease .5s;
+  background-color:#f2efc8;
+}
+/* ++++++++++ */
+.project-type-landing {
+  font-weight: bold;
+  padding: 0px 8px 0px 4px;
+}
+
+.project-header-landing {
+  padding: 4px 0px 6px 8px;
+  border-bottom: 1px solid #000;
+}
+.project-image-landing img {
+  display:block;
+}
+.landingpage-projects-header-mobile{
+  display:none;
+}
+.landingpage-projects-container-mobile{
+  display:none;
+}
