@@ -26,5 +26,11 @@
       .homepage-back-button-mobile {
         display:inline-block;
       }
+      /* New updates with landing page. */
+      .landing-page-big-text {
+        font-size: 72px;
+      }
+
+
    }
 
