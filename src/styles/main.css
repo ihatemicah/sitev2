@@ -173,6 +173,7 @@ hr {
 .projects-header-small {
   display:flex;
   margin-top: -50px;
+  font-size: 14px;
 }
 .landing-project-container {
   border: 1px solid #000;
@@ -208,4 +209,8 @@ hr {
 }
 .read-more-styling {
   font-size:14px;
+}
+
+.custom-footer {
+  padding: 0 0 24px 0;
 }
