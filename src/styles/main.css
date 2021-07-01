@@ -16,7 +16,7 @@ a {
   transition: all 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 a:hover{
-  color: #2A28EE;
+  color: #777777;
 }
 
 hr {
@@ -30,6 +30,7 @@ hr {
   display:flex;
   flex-wrap:wrap;
 }
+
 .spotify-listening-desktop {
   display:inline-block;
   overflow: hidden;
@@ -186,7 +187,8 @@ hr {
 }
 .hover-effect-link:hover {
   transition: ease .5s;
-  background-color:#f2efc8;
+  /* Turning off highlight effect for now. */
+  /* background-color:#f2efc8; */
 }
 /* ++++++++++ */
 .project-type-landing {
@@ -213,4 +215,24 @@ hr {
 
 .custom-footer {
   padding: 0 0 24px 0;
+}
+
+/* END of the landing page + general components */
+
+/* START of the case study page. */
+.header {
+  font-size: 41px;
+}
+.sub-header{
+  color: #C4C4C4;
+  font-size: 24px;
+}
+
+.subtitle {
+  text-align: center;
+  color:#C4C4C4;
+  font-size:14px;
+}
+.gray-explainer {
+  background-color: #FAFAFA;
 }
