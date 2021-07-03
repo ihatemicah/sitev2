@@ -94,6 +94,7 @@ hr {
   padding: 5px 25px 5px 25px;
   border-radius: 42px;
   background-color: #EDEDED;
+  width: max-content;
 }
 .homepage-back-button:hover {
    transition: ease .5s;
@@ -235,4 +236,15 @@ hr {
 }
 .gray-explainer {
   background-color: #FAFAFA;
+}
+.green-explainer {
+  background-color: #F3FFF9;
+}
+
+.nextproject-button {
+  transition: ease .5s;
+  padding: 5px 25px 5px 25px;
+  border-radius: 42px;
+  background-color: #EDEDED;
+  width: max-content;
 }
