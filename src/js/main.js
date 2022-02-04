@@ -14,3 +14,27 @@ function show_hide() {
       return a=1;
     }
 }
+
+// luxon - superhi tutorial for pulling timezones https://youtu.be/2Q07rMdB1oA
+// had to run two different functions to target both elements.
+const locations = document.querySelectorAll("div.ticker div.ticker-item")
+const updateTimes = function() {
+  locations.forEach(location => {
+    const output = document.querySelector("output.mobile-timezone")
+    const now = luxon.DateTime.now().setZone("America/New_York")
+    output.innerHTML = now.toFormat("HH:mm:ss")
+  })
+}
+const updateTimesDesktop = function() {
+  locations.forEach(location => {
+    const output = document.querySelector("output.desktop-timezone")
+    const now = luxon.DateTime.now().setZone("America/New_York")
+    output.innerHTML = now.toFormat("HH:mm:ss")
+  })
+}
+
+updateTimes()
+setInterval(function () {
+  updateTimes()
+  updateTimesDesktop()
+}, 1000)

@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    text-transform: lowercase;
     height: 100%;
     color: #010101  ;
     background-color: #fff;
