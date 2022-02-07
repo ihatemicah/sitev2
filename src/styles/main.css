@@ -121,6 +121,15 @@ hr {
   font-weight: bold;
   color:#000;
 }
+
+.text-animation {
+  overflow:hidden;
+  margin-top:20px;
+}
+.text-animation p {
+  overflow:hidden;
+}
+
 .landing-description{
  color: #000;
 }
