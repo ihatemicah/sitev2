@@ -1,174 +1,56 @@
-
-
-/* This is where we will setup all of the responsive breakpoints for the website.
-/* ----------- iPhone 6 & Lower ( for now ) ----------- */
-
-@media only screen
-  /*and (min-device-width: 414px)*/
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and ( orientation: portrait) {
-
-  .intro-paragraph {
-    font-size: 1.3rem;
-    padding: 0% 4%;
-    /* Margin placed for spacing on small phones. */
-    margin: 10% 0% 0% 0%;
-  }
-
-  .text-break{
-    display: none;
-  }
-
-  .navigation-1 , .navigation-2 {
-    font-size: 1.0rem;
-
-  }
-  .navigation-2 {
-    margin: 6% 0% 0% 0%;
-  }
-
-  .projectsmall{
-    width:100%;
-    margin-left: 0;
-  }
-  .projectbig{
-    width:100%;
-  }
-  .project{
-    margin-bottom: 20px;
-  }
-
-  .social-content , .social-link{
-    font-size: 1rem;
-  }
-
-  .detailed-intro-paragraph{
-    font-size: 1.3rem;
-    padding: 0 6%;
-  }
-
-  .detailed-intro-subparagraph{
-    font-size: 1.3rem;
-    /* margin-left: 2%; */
-  }
-
-  .team-hex-hero > img {
-    max-width:100%;
-  }
-
-  .product-detail-text-1 {
-    margin: 0 0 5% 0;
-  }
-
-  .product-detail-text-2 {
-    margin: 0 0 5% 0;
-  }
-
-  .about-me{
-    font-size: 1.2rem;
-    margin-left: 5%;
-    padding: 0 10%;
-  }
-
-  .project-description {
-    padding-top: 1%;
-    font-size: 1rem;
-    max-width: 100%;
-  }
-
-  .case-study-description{
-    font-size: 1rem;
-    max-width:100%;
-  }
-
-  .email-input {
-    width: 100%;
-    text-align:left;
-  }
-
-  .control:last-of-type {
-    margin-top:4% ;
-  }
-
-  .button.is-link {
-    width: 100%;
-  }
-  
-  .social-container {
-    margin-left: 0;
-  }
-
-  .from-them {
-    margin-right: 30%;
-  }
-
-  .detailed-intro-paragraph{
-    padding: 0 6%;
-  }
-
-  .detailed-intro-subparagraph {
-    padding: 10% 10%;
-  }
-
-  .product-detail-text > h4{
-    margin-top: 5%;
-  }
-
-  #navigation-homepage {
-    padding: 0 4%;
-  }
-  .text-container {
-    padding: 0 3%;
-  }
-
-  #text-section {
-    padding: 0 3%;
-  }
-}
-
-
-
-  /* Regular Laptops */
-@media only screen
-  and (min-device-width: 1024px){
-
-    .product-detail-text-1{
-      margin-bottom: 10%;
-    }
-
-    .product-detail-text-2{
-      margin-bottom: 10%;
-    }
-  }
-
-    /* For 4k Monitors */
-@media only screen
-  and (min-device-width: 2560px){
-
-    .high-res-page{
-      max-width: 70%;
-      margin:auto;
-    }
-
-    .detailed-intro-subparagraph{
-      /* margin-left:15%; */
-    }
-
-    .totoro{
-      z-index: 0;
-      position:absolute;
-      top: 40%;
-      right:12%;
-    }
-
-    .akira{
-      z-index: 0;
-      position:absolute;
-      top: 80%;
-      right:65%;
-    }
-
-
+@media only screen and (max-width: 428px) {
+    .landingpage-projects-container-desktop {
+     display:none;
+     }
+    .landingpage-projects-header-desktop {
+       display:none;
+     }
+    .landingpage-projects-header-mobile {
+       display: block;
+     }
+    .landingpage-projects-container-mobile {
+     display:block;
+     }
+      .spotify-listening-desktop {
+        display:none;
+      }
+      .spotify-listening-mobile {
+        display:inline-block;
+      }
+      .navbar-brand {
+        display:none;
+      }
+      .homepage-back-button {
+        display:none;
+      }
+      .homepage-back-button-mobile {
+        display:inline-block;
+      }
+      /* New updates with landing page. */
+      .landing-page-big-text {
+        font-size: 72px;
       }
 
+      .small-about-description {
+        padding: 0;
+      }
+
+   }
+
+@media only screen and (max-width:840px) {
+  .spotify-listening-desktop {
+    display:none;
+  }
+  .spotify-listening-mobile {
+    display:inline-block;
+  }
+  .navbar-brand {
+    display:none;
+  }
+  .homepage-back-button {
+    display:none;
+  }
+  .homepage-back-button-mobile {
+    display:inline-block;
+  }
+}
