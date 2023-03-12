@@ -21,14 +21,14 @@ const locations = document.querySelectorAll("div.ticker div.ticker-item")
 const updateTimes = function() {
   locations.forEach(location => {
     const output = document.querySelector("output.mobile-timezone")
-    const now = luxon.DateTime.now().setZone("America/New_York")
+    const now = luxon.DateTime.now().setZone("America/Vancouver")
     output.innerHTML = now.toFormat("HH:mm:ss")
   })
 }
 const updateTimesDesktop = function() {
   locations.forEach(location => {
     const output = document.querySelector("output.desktop-timezone")
-    const now = luxon.DateTime.now().setZone("America/New_York")
+    const now = luxon.DateTime.now().setZone("America/Vancouver")
     output.innerHTML = now.toFormat("HH:mm:ss")
   })
 }
