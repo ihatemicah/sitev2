@@ -1,6 +1,6 @@
 node_modules/
-
-
+public/
+/.cache
 # OS generated files #
 ######################
 .DS_Store

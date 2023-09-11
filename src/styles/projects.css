@@ -1,0 +1,169 @@
+
+
+.project-intro-grid {
+    display:grid;
+    gap: 16px;
+    grid-template-columns: repeat(12,1fr);
+    padding-top:24px;
+}
+
+.project-details {
+    grid-column: 1/6;
+}
+
+.project-image {
+    grid-column: 9/13;
+}
+.project-name-container {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+}
+.project-name {
+    text-align: right;
+}
+.case-study-description-container {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 32px;
+}
+
+.code-name {
+    font-size: 12px;
+    opacity: 0.5;
+    grid-column: 1/2;
+}
+
+.project-description {
+    text-align: right;
+    grid-column: 5/13;
+}
+
+.big-image-container {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(12, 1fr);
+    padding-top: 24px;
+}
+
+.big-image-caption {
+    grid-column: 1/4;
+    text-align: left;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.big-image-image {
+    grid-column: 1/13;
+}
+
+.description-component-container {
+    padding-top: 24px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(12,1fr);
+}
+
+.description-image {
+    grid-column: 1 / 6;
+}
+.description-content {
+    padding-top: 16px;
+    grid-column: 6 / 13;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.description-title{
+    font-size: 14px;
+    opacity: 0.5;
+}
+.description-words{
+    text-align: right;
+}
+.description-image {
+    font-size:14px;
+}
+
+.caption {
+    opacity: 0.5;
+    padding-bottom:12px;
+    font-size: 14px;
+}
+
+.doublecol-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding-top:24px;
+}
+.doublecol-image{
+    /* placeholder */
+}
+
+.featured-projects-bottom {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding-top: 12px;
+}
+
+
+.case-study-description-container {
+
+}
+@media only screen and (max-width: 768px) {
+    .project-intro-grid {
+        grid-template-columns: 1fr; /* modifies to single grid column */
+    }
+
+    .project-image {
+        grid-column: 1/6;
+        order: -1;
+    }
+    .project-name-container {
+        gap: 12px;
+        grid-template-columns: 1fr;
+    }
+    .project-name {
+        text-align: left;
+    }
+
+    .case-study-description-container {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+        padding-top: 12px;
+    }
+    .project-description {
+        text-align: left;
+        grid-column: 1/2;
+    }
+    .description-component-container {
+        padding-top: 24px;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+    }
+    .description-image {
+        grid-column: 1/2;
+    }
+    .description-content {
+        grid-column: 1 / 2; 
+    }
+    .doublecol-container {
+        grid-template-columns: 1fr;
+    }
+    .featured-projects-bottom {
+        grid-template-columns: repeat(auto-fit, minmax(12, 1fr));
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .case-feature-project-image {
+        width: 340px;
+    }
+    .big-image-caption {
+        grid-column: 1/12;
+    }
+
+}
