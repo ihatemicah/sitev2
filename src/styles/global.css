@@ -1,0 +1,379 @@
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url(../../static/NeueMontreal-Regular.woff) format("woff2");
+}
+
+
+html {
+  /* Hiding the scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  background-color: #000;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+
+}
+iframe{
+  border-radius: 4px;
+}
+img {
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  /* custom cursor soon!! */
+  cursor: pointer; 
+}
+.flashing-link:hover {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+@keyframes flashing {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* hover effect on projects */
+.hl-1:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+.hl-2:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+.hl-3:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+.hl-4:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+.hl-5:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+.hl-6:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+.hl-7:hover p {
+  animation: flashing 225ms steps(1,end) infinite;
+  -webkit-animation: flashing 225ms steps(1,end)infinite;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family:'Neue Montreal';
+  color: white;
+  background-color: #000;
+}
+html, body {
+  min-height: 100%;
+}
+/* css grid stuff */
+.intro-grid-text {
+  display: grid;
+  grid-template-columns: minmax(267px,577px)2fr;
+}
+
+.highlighted-project-grid-1 {
+  display:grid;
+  gap: 16px;
+  grid-template-columns: repeat(12,1fr);
+}
+
+.varied-project-grid-1 {
+  display:grid;
+  gap: 16px;
+  grid-template-columns: repeat(12,1fr);
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.varied-project-grid-1::-webkit-scrollbar {
+  display: none;
+}
+
+/* highlighted projects objects */
+.hl-1 {
+  grid-column: 1 / 4;
+}
+.hl-2 {
+  grid-column: 4 / 6;
+}
+.hl-3 {
+  grid-column: 6 / 9;
+}
+.hl-4 {
+  grid-column: 9 / 13;
+}
+.hl-5 {
+  grid-column: 1 / 6;
+}
+.hl-6 {
+  grid-column: 6 / 10;
+}
+.hl-7 {
+  grid-column: 10 / 13;
+}
+
+
+@media (max-width: 768px){
+  .highlighted-project-grid-1 {
+    grid-template-columns: 1fr; /* modifies to single grid column */
+  }
+  .hl-1  {
+    grid-column: 1 / 2;
+  }
+  .hl-2 {
+    grid-column: 1 / 2;
+  }
+  .hl-3 {
+    grid-column: 1 / 2;
+  }
+  .hl-4 {
+    grid-column: 1 / 2;
+  }
+  .hl-5 {
+    grid-column: 1 / 2;
+  }
+  .hl-6 {
+    grid-column: 1 / 2;
+  }
+  .hl-7 {
+    grid-column: 1 / 2;
+  }
+
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .navbar-brand {
+    justify-content: space-between;
+  }
+}
+
+.hl-description-container {
+  padding-top: 8px;
+  font-size: 12px;
+  display:flex;
+  justify-content: space-between;
+}
+/* Bottom of landing page layout */
+.callouts-grid {
+  display:grid;
+  gap: 16px;
+  grid-template-columns: repeat(12,1fr);
+}
+.title-3 {
+  grid-column: 1/5 ;
+  font-size: 38px;
+  color: #ffffff;
+  line-height: 46px;
+  padding-top: 56px;
+}
+.featured-links-container{
+  grid-column: 1/12;
+}
+.featured-links-container:first-child {
+  padding-top: 24px;
+}
+.feature-object {
+  padding-bottom:12px;
+}
+.feature-object a {
+  display:grid;
+  grid-template-columns: repeat(12,1fr);
+}
+.feature-title {
+  grid-column: 1/5;
+  text-decoration: underline;
+}
+.feature-description {
+  grid-column: 5/10;
+}
+.feature-year {
+  grid-column: 12 / 13; 
+}
+.social-links {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(12,1fr);
+  grid-column: 1 / 12;
+  padding-top: 24px;
+}
+.social-link-1{
+  grid-column: 1/3;
+}
+.social-link-2{
+  grid-column: 3/6;
+}
+.social-link-3{
+  grid-column: 6/8;
+}
+.social-link-4{
+  grid-column: 8/10;
+}
+.social-link-5{
+  grid-column: 10/12;
+}
+
+.opening-hours {
+  font-size: 12px;
+  padding-top: 16px;
+  grid-column: 1 / 3;
+}
+
+.about-me-container{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  padding-top: 12px;
+}
+
+@media (max-width: 768px){
+  .title-3 {
+    grid-column: 1 / 12;
+  }
+  .feature-year {
+    display:none;
+  }
+  .feature-description {
+    grid-column: 5 / 13;
+    font-size: 14px;
+  }
+  .feature-title {
+    font-size: 14px;
+  }
+  .social-link-1 {
+    grid-column: 1 / 6; 
+  }
+  .social-link-2 {
+    grid-column: 6 / 12;
+  }
+  .social-link-3 {
+    grid-column: 1 / 6;
+  }
+  .social-link-4 {
+    grid-column: 6 / 12;
+  }
+  .social-link-5 {
+    grid-column: 1 / 6;
+  }
+  .opening-hours {
+    grid-column: 1 / 12;
+    padding-bottom: 12px;
+  }
+  
+}
+/* layout & nav */
+
+.navbar-brand {
+  padding-top: 32px;
+  margin-bottom: 1px;
+  flex-wrap:wrap;
+}
+.navbar-item {
+  padding: 0;
+  color:#fff;
+}
+.navbar-item img {
+  max-height: 100%;
+}
+.nav-header {
+  font-size: 32px;
+}
+.navbar-end {
+  font-size: 16px;
+}
+.copyright {
+  display:inline-block;
+  font-size:16px;
+  line-height: 1rem;
+  vertical-align: sub;
+}
+
+.project-title {
+  display: flex;
+  margin:16px 0 16px 0;
+  justify-content: space-between;
+}
+/* image carousel  */
+.project-container {
+  display: inline-block;
+}
+.project-description-container {
+  display: flex;
+  justify-content: space-between;
+  font-size:12px;
+}
+
+
+.figure-001 {
+  display: inline-block;
+  height: 90px;
+  cursor:pointer;
+  position: relative;
+  background: #000;
+}
+.image-object {
+  width: 300px;
+  cursor: zoom-in;
+}
+
+.image-object-full {
+  width:500px;
+}
+.project-row {
+  display:flex;
+}
+
+/* bulma overides */
+.content figure {
+  margin-left: 0em;
+  margin-right: 0em;
+}
+
+.content li + li {
+  margin-top: 0;
+}
+.content p:not(:last-child), .content dl:not(:last-child), .content ol:not(:last-child), .content ul:not(:last-child), .content blockquote:not(:last-child), .content pre:not(:last-child), .content table:not(:last-child) {
+  margin-bottom:0px;
+}
+
+.maxims-container{
+  padding-top: 16px;
+}
+
+.maxims-css-grid {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.maxim-object {
+  font-size: 38px;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar-brand {
+    margin-bottom: 8px;
+  }
+  
+  }
+
+
+
+ 
