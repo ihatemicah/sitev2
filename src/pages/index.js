@@ -8,99 +8,99 @@ import { Link} from "gatsby"
 
 const imageObjectsRow1 = [
   {
-    imgNative: require('../images/image-rows/bastila-2.gif').default,
+    imgNative: require('../../static/temp-images/bastila-2.gif').default,
     projectName: '2023',
     projectLink: 'Bastila | Keycap Asset'
   },
   {
-    imgNative: require('../images/image-rows/bastila-1.jpg').default,
+    imgNative: require('../../static/temp-images/bastila-1.jpg').default,
     projectName: '2023',
     projectLink: 'Bastila | Shipping Container'
   },
   {
-    imgNative: require('../images/image-rows/mike-1.png').default,
+    imgNative: require('../../static/temp-images/mike-1.png').default,
     projectName: '2023',
     projectLink: 'Dreamcore | Dreamstation Asset'
   },
   {
-    imgNative: require('../images/image-rows/t-shirt-1.gif').default,
+    imgNative: require('../../static/temp-images/t-shirt-1.gif').default,
     projectName: '2023',
     projectLink: 'RM21 | Clothing Experience'
   },
   {
-    imgNative: require('../images/image-rows/oct-1.png').default,
+    imgNative: require('../../static/temp-images/oct-1.png').default,
     projectName: '2023',
     projectLink: 'LL21 | Unlocked Material'
   },
   {
-    imgNative: require('../images/image-rows/pill-1.png').default,
+    imgNative: require('../../static/temp-images/pill-1.png').default,
     projectName: '2023',
     projectLink: 'MDZ2 | Core Station'
   },
   {
-    imgNative: require('../images/image-rows/pill-2.png').default,
+    imgNative: require('../../static/temp-images/pill-2.png').default,
     projectName: '2023',
     projectLink: 'MDZ2 | Core Station'
   },
   {
-    imgNative: require('../images/image-rows/recharge-1.gif').default,
+    imgNative: require('../../static/temp-images/recharge-1.gif').default,
     projectName: '2023',
     projectLink: 'Breakeven | Cover Asset'
   },
   {
-    imgNative: require('../images/image-rows/vv-1.gif').default,
+    imgNative: require('../../static/temp-images/vv-1.gif').default,
     projectName: '2023',
     projectLink: 'Visualize Value | Checks'
   },
   {
-    imgNative: require('../images/image-rows/fabric-1.png').default,
+    imgNative: require('../../static/temp-images/fabric-1.png').default,
     projectName: '2023',
     projectLink: 'FB63 | Fabric Visualization'
   },
   {
-    imgNative: require('../images/image-rows/boys-2.gif').default,
+    imgNative: require('../../static/temp-images/boys-2.gif').default,
     projectName: '2023',
     projectLink: 'Boy Smells | Candle Visualization'
   },
   {
-    imgNative: require('../images/image-rows/konami.gif').default,
+    imgNative: require('../../static/temp-images/konami.gif').default,
     projectName: '2023',
     projectLink: 'Konami | Retro Visualization'
   },
 ];
 const imageObjectsRow2 = [
   {
-    imgNative: require('../images/image-rows/do-it-yourself.jpg').default,
+    imgNative: require('../../static/temp-images/do-it-yourself.jpg').default,
     projectName: '2021',
     projectLink: 'MEL2 | Self Expression'
   },
   {
-    imgNative: require('../images/image-rows/ducky-3d-multimicah.jpg').default,
+    imgNative: require('../../static/temp-images/ducky-3d-multimicah.jpg').default,
     projectName: '2022',
     projectLink: 'Ducky3D | Sculpture Exploration'
   },
   {
-    imgNative: require('../images/image-rows/feel-tired.jpg').default,
+    imgNative: require('../../static/temp-images/feel-tired.jpg').default,
     projectName: '2022',
     projectLink: 'D2-31 | Tired'
   },
   {
-    imgNative: require('../images/image-rows/higher-self-1.jpg').default,
+    imgNative: require('../../static/temp-images/higher-self-1.jpg').default,
     projectName: '2022',
     projectLink: 'Multi | Next Album'
   },
   {
-    imgNative: require('../images/image-rows/ram-dass-syf.jpg').default,
+    imgNative: require('../../static/temp-images/ram-dass-syf.jpg').default,
     projectName: '2021',
     projectLink: 'Multi | SYF 2021 Update'
   },
   {
-    imgNative: require('../images/image-rows/silence-mind-sticker.jpg').default,
+    imgNative: require('../../static/temp-images/silence-mind-sticker.jpg').default,
     projectName: '2023',
     projectLink: 'Multi | Silence Mind'
   },
   {
-    imgNative: require('../images/image-rows/version-of-you.jpg').default,
+    imgNative: require('../../static/temp-images/version-of-you.jpg').default,
     projectName: '2023',
     projectLink: 'Multi | V'
   },
@@ -301,7 +301,7 @@ export default function Home() {
 
             </div>
           </div>
-          <div className="callouts-grid"> 
+          <div className="callouts-grid mb-5"> 
             <div className="opening-hours"> 
             <p> Opening hours</p>
             <p> Monday to Friday 9AM - 6PM</p>
@@ -322,13 +322,13 @@ export const Head = () =>(
 <meta property="og:url" content="https://micahcarroll.com/" />
 <meta property="og:title" content="Micah Carroll" />
 <meta property="og:description" content="Design utilizing a unique blend of creativity, technical skill, and an innovative approach that draws upon a wide range of disciplines, including graphic design, 3D tooling, product design, and more" />
-<meta property="og:image" content="/static/metadata-image.png" />
+<meta property="og:image" content="../../static/metadata-image.png" />
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content="https://micahcarroll.com/" />
 <meta property="twitter:title" content="Micah Carroll " />
 <meta property="twitter:description" content="Design utilizing a unique blend of creativity, technical skill, and an innovative approach that draws upon a wide range of disciplines, including graphic design, 3D tooling, product design, and more" />
-<meta property="twitter:image" content="/static/metadata-image.png" />
+<meta property="twitter:image" content="../../static/metadata-image.png" />
 
 
 </>

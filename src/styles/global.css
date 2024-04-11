@@ -2,8 +2,18 @@
   font-family: 'Neue Montreal';
   src: url(../../static/NeueMontreal-Regular.woff) format("woff2");
 }
+
+
 html {
+  /* Hiding the scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
   background-color: #000;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+
 }
 iframe{
   border-radius: 4px;
@@ -11,6 +21,7 @@ iframe{
 img {
   border-radius: 4px;
 }
+
 a {
   text-decoration: none;
   color: inherit;
@@ -88,6 +99,7 @@ html, body {
   grid-template-columns: repeat(12,1fr);
   overflow-x: auto;
   white-space: nowrap;
+  scroll-behavior: smooth;
 }
 
 .varied-project-grid-1::-webkit-scrollbar {
@@ -269,7 +281,7 @@ html, body {
 /* layout & nav */
 
 .navbar-brand {
-  margin-top: 16px;
+  padding-top: 32px;
   margin-bottom: 1px;
   flex-wrap:wrap;
 }
