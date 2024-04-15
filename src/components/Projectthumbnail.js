@@ -11,7 +11,7 @@ export default function Projectthumbnail({getImageUrl, autoplay}) {
     return (
         <>
       {isVideo ? (
-        <video controls autoPlay={true} muted={true} controls={false} loop >
+        <video controls autoPlay={true} muted={true} controls={false} loop playsInline >
           <source src={getImageUrl} type="video/webm" />
           Your browser does not support the video tag.
         </video>
