@@ -8,29 +8,39 @@ import { Link} from "gatsby"
 
 const imageObjectsRow1 = [
   {
-    imgNative: require('../../static/temp-images/bastila-2.gif').default,
+    imgNative: require('../../static/temp-images/metalheart-1.webm').default,
+    projectName: '2024',
+    projectLink: 'metalheart creation I'
+  },
+  {
+    imgNative: require('../../static/temp-images/neotrance.webm').default,
+    projectName: '2024',
+    projectLink: 'RM21 | MotionEm'
+  },
+    {
+    imgNative: require('../../static/temp-images/shoe-animation.webm').default,
+    projectName: '2024',
+    projectLink: 'LL21 | Nike'
+  },
+  {
+    imgNative: require('../../static/temp-images/mindbloom.webm').default,
+    projectName: '2023',
+    projectLink: 'Mindbloom | Product Viz'
+  },
+  {
+    imgNative: require('../../static/temp-images/bastila-2.webm').default,
     projectName: '2023',
     projectLink: 'Bastila | Keycap Asset'
   },
   {
-    imgNative: require('../../static/temp-images/bastila-1.jpg').default,
-    projectName: '2023',
-    projectLink: 'Bastila | Shipping Container'
-  },
-  {
-    imgNative: require('../../static/temp-images/mike-1.png').default,
+    imgNative: require('../../static/temp-images/dreancore-animation.webm').default,
     projectName: '2023',
     projectLink: 'Dreamcore | Dreamstation Asset'
   },
   {
-    imgNative: require('../../static/temp-images/t-shirt-1.gif').default,
+    imgNative: require('../../static/temp-images/vv-1.webm').default,
     projectName: '2023',
-    projectLink: 'RM21 | Clothing Experience'
-  },
-  {
-    imgNative: require('../../static/temp-images/oct-1.png').default,
-    projectName: '2023',
-    projectLink: 'LL21 | Unlocked Material'
+    projectLink: 'Visualize Value | Checks'
   },
   {
     imgNative: require('../../static/temp-images/pill-1.png').default,
@@ -41,31 +51,6 @@ const imageObjectsRow1 = [
     imgNative: require('../../static/temp-images/pill-2.png').default,
     projectName: '2023',
     projectLink: 'MDZ2 | Core Station'
-  },
-  {
-    imgNative: require('../../static/temp-images/recharge-1.gif').default,
-    projectName: '2023',
-    projectLink: 'Breakeven | Cover Asset'
-  },
-  {
-    imgNative: require('../../static/temp-images/vv-1.gif').default,
-    projectName: '2023',
-    projectLink: 'Visualize Value | Checks'
-  },
-  {
-    imgNative: require('../../static/temp-images/fabric-1.png').default,
-    projectName: '2023',
-    projectLink: 'FB63 | Fabric Visualization'
-  },
-  {
-    imgNative: require('../../static/temp-images/boys-2.gif').default,
-    projectName: '2023',
-    projectLink: 'Boy Smells | Candle Visualization'
-  },
-  {
-    imgNative: require('../../static/temp-images/konami.gif').default,
-    projectName: '2023',
-    projectLink: 'Konami | Retro Visualization'
   },
 ];
 const imageObjectsRow2 = [
@@ -223,7 +208,7 @@ export default function Home() {
         {/* project lists - dynamic portion */}
         {/* working section */}
         <div className="container"> 
-          <Rowheader titleCategory={'3D Artifacts'} dateProject={'2019-2023'} />
+          <Rowheader titleCategory={'3D Artifacts'} dateProject={'2019-2024'} />
           <div>
           <Projectcontainer imageObjects={imageObjectsRow1} />
         </div>
@@ -244,8 +229,8 @@ export default function Home() {
               <div className="feature-object">
                   <a href="https://www.youtube.com/@MicahCarroll" target="_blank"> 
                   <p className="feature-title"> Youtube Channel</p>
-                  <p className="feature-description"> Teaching Blender & tricks</p>
-                  <p className="feature-year"> 2022</p>
+                  <p className="feature-description"> Teaching 3D design + design tips and tricks</p>
+                  <p className="feature-year"> 2024</p>
                   </a>
                 </div>
               <div className="feature-object">
