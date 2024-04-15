@@ -8,7 +8,7 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: "/sitev2",
+  // pathPrefix: "/sitev2",
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
