@@ -13,8 +13,8 @@ export default function hardsurface() {
         <>
         <Layout>
             <div className="container"> 
-                <Intro caseStudy={{ codeName: 'HS3D',projectLink:'https://www.instagram.com/multimicah/', projectName: 'Hard Surface Practice',
-                description: "While learning Blender,I eventually dove into some hard surface practice.. so I started created devices around dystopian societies to practice 3D techniques and an intro into FUI (Fictional User Interface)",
+                <Intro caseStudy={{ codeName: 'HS3D',projectLink:'https://www.instagram.com/multimicah/', projectName: 'Device Renders',
+                description: "This page would showcase an assortment of 3D renders highlighting techniques with modeling and device presentation. Along with Sci-Fi UI practice.",
                 imageArea:
                 <StaticImage
                     src ="../../images/project-images/device-studies/ds-1.png"
@@ -22,6 +22,14 @@ export default function hardsurface() {
                     placeholder="blurred" 
                 />
                 }} />
+                <BigImage bigImage ={{ 
+                bigCaption: 'AI powered meditative companion, after a session you recite your downloads and the AI will bring together the findings.',
+                bigImageImage: <StaticImage src="../../images/project-images/device-studies/meditative-device-1.png" alt="Chat GPT interface"/>
+                }}/>
+                <BigImage bigImage ={{ 
+                bigCaption: 'AI powered air filter',
+                bigImageImage: <StaticImage src="../../images/project-images/device-studies/airflow-1.png" alt="image of a 3D render, cylinder like structure with LEDs"/>
+                }}/>
                 <BigImage bigImage ={{ 
                 bigCaption: 'Chat GPT, listening device that has your memories with your profile.',
                 bigImageImage: <StaticImage src="../../images/project-images/device-studies/ds-2.png" alt="Chat GPT interface"/>

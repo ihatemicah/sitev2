@@ -129,7 +129,7 @@ export default function Home() {
               />
               </Link>
               <div className="hl-description-container"> 
-                    <p> Hard Surface Modeling  </p>
+                    <p> 3D Product Renders  </p>
                     <p> Device™ | ↗︎ </p>
                   </div>
             </div>
