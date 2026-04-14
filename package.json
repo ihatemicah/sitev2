@@ -1,44 +1,34 @@
 {
-  "name": "Micah Carroll's Website",
+  "name": "micah-2026",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
-  "version": "0.1.0",
-  "license": "0BSD",
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "deploy": "gatsby build && gh-pages -d public -b gh-pages",
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.16",
-    "@studio-freight/react-lenis": "^0.0.23",
-    "bulma": "^0.9.4",
-    "gatsby": "^5.9.1",
-    "gatsby-omni-font-loader": "^2.0.2",
-    "gatsby-plugin-force-file-loader": "^5.0.1",
-    "gatsby-plugin-image": "^3.10.0",
-    "gatsby-plugin-sass": "^6.10.0",
-    "gatsby-plugin-sharp": "^5.10.0",
-    "gatsby-source-filesystem": "^5.10.0",
-    "gatsby-transformer-sharp": "^5.10.0",
-    "lenis": "^0.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
-    "sass": "^1.63.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "@browser.style/digital-clock": "^1.0.0",
+    "embla-carousel-react": "^8.6.0",
+    "gsap": "^3.14.2",
+    "hover-video-player": "^1.3.0",
+    "luxon": "^3.7.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hover-video-player": "^10.0.2"
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0"
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.2.4"
   }
 }
