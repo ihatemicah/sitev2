@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 import Header from './Header.jsx'
-import FeatureProjects from './FeatureProjects.jsx'
+import FeatureProjects from './Featureprojects.jsx'
 import StickyNav from './StickyNav.jsx'
 import Links from './Links.jsx'
 import CreativeCanvas from './CreativeCanvas.jsx'
