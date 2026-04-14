@@ -3,6 +3,8 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 import './Components.css'
+import circleIcon from './assets/circle.svg'
+import zoomIcon from './assets/zoom.svg'
 
 const defaultImages1 = [
     "https://zone-multi.b-cdn.net/Ai%20Images/image%2011.jpg",
@@ -142,10 +144,10 @@ function CreativeCanvas({ imageArrays = [defaultImages1, defaultImages2] }) {
             >
                 <div className='upper-container'>
                     <div className='title-container'>
-                        <img src="/src/assets/circle.svg" alt="circle shape" className='circle-icon' />
+                        <img src={circleIcon} alt="circle shape" className='circle-icon' />
                         <p> AI Creations</p>
                     </div>
-                    <img src="/src/assets/zoom.svg" alt="viewfinder icon" className='viewfinder-icon' />
+                    <img src={zoomIcon} alt="viewfinder icon" className='viewfinder-icon' />
                 </div>
                 <div className='lower-container'>
                     <div className="creative-embla" ref={emblaRef1}>
@@ -166,10 +168,10 @@ function CreativeCanvas({ imageArrays = [defaultImages1, defaultImages2] }) {
             >
                 <div className='upper-container'>
                     <div className='title-container'>
-                        <img src="/src/assets/circle.svg" alt="circle shape" className='circle-icon' />
+                        <img src={circleIcon} alt="circle shape" className='circle-icon' />
                         <p> Proof of life </p>
                     </div>
-                    <img src="/src/assets/zoom.svg" alt="viewfinder icon" className='viewfinder-icon' />
+                    <img src={zoomIcon} alt="viewfinder icon" className='viewfinder-icon' />
                 </div>
                 <div className='lower-container'>
                     <div className="creative-embla" ref={emblaRef2}>

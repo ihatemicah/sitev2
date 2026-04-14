@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/ — GitHub Pages: https://vite.dev/guide/static-deploy#github-pages
+// https://vite.dev/config/ — base './' so assets resolve on github.io/<repo>/ or a custom domain
 export default defineConfig({
-  base: '/sitev2/',
+  base: './',
   plugins: [
     react({
       babel: {
