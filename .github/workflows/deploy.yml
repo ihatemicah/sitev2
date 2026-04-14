@@ -28,6 +28,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      VITE_SITE_ORIGIN: https://ihatemicah.github.io/sitev2
     steps:
       - name: Checkout
         uses: actions/checkout@v6
