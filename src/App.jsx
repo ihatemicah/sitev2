@@ -172,9 +172,13 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 function App() {
   // Define your media arrays
   const row1Media = [
+    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKN_C.jpg" },
+    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKIN-GLASS_C.jpg" },
+    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKIN-MACRO-C.jpg" },
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/octane-exp.jpg" },
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/metalheart-1-090c1bed25e0d082280f05a73a2ce4af.webm", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/delicate.png" },
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/dreancore-animation-648dbbeab1a648a1e699b658e241cd5a.webm", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/metalheart-frame.png" },
+
+
+
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/multiple-view.jpg" },
     { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/Miffy-Motion-2.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/Miffy-Thumbnail.jpg" },
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/version-u.jpg" },
@@ -183,7 +187,8 @@ function App() {
   ]
 
   const row2Media = [
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKN_C.jpg" },
+    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/metalheart-1-090c1bed25e0d082280f05a73a2ce4af.webm", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/delicate.png" },
+
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/ram-dass-syf-02ea4ecb748b32878e1fd68465717492.jpg" },
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/silence-mind-sticker-0cfa778762a90f1766c31961d6e27b6d.jpg" },
     { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/weekend-carti.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/weekend-carti-frame.jpg" },
