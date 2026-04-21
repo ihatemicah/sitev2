@@ -178,6 +178,8 @@ function App() {
     { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/Handheld-Meditation%20-%20Compressed.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/HandHeld%20-%20Preview.jpg" },
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/octane-exp.jpg" },
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/multiple-view.jpg" },
+    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/EVA%20-%20WEBSITE%20SQUARE_c.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/eva-background.png" },
+
     { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/Umbrella%20-%201.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/Vial%20-%201.jpg" },
     { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/Miffy-Motion-2.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/Miffy-Thumbnail.jpg" },
     { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/ISOKNOCK-1.png" },
