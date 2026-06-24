@@ -28,6 +28,7 @@ function Footer() {
             <a href="#">Linkedin</a>
             <a href="#">X</a>
             <a href="#">Instagram</a>
+            <a href="experiments.html">Experiments</a>
             </div>
         </div>
         <div className='local-clock'>
