@@ -8,6 +8,7 @@ import CreativeCanvas from './CreativeCanvas.jsx'
 import Companies from './Companies.jsx'
 import PersonalBio from './PersonalBio.jsx'
 import Footer from './Footer.jsx'
+import { row1Media, row2Media } from './portfolioMedia.js'
 import useEmblaCarousel from 'embla-carousel-react'
 import HoverVideoPlayer from 'react-hover-video-player'
 import { gsap } from 'gsap'
@@ -17,6 +18,7 @@ const overlayEase = CustomEase.create('custom', 'M0,0 C0.274,0 -0.139,1 1,1 ')
 
 function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
     const overlayRef = useRef(null)
+    const overlayPanelRef = useRef(null)
     const overlayOpenRef = useRef(false)
     const pointerStartRef = useRef({ x: 0, y: 0 })
     const pointerDraggedRef = useRef(false)
@@ -55,39 +57,62 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
     }
 
     const toggleOverlay = useCallback(() => {
-        if (!overlayRef.current) return
+        const backdrop = overlayRef.current
+        const panel = overlayPanelRef.current
+        if (!backdrop || !panel) return
 
         if (overlayOpenRef.current) {
-            gsap.to(overlayRef.current, {
-                y: '100%',
-                duration: 0.5,
-                ease: overlayEase,
+            const tl = gsap.timeline({
                 onComplete: () => {
                     overlayOpenRef.current = false
+                    backdrop.style.visibility = 'hidden'
                     setOverlayVisible(false)
+                    gsap.set(panel, { yPercent: 100 })
+                    gsap.set(backdrop, { opacity: 0 })
                 },
             })
+            tl.to(panel, {
+                yPercent: 100,
+                duration: 0.2,
+                ease: overlayEase,
+            })
+            tl.to(
+                backdrop,
+                {
+                    opacity: 0,
+                    duration: 0.12,
+                    ease: 'power2.in',
+                },
+                '-=0.07'
+            )
         } else {
             overlayOpenRef.current = true
+            backdrop.style.visibility = 'visible'
             setOverlayVisible(true)
-            requestAnimationFrame(() => {
-                if (!overlayRef.current) return
-                gsap.to(overlayRef.current, {
-                    y: 0,
-                    xPercent: -50,
-                    duration: 0.5,
-                    ease: overlayEase,
-                })
+            gsap.set(panel, { yPercent: 100 })
+            gsap.set(backdrop, { opacity: 0, xPercent: -50 })
+            const tl = gsap.timeline()
+            tl.to(backdrop, {
+                opacity: 1,
+                duration: 0.2,
+                ease: 'power2.out',
             })
+            tl.to(
+                panel,
+                {
+                    yPercent: 0,
+                    duration: 0.45,
+                    ease: overlayEase,
+                },
+                '-=0.15'
+            )
         }
     }, [])
 
     useEffect(() => {
-        if (!overlayRef.current) return
-        gsap.set(overlayRef.current, {
-            y: '100%',
-            xPercent: -50,
-        })
+        if (!overlayRef.current || !overlayPanelRef.current) return
+        gsap.set(overlayRef.current, { opacity: 0, xPercent: -50 })
+        gsap.set(overlayPanelRef.current, { yPercent: 100 })
     }, [])
 
     const handleRowPointerDown = (event) => {
@@ -143,7 +168,7 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                     visibility: overlayVisible ? 'visible' : 'hidden',
                 }}
             >
-                <div className="creative-overlay-content">
+                <div ref={overlayPanelRef} className="creative-overlay-content">
                     <div className="overlay-layout">
                         <div>
                             <div
@@ -170,37 +195,6 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 }
 
 function App() {
-  // Define your media arrays
-  const row1Media = [
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKN_C.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKIN-GLASS_C.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/SKIN-MACRO-C.jpg" },
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/Handheld-Meditation%20-%20Compressed.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/HandHeld%20-%20Preview.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/octane-exp.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/multiple-view.jpg" },
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/EVA%20-%20WEBSITE%20SQUARE_c.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/eva-background.png" },
-
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/Umbrella%20-%201.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/Vial%20-%201.jpg" },
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/Miffy-Motion-2.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/Miffy-Thumbnail.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/ISOKNOCK-1.png" },
-
-  ]
-
-  const row2Media = [
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/joi-blokes-social-c.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/ScreamCream.jpg" },
-
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/metalheart-1-090c1bed25e0d082280f05a73a2ce4af.webm", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/delicate.png" },
-
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/ram-dass-syf-02ea4ecb748b32878e1fd68465717492.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/silence-mind-sticker-0cfa778762a90f1766c31961d6e27b6d.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/zest_a.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/Logo%20Presentation%20-%20Digital.jpg" },
-    { type: 'image', src: "https://zone-multi.b-cdn.net/Static/rows/version-u.jpg" },
-    { type: 'video', videoSrc: "https://zone-multi.b-cdn.net/Motion%20Projects/rows/weekend-carti.mp4", thumbnail: "https://zone-multi.b-cdn.net/Static/rows/weekend-carti-frame.jpg" },
-
-    
-  ]
-
   return (
     <>
       <Header />

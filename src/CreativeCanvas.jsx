@@ -5,40 +5,16 @@ import { CustomEase } from 'gsap/CustomEase'
 import './Components.css'
 import circleIcon from './assets/circle.svg'
 import zoomIcon from './assets/zoom.svg'
+import { creativeAiImages, creativeProofOfLife } from './portfolioMedia.js'
 
-const defaultImages1 = [
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%2011.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%2012.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%2021.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%202.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%2024.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%2025.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%204.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%205.jpg",
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%203.jpg",
+const overlayEase = CustomEase.create('custom', 'M0,0 C0.274,0 -0.139,1 1,1 ')
 
-    "https://zone-multi.b-cdn.net/Ai%20Images/image%2026.jpg",
-]
-
-const defaultImages2 = [
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-1.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-5.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/AYN%20THOR.mp4",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-2.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-3.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/Crimson%20Desert.mp4",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-4.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/Work%20Example%20-%201.mp4",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-7.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-8.jpg",
-    "https://zone-multi.b-cdn.net/proof-of-life/photo-2.jpg",
-
-
-]
-
-function CreativeCanvas({ imageArrays = [defaultImages1, defaultImages2] }) {
+function CreativeCanvas({
+    imageArrays = [creativeAiImages, creativeProofOfLife],
+}) {
     const [activeContainer, setActiveContainer] = useState(null)
     const overlayRef = useRef(null)
+    const overlayPanelRef = useRef(null)
 
     const [emblaRef1] = useEmblaCarousel({ 
         loop: false,
@@ -102,37 +78,84 @@ function CreativeCanvas({ imageArrays = [defaultImages1, defaultImages2] }) {
         return <img src={src} alt="" className='s-default' />
     }
 
+    const runCloseOverlay = () => {
+        const backdrop = overlayRef.current
+        const panel = overlayPanelRef.current
+        if (!backdrop || !panel) return
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                backdrop.style.visibility = 'hidden'
+                setActiveContainer(null)
+                gsap.set(panel, { yPercent: 100 })
+                gsap.set(backdrop, { opacity: 0 })
+            },
+        })
+        tl.to(panel, {
+            yPercent: 100,
+            duration: 0.2,
+            ease: overlayEase,
+        })
+        tl.to(
+            backdrop,
+            {
+                opacity: 0,
+                duration: 0.12,
+                ease: 'power2.in',
+            },
+            '-=0.07'
+        )
+    }
+
+    const runOpenOverlay = () => {
+        const backdrop = overlayRef.current
+        const panel = overlayPanelRef.current
+        if (!backdrop || !panel) return
+
+        backdrop.style.visibility = 'visible'
+        gsap.set(panel, { yPercent: 100 })
+        gsap.set(backdrop, { opacity: 0, xPercent: -50 })
+
+        const tl = gsap.timeline()
+        tl.to(backdrop, {
+            opacity: 1,
+            duration: 0.2,
+            ease: 'power2.out',
+        })
+        tl.to(
+            panel,
+            {
+                yPercent: 0,
+                duration: 0.45,
+                ease: overlayEase,
+            },
+            '-=0.15'
+        )
+    }
+
     const handleContainerClick = (containerIndex) => {
         if (activeContainer === containerIndex) {
-            // Close overlay - slide down and out
-            gsap.to(overlayRef.current, {
-                y: '100%',
-                duration: 0.5,
-                ease: CustomEase.create("custom", "M0,0 C0.274,0 -0.139,1 1,1 "),
-                onComplete: () => {
-                    setActiveContainer(null)
-                }
-            })
-        } else {
-            // Open overlay - slide up from below
-            setActiveContainer(containerIndex)
-            gsap.to(overlayRef.current, {
-                y: 0,
-                xPercent: -50,
-                duration: 0.5,
-                ease: CustomEase.create("custom", "M0,0 C0.274,0 -0.139,1 1,1 "),
-            })
+            runCloseOverlay()
+            return
         }
+
+        if (activeContainer === null) {
+            setActiveContainer(containerIndex)
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    runOpenOverlay()
+                })
+            })
+            return
+        }
+
+        setActiveContainer(containerIndex)
     }
 
     useEffect(() => {
-        // Ensure initial position is set (hidden below screen)
-        if (overlayRef.current) {
-            gsap.set(overlayRef.current, {
-                y: '100%',
-                xPercent: -50
-            })
-        }
+        if (!overlayRef.current || !overlayPanelRef.current) return
+        gsap.set(overlayRef.current, { opacity: 0, xPercent: -50 })
+        gsap.set(overlayPanelRef.current, { yPercent: 100 })
     }, [])
 
     return (
@@ -188,11 +211,11 @@ function CreativeCanvas({ imageArrays = [defaultImages1, defaultImages2] }) {
 
             <div 
                 ref={overlayRef}
-                className="creative-overlay"
+                className="creative-overlay creative-overlay--panel-rise"
                 onClick={() => activeContainer && handleContainerClick(activeContainer)}
                 style={{ visibility: activeContainer ? 'visible' : 'hidden' }}
             >
-                <div className="creative-overlay-content">
+                <div ref={overlayPanelRef} className="creative-overlay-content">
                     <div className='overlay-layout'>
                         <div>
                         {activeContainer === 1 && (
