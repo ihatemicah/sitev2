@@ -67,6 +67,13 @@ export const row1Media = [
     {
         type: 'video',
         videoSrc:
+            'https://zone-multi.b-cdn.net/Motion%20Projects/rows/kalshi-motion-preview-c.mp4',
+        thumbnail:
+            'https://zone-multi.b-cdn.net/Static/kalshi-thumbnail.jpg',
+    },
+    {
+        type: 'video',
+        videoSrc:
             'https://zone-multi.b-cdn.net/Motion%20Projects/rows/usb-showcase.mp4',
         thumbnail:
             'https://zone-multi.b-cdn.net/Static/usb-4.1.jpg',
