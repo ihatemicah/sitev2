@@ -1,39 +1,40 @@
 import useEmblaCarousel from 'embla-carousel-react'
-import HoverVideoPlayer from 'react-hover-video-player'
+import PortfolioHoverVideo, {
+    useEmblaDragSuppress,
+} from './PortfolioHoverVideo.jsx'
 import './Components.css'
 
 function EmblaRow({ title = '', mediaItems = [] }) {
-    const [emblaRef] = useEmblaCarousel({
+    const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: false,
         align: 'start',
         dragFree: true,
     })
+    const suppressHover = useEmblaDragSuppress(emblaApi)
 
     return (
         <div className="embla-row">
             {title && <p className="mixed-projects">{title}</p>}
-            <div className="embla" ref={emblaRef}>
+            <div
+                className={suppressHover ? 'embla is-dragging' : 'embla'}
+                ref={emblaRef}
+            >
                 <div className="embla__container">
                     {mediaItems.map((item, index) => (
                         <div key={index} className="embla__slide">
                             {item.type === 'video' ? (
-                                <HoverVideoPlayer
-                                    key={`video-${item.videoSrc}`}
+                                <PortfolioHoverVideo
                                     videoSrc={item.videoSrc}
-                                    pausedOverlay={
-                                        <img
-                                            src={item.thumbnail}
-                                            alt=""
-                                            className="s-default"
-                                        />
-                                    }
+                                    thumbnail={item.thumbnail}
                                     className="s-default"
-                                    restartOnPaused
-                                    unloadVideoOnPaused={false}
-                                    preload="metadata"
+                                    suppressHover={suppressHover}
                                 />
                             ) : (
-                                <img src={item.src} alt="" className="s-default" />
+                                <img
+                                    src={item.src}
+                                    alt=""
+                                    className="s-default"
+                                />
                             )}
                         </div>
                     ))}

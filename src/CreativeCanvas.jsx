@@ -6,6 +6,7 @@ import './Components.css'
 import circleIcon from './assets/circle.svg'
 import zoomIcon from './assets/zoom.svg'
 import { creativeAiImages, creativeProofOfLife } from './portfolioMedia.js'
+import { useEmblaDragSuppress } from './PortfolioHoverVideo.jsx'
 
 const overlayEase = CustomEase.create('custom', 'M0,0 C0.274,0 -0.139,1 1,1 ')
 
@@ -16,23 +17,27 @@ function CreativeCanvas({
     const overlayRef = useRef(null)
     const overlayPanelRef = useRef(null)
 
-    const [emblaRef1] = useEmblaCarousel({ 
+    const [emblaRef1, emblaApi1] = useEmblaCarousel({ 
         loop: false,
         align: 'start',
         dragFree: true
     })
 
-    const [emblaRef2] = useEmblaCarousel({ 
+    const [emblaRef2, emblaApi2] = useEmblaCarousel({ 
         loop: false,
         align: 'start',
         dragFree: true
     })
 
-    const [overlayEmblaRef] = useEmblaCarousel({ 
+    const [overlayEmblaRef, overlayEmblaApi] = useEmblaCarousel({ 
         loop: false,
         align: 'start',
         dragFree: true
     })
+
+    const suppressHover1 = useEmblaDragSuppress(emblaApi1)
+    const suppressHover2 = useEmblaDragSuppress(emblaApi2)
+    const overlaySuppressHover = useEmblaDragSuppress(overlayEmblaApi)
 
     const images1 = imageArrays[0] || []
     const images2 = imageArrays[1] || []
@@ -44,11 +49,21 @@ function CreativeCanvas({
         return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(src)
     }
 
+    const playTimeoutRef = useRef(null)
+
     const handleVideoHover = (event, shouldPlay) => {
         const video = event.currentTarget
 
+        if (playTimeoutRef.current) {
+            window.clearTimeout(playTimeoutRef.current)
+            playTimeoutRef.current = null
+        }
+
         if (shouldPlay) {
-            video.play().catch(() => {})
+            playTimeoutRef.current = window.setTimeout(() => {
+                playTimeoutRef.current = null
+                video.play().catch(() => {})
+            }, 80)
             return
         }
 
@@ -56,21 +71,30 @@ function CreativeCanvas({
         video.currentTime = 0
     }
 
-    const renderMedia = (item) => {
+    const renderMedia = (item, suppressHover = false) => {
         const src = getMediaSource(item)
         if (!src) return null
 
         if (isVideoMedia(item)) {
             return (
                 <video
+                    key={suppressHover ? `${src}-suppressed` : src}
                     src={src}
                     className='s-default'
                     muted
                     loop
                     playsInline
                     preload='metadata'
-                    onMouseEnter={(event) => handleVideoHover(event, true)}
-                    onMouseLeave={(event) => handleVideoHover(event, false)}
+                    onMouseEnter={
+                        suppressHover
+                            ? undefined
+                            : (event) => handleVideoHover(event, true)
+                    }
+                    onMouseLeave={
+                        suppressHover
+                            ? undefined
+                            : (event) => handleVideoHover(event, false)
+                    }
                 />
             )
         }
@@ -173,11 +197,18 @@ function CreativeCanvas({
                     <img src={zoomIcon} alt="viewfinder icon" className='viewfinder-icon' />
                 </div>
                 <div className='lower-container'>
-                    <div className="creative-embla" ref={emblaRef1}>
+                    <div
+                        className={
+                            suppressHover1
+                                ? 'creative-embla is-dragging'
+                                : 'creative-embla'
+                        }
+                        ref={emblaRef1}
+                    >
                         <div className="creative-embla__container">
                             {images1.map((src, index) => (
                                 <div key={index} className="creative-embla__slide">
-                                    {renderMedia(src)}
+                                    {renderMedia(src, suppressHover1)}
                                 </div>
                             ))}
                         </div>
@@ -197,11 +228,18 @@ function CreativeCanvas({
                     <img src={zoomIcon} alt="viewfinder icon" className='viewfinder-icon' />
                 </div>
                 <div className='lower-container'>
-                    <div className="creative-embla" ref={emblaRef2}>
+                    <div
+                        className={
+                            suppressHover2
+                                ? 'creative-embla is-dragging'
+                                : 'creative-embla'
+                        }
+                        ref={emblaRef2}
+                    >
                         <div className="creative-embla__container">
                             {images2.map((src, index) => (
                                 <div key={index} className="creative-embla__slide">
-                                    {renderMedia(src)}
+                                    {renderMedia(src, suppressHover2)}
                                 </div>
                             ))}
                         </div>
@@ -219,11 +257,18 @@ function CreativeCanvas({
                     <div className='overlay-layout'>
                         <div>
                         {activeContainer === 1 && (
-                                <div className="creative-overlay-embla" ref={overlayEmblaRef}>
+                                <div
+                                    className={
+                                        overlaySuppressHover
+                                            ? 'creative-overlay-embla is-dragging'
+                                            : 'creative-overlay-embla'
+                                    }
+                                    ref={overlayEmblaRef}
+                                >
                                     <div className="creative-overlay-embla__container">
                                         {images1.map((src, index) => (
                                             <div key={index} className="creative-overlay-embla__slide">
-                                                {renderMedia(src)}
+                                                {renderMedia(src, overlaySuppressHover)}
                                             </div>
                                         ))}
                                     </div>
@@ -231,11 +276,18 @@ function CreativeCanvas({
                             )}
                         {activeContainer === 2 && (
                                 <>
-                                    <div className="creative-overlay-embla" ref={overlayEmblaRef}>
+                                    <div
+                                        className={
+                                            overlaySuppressHover
+                                                ? 'creative-overlay-embla is-dragging'
+                                                : 'creative-overlay-embla'
+                                        }
+                                        ref={overlayEmblaRef}
+                                    >
                                         <div className="creative-overlay-embla__container">
                                             {images2.map((src, index) => (
                                                 <div key={index} className="creative-overlay-embla__slide">
-                                                    {renderMedia(src)}
+                                                    {renderMedia(src, overlaySuppressHover)}
                                                 </div>
                                             ))}
                                         </div>

@@ -10,7 +10,9 @@ import PersonalBio from './PersonalBio.jsx'
 import Footer from './Footer.jsx'
 import { row1Media, row2Media } from './portfolioMedia.js'
 import useEmblaCarousel from 'embla-carousel-react'
-import HoverVideoPlayer from 'react-hover-video-player'
+import PortfolioHoverVideo, {
+    useEmblaDragSuppress,
+} from './PortfolioHoverVideo.jsx'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 
@@ -25,35 +27,50 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 
     const [overlayVisible, setOverlayVisible] = useState(false)
 
-    const [emblaRef] = useEmblaCarousel({
+    const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: false,
         align: 'start',
         dragFree: true,
     })
 
-    const [overlayEmblaRef] = useEmblaCarousel({
+    const [overlayEmblaRef, overlayEmblaApi] = useEmblaCarousel({
         loop: false,
         align: 'start',
         dragFree: true,
     })
 
-    const renderSlideMedia = (item) => {
+    const rowSuppressHover = useEmblaDragSuppress(emblaApi)
+    const overlaySuppressHover = useEmblaDragSuppress(overlayEmblaApi)
+
+    const renderSlideMedia = (item, suppressHover = false) => {
         if (item.type === 'video') {
             return (
-                <HoverVideoPlayer
-                    key={`video-${item.videoSrc}`}
+                <PortfolioHoverVideo
                     videoSrc={item.videoSrc}
-                    pausedOverlay={
-                        <img src={item.thumbnail} alt="" className="s-default" />
-                    }
+                    thumbnail={item.thumbnail}
                     className="s-default"
-                    restartOnPaused
-                    unloadVideoOnPaused={false}
-                    preload="metadata"
+                    suppressHover={suppressHover}
                 />
             )
         }
         return <img src={item.src} alt="" className="s-default" />
+    }
+
+    // Keep layout in the closed overlay with light placeholders; mount real media only when open
+    const renderOverlaySlideMedia = (item) => {
+        if (!overlayVisible) {
+            if (item.type === 'video') {
+                return (
+                    <img
+                        src={item.thumbnail}
+                        alt=""
+                        className="s-default"
+                    />
+                )
+            }
+            return <img src={item.src} alt="" className="s-default" />
+        }
+        return renderSlideMedia(item, overlaySuppressHover)
     }
 
     const toggleOverlay = useCallback(() => {
@@ -115,6 +132,12 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
         gsap.set(overlayPanelRef.current, { yPercent: 100 })
     }, [])
 
+    // Re-measure overlay carousel once real media mounts
+    useEffect(() => {
+        if (!overlayVisible || !overlayEmblaApi) return
+        overlayEmblaApi.reInit()
+    }, [overlayVisible, overlayEmblaApi, mediaItems])
+
     const handleRowPointerDown = (event) => {
         pointerStartRef.current = { x: event.clientX, y: event.clientY }
         pointerDraggedRef.current = false
@@ -149,11 +172,16 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                 style={{ cursor: 'pointer' }}
             >
                 {title && <p className="mixed-projects">{title}</p>}
-                <div className="embla" ref={emblaRef}>
+                <div
+                    className={
+                        rowSuppressHover ? 'embla is-dragging' : 'embla'
+                    }
+                    ref={emblaRef}
+                >
                     <div className="embla__container">
                         {mediaItems.map((item, index) => (
                             <div key={index} className="embla__slide">
-                                {renderSlideMedia(item)}
+                                {renderSlideMedia(item, rowSuppressHover)}
                             </div>
                         ))}
                     </div>
@@ -172,7 +200,11 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                     <div className="overlay-layout">
                         <div>
                             <div
-                                className="creative-overlay-embla embla-row-expand-overlay"
+                                className={
+                                    overlaySuppressHover
+                                        ? 'creative-overlay-embla embla-row-expand-overlay is-dragging'
+                                        : 'creative-overlay-embla embla-row-expand-overlay'
+                                }
                                 ref={overlayEmblaRef}
                             >
                                 <div className="creative-overlay-embla__container">
@@ -181,7 +213,7 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                                             key={index}
                                             className="creative-overlay-embla__slide"
                                         >
-                                            {renderSlideMedia(item)}
+                                            {renderOverlaySlideMedia(item)}
                                         </div>
                                     ))}
                                 </div>
@@ -195,22 +227,22 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 }
 
 function App() {
-  return (
-    <>
-      <Header />
-      <StickyNav />
-      <FeatureProjects />
-      <ExpandableEmblaRow title="" mediaItems={row1Media} />
-      <ExpandableEmblaRow title="" mediaItems={row2Media} />
-      <Links />
-      <CreativeCanvas/>
-      <div className='companies-why'>
-        <Companies/>
-        <PersonalBio/>
-      </div>
-      <Footer/>
-    </>
-  )
+    return (
+        <>
+            <Header />
+            <StickyNav />
+            <FeatureProjects />
+            <ExpandableEmblaRow title="" mediaItems={row1Media} />
+            <ExpandableEmblaRow title="" mediaItems={row2Media} />
+            <Links />
+            <CreativeCanvas />
+            <div className="companies-why">
+                <Companies />
+                <PersonalBio />
+            </div>
+            <Footer />
+        </>
+    )
 }
 
 export default App

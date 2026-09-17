@@ -86,16 +86,11 @@ export const row1Media = [
             'https://zone-multi.b-cdn.net/Static/case-thumbnail.jpg',
     },
     {
-        type: 'image',
-        src: 'https://zone-multi.b-cdn.net/Static/rows/SKN_C.jpg',
-    },
-    {
-        type: 'image',
-        src: 'https://zone-multi.b-cdn.net/Static/rows/SKIN-GLASS_C.jpg',
-    },
-    {
-        type: 'image',
-        src: 'https://zone-multi.b-cdn.net/Static/rows/SKIN-MACRO-C.jpg',
+        type: 'video',
+        videoSrc:
+            'https://zone-multi.b-cdn.net/Motion%20Projects/rows/skn-showcase-a.mp4',
+        thumbnail:
+            'https://zone-multi.b-cdn.net/Static/rows/SKIN-GLASS_C.jpg',
     },
     {
         type: 'video',
@@ -103,6 +98,10 @@ export const row1Media = [
             'https://zone-multi.b-cdn.net/Motion%20Projects/rows/Handheld-Meditation%20-%20Compressed.mp4',
         thumbnail:
             'https://zone-multi.b-cdn.net/Static/rows/HandHeld%20-%20Preview.jpg',
+    },
+    {
+        type: 'image',
+        src: 'https://zone-multi.b-cdn.net/Static/rows/ISOKNOCK-1.png',
     },
     {
         type: 'image',
@@ -132,10 +131,7 @@ export const row1Media = [
         thumbnail:
             'https://zone-multi.b-cdn.net/Static/rows/Miffy-Thumbnail.jpg',
     },
-    {
-        type: 'image',
-        src: 'https://zone-multi.b-cdn.net/Static/rows/ISOKNOCK-1.png',
-    },
+
 ]
 
 export const row2Media = [

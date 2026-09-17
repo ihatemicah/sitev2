@@ -395,10 +395,17 @@ header h1 {
 
 
 
-/* Ensure video player can receive hover events even during carousel drag */
+/* Hover video can receive events, but not while the carousel is dragging */
 .embla__slide [class*="hover-video-player"] {
     pointer-events: auto;
     touch-action: pan-y;
+}
+
+.embla.is-dragging .embla__slide [class*="hover-video-player"],
+.creative-embla.is-dragging video,
+.creative-overlay-embla.is-dragging video,
+.creative-overlay-embla.is-dragging [class*="hover-video-player"] {
+    pointer-events: none;
 }
 
 /* Creative Canvas Carousel */

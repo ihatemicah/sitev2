@@ -1,17 +1,14 @@
-import HoverVideoPlayer from 'react-hover-video-player'
+import PortfolioHoverVideo from './PortfolioHoverVideo.jsx'
 import './Components.css'
 import { featuredProjectRows } from './portfolioMedia.js'
 
 function ProjectMedia({ item }) {
   if (item.type === 'video') {
     return (
-      <HoverVideoPlayer
+      <PortfolioHoverVideo
         videoSrc={item.videoSrc}
-        pausedOverlay={<img src={item.thumbnail} alt="" className="s-default" />}
+        thumbnail={item.thumbnail}
         className="s-default"
-        restartOnPaused
-        unloadVideoOnPaused={false}
-        preload="metadata"
       />
     )
   }
@@ -53,4 +50,3 @@ function FeatureProjects() {
 }
 
 export default FeatureProjects
-
