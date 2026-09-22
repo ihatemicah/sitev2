@@ -17,10 +17,13 @@ export const featuredProjectRows = [
             title: 'J+B | Motion + 3D Product Renders',
         },
         {
-            type: 'image',
-            src: 'https://zone-multi.b-cdn.net/Static/brat_c.jpg',
-            date: '2026.04',
-            title: 'Charlie XCX (Fan Project) | 3D Renders',
+            type: 'video',
+            videoSrc:
+            'https://zone-multi.b-cdn.net/Motion%20Projects/batterypack-b.mp4',
+            thumbnail:
+            'https://zone-multi.b-cdn.net/Static/thumbnail-battery.jpg',
+            date: '2026.09',
+            title: 'Nexcharge (Smart Battery Pack) | 3D Renders',
         },
         {
             type: 'image',
