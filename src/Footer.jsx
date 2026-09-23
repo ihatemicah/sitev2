@@ -24,10 +24,11 @@ function Footer() {
         <div>
             <p> There are no ordinary moments </p>
             <div className='footer-links'>
-            <a href="#">Dribbble</a>
-            <a href="#">Linkedin</a>
-            <a href="#">X</a>
-            <a href="#">Instagram</a>
+            <a href="https://dribbble.com/MicahCarroll" target="_blank">Dribbble</a>
+            <a href="https://www.linkedin.com/in/carrollmicah/" target="_blank">Linkedin</a>
+            <a href="https://x.com/multimicah" target="_blank">X</a>
+            <a href="https://www.instagram.com/multimicah" target="_blank">Instagram</a>
+       
             <a href="experiments.html">Experiments</a>
             </div>
         </div>
