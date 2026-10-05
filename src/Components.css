@@ -278,7 +278,11 @@ header h1 {
     height: 100%;
 }
 
-/* Ensure HoverVideoPlayer matches .s-default styling */
+.hover-video-player {
+    position: relative;
+}
+
+/* Ensure hover video matches .s-default styling */
 .s-default video {
     max-width: 100%;
     border-radius: 4px;

@@ -26,16 +26,20 @@ export const featuredProjectRows = [
             title: 'Nexcharge (Smart Battery Pack) | 3D Renders',
         },
         {
-            type: 'image',
-            src: 'https://zone-multi.b-cdn.net/Static/Subframe%203D%20Project.jpg',
-            date: '2025.02',
-            title: 'Subframe | Device 3D Renders',
+            type: 'video',
+            videoSrc:
+            'https://zone-multi.b-cdn.net/Motion%20Projects/subframe_featured_c.mp4',
+            thumbnail:
+            'https://zone-multi.b-cdn.net/Static/subframe_feature.jpg',
+            date: '2026.09',
+            title: 'Subframe (AI Tool) | Brand (3D + Motion)',
         },
         {
-            type: 'image',
-            src: 'https://zone-multi.b-cdn.net/Static/All%20Product%20Blokes.jpg',
+            type: 'video',
+            thumbnail: 'https://zone-multi.b-cdn.net/Static/All%20Product%20Blokes.jpg',
+            videoSrc:'https://zone-multi.b-cdn.net/Motion%20Projects/joi-blokes-c.mp4',
             date: '2023.02',
-            title: 'J+B | E-Comm 3D Renders',
+            title: 'J+B | E-Commerce 3D Renders',
         },
     ],
     [
@@ -67,6 +71,13 @@ export const featuredProjectRows = [
 ]
 
 export const row1Media = [
+    {
+        type: 'video',
+        videoSrc:
+            'https://zone-multi.b-cdn.net/Motion%20Projects/rows/tapo-video.mp4',
+        thumbnail:
+            'https://zone-multi.b-cdn.net/Static/tapo-thumbnail.jpg',
+    },
     {
         type: 'video',
         videoSrc:

@@ -24,7 +24,7 @@ function FeatureProjects() {
           <p> Recent favorites</p>
         </div>
         <div className='project-header-2'>
-        <p> Last updated: April 2026</p>
+        <p> Last updated: October 2026</p>
         </div>
       </div>
       {featuredProjectRows.map((row, rowIndex) => (

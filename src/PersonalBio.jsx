@@ -14,7 +14,7 @@ function PersonalBio() {
     Need the full package or just one piece of it? Whatever the touchpoint, I can handle it.
   </p>
   <p>
-    hi@micahcarroll.com
+    work@micahcarroll.com
   </p>
 </div>
   )
