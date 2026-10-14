@@ -44,8 +44,9 @@ export const featuredProjectRows = [
     ],
     [
         {
-            type: 'image',
-            src: 'https://zone-multi.b-cdn.net/Static/seedling.jpg',
+            type: 'video',
+            thumbnail: 'https://zone-multi.b-cdn.net/Static/seedling-feature-thumb.jpg',
+            videoSrc: 'https://zone-multi.b-cdn.net/Motion%20Projects/seedling-feature-row-compressed.mp4',
             date: '2026.04',
             title: 'Seedling | Interface + Brand Design',
         },
