@@ -1,13 +1,13 @@
-import { useCanvas } from './useCanvas.js'
+import { useInfiniteCanvas } from './useCanvas.js'
 import './canvas.css'
 
-export function Canvas({ children, fitContent }) {
-    const { outerRef, worldRef } = useCanvas({ fitContent })
+export function Canvas({ items, children }) {
+    const { outerRef, worldRef, tiles } = useInfiniteCanvas(items)
 
     return (
         <div ref={outerRef} className="canvas-outer">
-            <div ref={worldRef} className="canvas-world">
-                {children}
+            <div ref={worldRef} className="canvas-world canvas-world--infinite">
+                {children(tiles)}
             </div>
         </div>
     )

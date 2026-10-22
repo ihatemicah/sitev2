@@ -1,230 +1,76 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Canvas } from './Canvas.jsx'
+import { useMemo, useState } from 'react'
 import './experiments-entry.css'
-import { initMagnetic } from './magnetic.js'
-import { CANVAS_MEDIA } from './canvasMedia.js'
-import { TILE_HEIGHT_PX, TILE_WIDTH_PX } from './tileLayout.js'
+import { CANVAS_ITEMS } from './canvasMedia.js'
+import { InfiniteCanvas } from './infinite/InfiniteCanvas.jsx'
 
-const TOOLTIP_SHOW_DELAY_MS = 200
-
-/** Tooltip above or below the tile only: cursor above center → top, below → bottom. */
-function dirFromPointer(rect, clientY) {
-    const cy = rect.top + rect.height / 2
-    return clientY < cy ? 'top' : 'bottom'
-}
-
-function labelFromSrc(src, type) {
-    try {
-        const u = new URL(src)
-        const seg = u.pathname.split('/').filter(Boolean).pop() ?? ''
-        const base = decodeURIComponent(seg).replace(/\.[^.]+$/, '')
-        if (base) return base.replace(/[-_]+/g, ' ')
-    } catch {
-        /* ignore */
-    }
-    return type === 'video' ? 'Video' : 'Image'
-}
-
-/** Stable reference for useCanvas fit effect */
-const FIT_CONTENT = {
-    items: CANVAS_MEDIA,
-    tileWidth: TILE_WIDTH_PX,
-    tileHeight: TILE_HEIGHT_PX,
-}
-
-function MediaTile({ x, y, type, src, tooltipLabel }) {
-    const measureRef = useRef(null)
-    const tileRef = useRef(null)
-    const showTimerRef = useRef(null)
-    const lastClientYRef = useRef(0)
-    const hoverRef = useRef(false)
-    const [tip, setTip] = useState({
-        show: false,
-        exiting: false,
-        dir: 'top',
-        flip: 0,
-    })
-
-    function clearShowTimer() {
-        if (showTimerRef.current != null) {
-            clearTimeout(showTimerRef.current)
-            showTimerRef.current = null
-        }
-    }
-
-    useEffect(() => () => clearShowTimer(), [])
-
-    useLayoutEffect(() => {
-        const moveEl = tileRef.current
-        const originEl = measureRef.current
-        if (!moveEl || !originEl) return
-
-        const radius = TILE_WIDTH_PX >= 200 ? 160 : 120
-        return initMagnetic(moveEl, {
-            strength: 0.035,
-            radius,
-            measureEl: originEl,
-        })
-    }, [])
-
-    function scheduleShowDelay() {
-        clearShowTimer()
-        showTimerRef.current = window.setTimeout(() => {
-            showTimerRef.current = null
-            if (!hoverRef.current) return
-            const node = measureRef.current
-            if (!node) return
-            const rect = node.getBoundingClientRect()
-            setTip({
-                show: true,
-                exiting: false,
-                dir: dirFromPointer(rect, lastClientYRef.current),
-                flip: 0,
-            })
-        }, TOOLTIP_SHOW_DELAY_MS)
-    }
-
-    function handlePointerEnter(e) {
-        lastClientYRef.current = e.clientY
-        hoverRef.current = true
-        clearShowTimer()
-
-        setTip((prev) => {
-            if (prev.exiting) {
-                return {
-                    ...prev,
-                    exiting: false,
-                    show: true,
-                    flip: prev.flip + 1,
-                }
-            }
-            if (!prev.show && !prev.exiting) {
-                queueMicrotask(() => {
-                    if (!hoverRef.current) return
-                    setTip((p) => {
-                        if (p.show || p.exiting) return p
-                        scheduleShowDelay()
-                        return p
-                    })
-                })
-            }
-            return prev
-        })
-    }
-
-    function handlePointerMove(e) {
-        lastClientYRef.current = e.clientY
-        const node = measureRef.current
-        if (!node) return
-        const rect = node.getBoundingClientRect()
-        setTip((prev) => {
-            if (!prev.show || prev.exiting) return prev
-            const nextDir = dirFromPointer(rect, e.clientY)
-            if (nextDir === prev.dir) return prev
-            return {
-                ...prev,
-                dir: nextDir,
-                flip: prev.flip + 1,
-            }
-        })
-    }
-
-    function handlePointerLeave() {
-        hoverRef.current = false
-        clearShowTimer()
-        setTip((prev) => {
-            if (prev.show && !prev.exiting) {
-                return { ...prev, show: false, exiting: true }
-            }
-            return { ...prev, show: false }
-        })
-    }
-
-    function handleTooltipAnimationEnd(e) {
-        const name = e.animationName
-        if (
-            name !== 'canvas-tooltip-exit-top' &&
-            name !== 'canvas-tooltip-exit-bottom'
-        ) {
-            return
-        }
-        setTip((prev) => {
-            if (!prev.exiting) return prev
-            return { show: false, exiting: false, dir: 'top', flip: 0 }
-        })
-    }
-
-    const tooltipMounted = tip.show || tip.exiting
+function InfoButton() {
+    const [open, setOpen] = useState(false)
 
     return (
-        <div
-            ref={measureRef}
-            className="canvas-media-tile-slot"
-            style={{
-                left: x,
-                top: y,
-                width: TILE_WIDTH_PX,
-                height: TILE_HEIGHT_PX,
-            }}
-            onPointerEnter={handlePointerEnter}
-            onPointerMove={handlePointerMove}
-            onPointerLeave={handlePointerLeave}
-        >
-            <div ref={tileRef} className="canvas-media-tile">
-                {type === 'video' ? (
-                    <video
-                        className="canvas-media-fill"
-                        src={src}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                    />
-                ) : (
-                    <img
-                        className="canvas-media-fill"
-                        src={src}
-                        alt=""
-                        draggable={false}
-                    />
-                )}
-            </div>
-            {tooltipMounted ? (
-                <div
-                    key={`${tip.dir}-${tip.flip}`}
-                    className={`canvas-media-tooltip canvas-media-tooltip--${tip.dir}${tip.exiting ? ' canvas-media-tooltip--exiting' : ''}`}
-                    role="tooltip"
-                    onAnimationEnd={handleTooltipAnimationEnd}
-                >
-                    {tooltipLabel}
+        <div className="experiments-info">
+            {open ? (
+                <div className="experiments-info-panel" role="dialog">
+                    <p>Drag to move. Scroll or pinch to travel through the space.</p>
+                    <a
+                        href="https://github.com/edoardolunardi/infinite-canvas"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Infinite Canvas
+                    </a>
                 </div>
             ) : null}
+            <button
+                type="button"
+                className="experiments-info-button"
+                aria-expanded={open}
+                aria-label="About this canvas"
+                onClick={() => setOpen((current) => !current)}
+            >
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+                    <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM13 10.5V17H11V10.5H13Z"
+                        fill="currentColor"
+                    />
+                    <path
+                        d="M13.5 7.99999C13.5 8.82842 12.8284 9.49999 12 9.49999C11.1715 9.49999 10.5 8.82842 10.5 7.99999C10.5 7.17157 11.1715 6.49999 12 6.49999C12.8284 6.49999 13.5 7.17157 13.5 7.99999Z"
+                        fill="currentColor"
+                    />
+                </svg>
+            </button>
         </div>
     )
 }
 
 export default function ExperimentsPage() {
+    const media = useMemo(
+        () =>
+            CANVAS_ITEMS.map((item) => ({
+                url: item.src,
+                label: item.tooltipLabel,
+                type: item.type,
+                width: 4,
+                height: 3,
+            })),
+        [],
+    )
+
     return (
         <div className="experiments-app">
             <a className="experiments-home-link" href="index.html">
                 ← Home
             </a>
-            <Canvas fitContent={FIT_CONTENT}>
-                {CANVAS_MEDIA.map((item, index) => (
-                    <MediaTile
-                        key={`${item.type}-${index}-${item.src}`}
-                        x={item.x}
-                        y={item.y}
-                        type={item.type}
-                        src={item.src}
-                        tooltipLabel={
-                            item.tooltipLabel ??
-                            labelFromSrc(item.src, item.type)
-                        }
-                    />
-                ))}
-            </Canvas>
+            <InfoButton />
+            <InfiniteCanvas media={media} />
         </div>
     )
 }

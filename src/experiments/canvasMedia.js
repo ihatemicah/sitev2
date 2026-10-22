@@ -190,4 +190,7 @@ function collectCanvasItems() {
     return list
 }
 
-export const CANVAS_MEDIA = assignScatter(collectCanvasItems())
+/** Media list without positions — the infinite canvas places these itself. */
+export const CANVAS_ITEMS = collectCanvasItems()
+
+export const CANVAS_MEDIA = assignScatter(CANVAS_ITEMS)

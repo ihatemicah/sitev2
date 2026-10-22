@@ -3,7 +3,7 @@
     height: 100vh;
     height: 100dvh;
     overflow: hidden;
-    cursor: grab;
+    cursor: default;
     background-color: #000;
     background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
     background-size: 24px 24px;
@@ -15,16 +15,16 @@
     position: absolute;
     left: 0;
     top: 0;
-    min-width: 2400px;
-    min-height: 2400px;
     transform-origin: 0 0;
     will-change: transform;
 }
 
-/*
- * Slot = stable layout box (no magnetic transform). Distance math uses this rect so the
- * “center” does not chase GSAP motion (prevents shaking over the tile).
- */
+.canvas-world--infinite {
+    width: 0;
+    height: 0;
+}
+
+/* Slot is the stable layout box. Hover scales the inner tile. */
 .canvas-media-tile-slot {
     position: absolute;
 }
@@ -37,7 +37,19 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-sizing: border-box;
     background: #050505;
+    transform: scale(1);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
+}
+
+.canvas-media-tile-slot:hover,
+.canvas-media-tile-slot.is-hovered {
+    z-index: 4;
+}
+
+.canvas-media-tile-slot:hover .canvas-media-tile,
+.canvas-media-tile-slot.is-hovered .canvas-media-tile {
+    transform: scale(1.06);
 }
 
 .canvas-media-fill {
