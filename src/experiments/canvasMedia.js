@@ -168,11 +168,18 @@ function normalizeMediaEntry(entry) {
         typeof entry === 'object' && entry != null && entry.label
             ? String(entry.label).trim() || labelFromUrl(url)
             : labelFromUrl(url)
+    const text = (value) => (typeof value === 'string' ? value.trim() : '')
+    const tags = Array.isArray(entry?.tags)
+        ? entry.tags.map((tag) => String(tag).trim()).filter(Boolean)
+        : []
 
     return {
         type: urlLooksLikeVideo(url) ? 'video' : 'image',
         src: url,
         tooltipLabel,
+        date: text(entry?.date),
+        tags,
+        description: text(entry?.description),
     }
 }
 
@@ -190,4 +197,7 @@ function collectCanvasItems() {
     return list
 }
 
-export const CANVAS_MEDIA = assignScatter(collectCanvasItems())
+/** Media list without positions — the infinite canvas places these itself. */
+export const CANVAS_ITEMS = collectCanvasItems()
+
+export const CANVAS_MEDIA = assignScatter(CANVAS_ITEMS)

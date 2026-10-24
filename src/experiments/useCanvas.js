@@ -1,259 +1,207 @@
-import { useRef, useEffect, useLayoutEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { TILE_HEIGHT_PX, TILE_WIDTH_PX } from './tileLayout.js'
+
+const GAP = 36
+const CELL_W = TILE_WIDTH_PX + GAP
+const CELL_H = TILE_HEIGHT_PX + GAP
+/** Cursor inside this fraction of the viewport does not move the canvas. */
+const DEAD_ZONE = 0.22
+/** Pixels per second when the cursor is at the screen edge. */
+const MAX_SPEED = 920
+const VELOCITY_LERP = 3.2
+
+function mediaIndex(col, row, length) {
+    let n = Math.imul(col, 0x27d4eb2d) ^ Math.imul(row, 0x165667b1)
+    n = Math.imul(n ^ (n >>> 16), 0x7feb352d)
+    n = Math.imul(n ^ (n >>> 15), 0x846ca68b)
+    return ((n ^ (n >>> 16)) >>> 0) % length
+}
+
+function axisInfluence(offset) {
+    const amount = Math.abs(offset)
+    if (amount <= DEAD_ZONE) return 0
+    const t = (amount - DEAD_ZONE) / (1 - DEAD_ZONE)
+    return Math.sign(offset) * t * t
+}
 
 /**
- * Fraction of the canvas viewport used when fitting all tiles (contain).
- * 1 = as large as possible while every tile stays on-screen; slightly under on narrow widths for safe edges.
+ * Infinite tile field. Only the cells around the viewport are mounted.
+ * On a mouse, distance from the screen center sets glide speed.
+ * Touch and pen drag the field instead, with the same inertia.
  */
-function getTargetFrac(vw) {
-    if (vw <= 480) return 0.99
-    return 1
-}
-
-function boundsFromItems(items, tileW, tileH) {
-    let minX = Infinity
-    let minY = Infinity
-    let maxX = -Infinity
-    let maxY = -Infinity
-    for (const it of items) {
-        minX = Math.min(minX, it.x)
-        minY = Math.min(minY, it.y)
-        maxX = Math.max(maxX, it.x + tileW)
-        maxY = Math.max(maxY, it.y + tileH)
-    }
-    const w = maxX - minX
-    const h = maxY - minY
-    return {
-        cx: (minX + maxX) / 2,
-        cy: (minY + maxY) / 2,
-        w,
-        h,
-    }
-}
-
-function distance(ax, ay, bx, by) {
-    return Math.hypot(bx - ax, by - ay)
-}
-
-export function useCanvas({ fitContent } = {}) {
+export function useInfiniteCanvas(items) {
     const outerRef = useRef(null)
     const worldRef = useRef(null)
-    const pointersRef = useRef(new Map())
-    const pinchLastDistRef = useRef(null)
-    const userAdjustedRef = useRef(false)
-
-    const state = useRef({
-        ox: 0,
-        oy: 0,
-        zoom: 1,
-        dragging: false,
-        startMx: 0,
-        startMy: 0,
-        startOx: 0,
-        startOy: 0,
-    })
-
-    function applyTransform() {
-        const world = worldRef.current
-        if (!world) return
-        const { ox, oy, zoom } = state.current
-        world.style.transform = `translate(${ox}px, ${oy}px) scale(${zoom})`
-    }
-
-    function layoutToFit() {
-        if (!fitContent?.items?.length) return
-        const outer = outerRef.current
-        if (!outer) return
-
-        const { items, tileWidth, tileHeight } = fitContent
-        const rect = outer.getBoundingClientRect()
-        const vw = rect.width
-        const vh = rect.height
-        const { cx, cy, w: bw, h: bh } = boundsFromItems(
-            items,
-            tileWidth,
-            tileHeight,
-        )
-        if (bw <= 0 || bh <= 0 || vw <= 0 || vh <= 0) return
-
-        const frac = getTargetFrac(vw)
-        const s = state.current
-        let zoom = Math.min((frac * vw) / bw, (frac * vh) / bh)
-        zoom = Math.min(4, Math.max(0.1, zoom))
-
-        s.zoom = zoom
-        s.ox = vw / 2 - cx * zoom
-        s.oy = vh / 2 - cy * zoom
-        applyTransform()
-    }
-
-    useLayoutEffect(() => {
-        if (!fitContent?.items?.length) return
-
-        layoutToFit()
-
-        const outer = outerRef.current
-        if (!outer) return
-
-        const ro = new ResizeObserver(() => {
-            if (!userAdjustedRef.current) layoutToFit()
-        })
-        ro.observe(outer)
-
-        const onOrientation = () => {
-            userAdjustedRef.current = false
-            requestAnimationFrame(() => layoutToFit())
-        }
-        window.addEventListener('orientationchange', onOrientation)
-
-        const vv = window.visualViewport
-        const onVvResize = () => {
-            if (!userAdjustedRef.current) layoutToFit()
-        }
-        if (vv) {
-            vv.addEventListener('resize', onVvResize)
-        }
-
-        return () => {
-            ro.disconnect()
-            window.removeEventListener('orientationchange', onOrientation)
-            if (vv) {
-                vv.removeEventListener('resize', onVvResize)
-            }
-        }
-    }, [fitContent])
+    const [tiles, setTiles] = useState([])
 
     useEffect(() => {
         const outer = outerRef.current
-        if (!outer) return
+        const world = worldRef.current
+        if (!outer || !world || !items.length) return
 
-        const s = state.current
-        const pointers = pointersRef.current
+        const reduced = window.matchMedia(
+            '(prefers-reduced-motion: reduce)',
+        ).matches
 
-        function markAdjusted() {
-            userAdjustedRef.current = true
+        const pointer = {
+            nx: 0,
+            ny: 0,
+            inside: false,
+            dragging: false,
+            lastX: 0,
+            lastY: 0,
+        }
+        const motion = { x: 0, y: 0, vx: 0, vy: 0 }
+        let rangeKey = ''
+        let frame = 0
+        let last = performance.now()
+
+        const rectSize = () => {
+            const rect = outer.getBoundingClientRect()
+            return { w: rect.width, h: rect.height, left: rect.left, top: rect.top }
         }
 
-        function zoomAtPoint(mx, my, newZoom) {
-            const clamped = Math.min(4, Math.max(0.1, newZoom))
-            s.ox = mx - (mx - s.ox) * (clamped / s.zoom)
-            s.oy = my - (my - s.oy) * (clamped / s.zoom)
-            s.zoom = clamped
-            applyTransform()
-            markAdjusted()
+        const first = rectSize()
+        motion.x = -first.w / 2 + CELL_W / 2
+        motion.y = -first.h / 2 + CELL_H / 2
+
+        function syncTiles(w, h) {
+            const padX = CELL_W
+            const padY = CELL_H
+            const col0 = Math.floor((motion.x - padX) / CELL_W)
+            const col1 = Math.floor((motion.x + w + padX) / CELL_W)
+            const row0 = Math.floor((motion.y - padY) / CELL_H)
+            const row1 = Math.floor((motion.y + h + padY) / CELL_H)
+            const key = `${col0}:${col1}:${row0}:${row1}`
+            if (key === rangeKey) return
+            rangeKey = key
+
+            const next = []
+            for (let row = row0; row <= row1; row++) {
+                for (let col = col0; col <= col1; col++) {
+                    const item = items[mediaIndex(col, row, items.length)]
+                    next.push({
+                        key: `${col}:${row}`,
+                        x: col * CELL_W,
+                        y: row * CELL_H,
+                        type: item.type,
+                        src: item.src,
+                        tooltipLabel: item.tooltipLabel,
+                    })
+                }
+            }
+            setTiles(next)
         }
 
-        function onPointerDown(e) {
-            if (e.pointerType === 'mouse' && e.button !== 0) return
+        function apply() {
+            const { x, y } = motion
+            world.style.transform = `translate3d(${-x}px, ${-y}px, 0)`
+            outer.style.backgroundPosition = `${-x}px ${-y}px`
+        }
 
-            pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+        function frameStep(now) {
+            const dt = Math.min(0.05, (now - last) / 1000)
+            last = now
+            const { w, h } = rectSize()
 
+            let targetX = 0
+            let targetY = 0
+            if (!pointer.dragging && pointer.inside && !reduced) {
+                targetX = axisInfluence(pointer.nx) * MAX_SPEED
+                targetY = axisInfluence(pointer.ny) * MAX_SPEED
+            }
+
+            const blend = 1 - Math.exp(-VELOCITY_LERP * dt)
+            motion.vx += (targetX - motion.vx) * blend
+            motion.vy += (targetY - motion.vy) * blend
+            if (!pointer.dragging) {
+                motion.x += motion.vx * dt
+                motion.y += motion.vy * dt
+            }
+
+            apply()
+            syncTiles(w, h)
+            frame = requestAnimationFrame(frameStep)
+        }
+
+        function onPointerMove(event) {
+            if (event.pointerType === 'touch') return
+            const box = rectSize()
+            const inside =
+                event.clientX >= box.left &&
+                event.clientX <= box.left + box.w &&
+                event.clientY >= box.top &&
+                event.clientY <= box.top + box.h
+            pointer.inside = inside
+            if (!inside) return
+            pointer.nx = ((event.clientX - box.left) / box.w) * 2 - 1
+            pointer.ny = ((event.clientY - box.top) / box.h) * 2 - 1
+        }
+
+        function onPointerLeaveWindow(event) {
+            if (event?.relatedTarget) return
+            pointer.inside = false
+        }
+
+        function onTouchDown(event) {
+            if (event.pointerType === 'mouse') return
+            pointer.dragging = true
+            pointer.lastX = event.clientX
+            pointer.lastY = event.clientY
+            pointer.inside = false
+            motion.vx = 0
+            motion.vy = 0
             try {
-                outer.setPointerCapture(e.pointerId)
+                outer.setPointerCapture(event.pointerId)
             } catch {
                 /* ignore */
             }
-
-            if (pointers.size === 1) {
-                s.dragging = true
-                s.startMx = e.clientX
-                s.startMy = e.clientY
-                s.startOx = s.ox
-                s.startOy = s.oy
-                pinchLastDistRef.current = null
-                outer.style.cursor = 'grabbing'
-            }
-
-            if (pointers.size === 2) {
-                s.dragging = false
-                const ids = [...pointers.keys()]
-                const a = pointers.get(ids[0])
-                const b = pointers.get(ids[1])
-                pinchLastDistRef.current = distance(a.x, a.y, b.x, b.y)
-            }
-
-            if (e.cancelable) e.preventDefault()
         }
 
-        function onPointerMove(e) {
-            if (!pointers.has(e.pointerId)) return
-            pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
-
-            const rect = outer.getBoundingClientRect()
-
-            if (pointers.size >= 2) {
-                const ids = [...pointers.keys()].slice(0, 2)
-                const a = pointers.get(ids[0])
-                const b = pointers.get(ids[1])
-                const dist = distance(a.x, a.y, b.x, b.y)
-                const midX = (a.x + b.x) / 2 - rect.left
-                const midY = (a.y + b.y) / 2 - rect.top
-
-                const last = pinchLastDistRef.current
-                if (last != null && last > 1e-3 && dist > 1e-3) {
-                    const factor = dist / last
-                    zoomAtPoint(midX, midY, s.zoom * factor)
-                }
-                pinchLastDistRef.current = dist
-                return
-            }
-
-            if (s.dragging && pointers.size === 1) {
-                s.ox = s.startOx + (e.clientX - s.startMx)
-                s.oy = s.startOy + (e.clientY - s.startMy)
-                applyTransform()
-                markAdjusted()
-            }
+        function onTouchMove(event) {
+            if (!pointer.dragging) return
+            const dx = event.clientX - pointer.lastX
+            const dy = event.clientY - pointer.lastY
+            pointer.lastX = event.clientX
+            pointer.lastY = event.clientY
+            motion.x -= dx
+            motion.y -= dy
+            const { w, h } = rectSize()
+            apply()
+            syncTiles(w, h)
         }
 
-        function onPointerUp(e) {
-            pointers.delete(e.pointerId)
-
-            if (pointers.size < 2) {
-                pinchLastDistRef.current = null
-            }
-
-            if (pointers.size === 0) {
-                s.dragging = false
-                outer.style.cursor = 'grab'
-            } else if (pointers.size === 1) {
-                const remaining = [...pointers.values()][0]
-                s.dragging = true
-                s.startMx = remaining.x
-                s.startMy = remaining.y
-                s.startOx = s.ox
-                s.startOy = s.oy
-            }
+        function onTouchUp() {
+            pointer.dragging = false
         }
 
-        function onPointerCancel(e) {
-            onPointerUp(e)
+        function onBlur() {
+            pointer.inside = false
         }
 
-        function onWheel(ev) {
-            ev.preventDefault()
-            const rect = outer.getBoundingClientRect()
-            const mx = ev.clientX - rect.left
-            const my = ev.clientY - rect.top
-            const factor = ev.deltaY < 0 ? 1.1 : 0.9
-            zoomAtPoint(mx, my, s.zoom * factor)
-        }
+        apply()
+        syncTiles(first.w, first.h)
+        frame = requestAnimationFrame(frameStep)
 
-        outer.addEventListener('pointerdown', onPointerDown)
-        outer.addEventListener('pointermove', onPointerMove)
-        outer.addEventListener('pointerup', onPointerUp)
-        outer.addEventListener('pointercancel', onPointerCancel)
-        outer.addEventListener('lostpointercapture', onPointerUp)
-        outer.addEventListener('wheel', onWheel, { passive: false })
+        window.addEventListener('pointermove', onPointerMove, { passive: true })
+        window.addEventListener('blur', onBlur)
+        window.addEventListener('pointerout', onPointerLeaveWindow)
+        outer.addEventListener('pointerdown', onTouchDown)
+        outer.addEventListener('pointermove', onTouchMove)
+        outer.addEventListener('pointerup', onTouchUp)
+        outer.addEventListener('pointercancel', onTouchUp)
 
         return () => {
-            outer.removeEventListener('pointerdown', onPointerDown)
-            outer.removeEventListener('pointermove', onPointerMove)
-            outer.removeEventListener('pointerup', onPointerUp)
-            outer.removeEventListener('pointercancel', onPointerCancel)
-            outer.removeEventListener('lostpointercapture', onPointerUp)
-            outer.removeEventListener('wheel', onWheel)
+            cancelAnimationFrame(frame)
+            window.removeEventListener('pointermove', onPointerMove)
+            window.removeEventListener('blur', onBlur)
+            window.removeEventListener('pointerout', onPointerLeaveWindow)
+            outer.removeEventListener('pointerdown', onTouchDown)
+            outer.removeEventListener('pointermove', onTouchMove)
+            outer.removeEventListener('pointerup', onTouchUp)
+            outer.removeEventListener('pointercancel', onTouchUp)
         }
-    }, [])
+    }, [items])
 
-    return { outerRef, worldRef }
+    return { outerRef, worldRef, tiles }
 }
