@@ -12,6 +12,7 @@
 }
 
 .infinite-hover-label {
+    display: none; /* hidden for now; hover label code is still wired up */
     position: absolute;
     z-index: 5;
     left: 0;

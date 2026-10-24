@@ -213,6 +213,8 @@ function MediaPlane({
         displayScaleRef.current = display
         mesh.scale.copy(display)
         mesh.userData.label = media.label || ''
+        mesh.userData.mediaUrl = media.url
+        mesh.userData.mediaType = media.type || 'image'
         mesh.userData.texture = texture
 
         material.map = texture
@@ -246,7 +248,7 @@ function Chunk({ cx, cy, cz, media, cameraGridRef, hoverMeshRef }) {
     useEffect(() => {
         let canceled = false
         const run = () => {
-            if (!canceled) setPlanes(generateChunkPlanesCached(cx, cy, cz))
+            if (!canceled) setPlanes(generateChunkPlanesCached(cx, cy, cz, media.length))
         }
 
         if (typeof requestIdleCallback !== 'undefined') {
@@ -262,7 +264,7 @@ function Chunk({ cx, cy, cz, media, cameraGridRef, hoverMeshRef }) {
             canceled = true
             clearTimeout(id)
         }
-    }, [cx, cy, cz])
+    }, [cx, cy, cz, media.length])
 
     if (!planes) return null
 
@@ -307,13 +309,22 @@ function createInitialState(camZ) {
     }
 }
 
-function SceneController({ media, labelRef }) {
+function isTyping() {
+    const element = document.activeElement
+    if (!element) return false
+    const tag = element.tagName
+    return tag === 'TEXTAREA' || tag === 'INPUT' || element.isContentEditable
+}
+
+function SceneController({ media, labelRef, onSelect }) {
     const { camera, gl, scene } = useThree()
     const isTouchDevice = useIsTouchDevice()
     const [, getKeys] = useKeyboardControls()
     const state = useRef(createInitialState(INITIAL_CAMERA_Z))
     const cameraGridRef = useRef({ cx: 0, cy: 0, cz: 0, camZ: camera.position.z })
     const hoverMeshRef = useRef(null)
+    const onSelectRef = useRef(onSelect)
+    onSelectRef.current = onSelect
     const raycaster = useRef(new THREE.Raycaster())
     const ndc = useRef(new THREE.Vector2())
     const labelPoint = useRef(new THREE.Vector3())
@@ -342,7 +353,7 @@ function SceneController({ media, labelRef }) {
             const mesh =
                 raycaster.current
                     .intersectObjects(scene.children, true)
-                    .find((item) => item.object.userData.label)?.object ?? null
+                    .find((item) => item.object.userData.mediaUrl)?.object ?? null
             hoverMeshRef.current = mesh
             s.pinnedHover = Boolean(mesh)
             setActiveVideoTexture(mesh?.userData.texture ?? null)
@@ -419,8 +430,19 @@ function SceneController({ media, labelRef }) {
 
             s.isDragging = false
             canvas.style.cursor = 'grab'
-            if (current && !s.dragMoved && current.type !== 'mouse') {
+            if (current && !s.dragMoved) {
                 selectAt(event.clientX, event.clientY)
+                const mesh = hoverMeshRef.current
+                const url = mesh?.userData.mediaUrl
+                if (url) {
+                    onSelectRef.current?.({
+                        url,
+                        type: mesh.userData.mediaType || 'image',
+                        label: mesh.userData.label || '',
+                    })
+                } else {
+                    onSelectRef.current?.(null)
+                }
             } else {
                 s.pinnedHover = false
                 hoverMeshRef.current = null
@@ -459,13 +481,16 @@ function SceneController({ media, labelRef }) {
         const s = state.current
         const now = performance.now()
         const { forward, backward, left, right, up, down } = getKeys()
+        const typing = isTyping()
 
-        if (forward) s.targetVel.z -= KEYBOARD_SPEED
-        if (backward) s.targetVel.z += KEYBOARD_SPEED
-        if (left) s.targetVel.x -= KEYBOARD_SPEED
-        if (right) s.targetVel.x += KEYBOARD_SPEED
-        if (down) s.targetVel.y -= KEYBOARD_SPEED
-        if (up) s.targetVel.y += KEYBOARD_SPEED
+        if (!typing) {
+            if (forward) s.targetVel.z -= KEYBOARD_SPEED
+            if (backward) s.targetVel.z += KEYBOARD_SPEED
+            if (left) s.targetVel.x -= KEYBOARD_SPEED
+            if (right) s.targetVel.x += KEYBOARD_SPEED
+            if (down) s.targetVel.y -= KEYBOARD_SPEED
+            if (up) s.targetVel.y += KEYBOARD_SPEED
+        }
 
         const isZooming = Math.abs(s.velocity.z) > 0.05
         const zoomFactor = clamp(s.basePos.z / 50, 0.3, 2)
@@ -536,7 +561,7 @@ function SceneController({ media, labelRef }) {
             const mesh =
                 raycaster.current
                     .intersectObjects(scene.children, true)
-                    .find((item) => item.object.userData.label)?.object ?? null
+                    .find((item) => item.object.userData.mediaUrl)?.object ?? null
             if (hoverMeshRef.current !== mesh) {
                 hoverMeshRef.current = mesh
                 setActiveVideoTexture(mesh?.userData.texture ?? null)
@@ -573,7 +598,7 @@ function SceneController({ media, labelRef }) {
     )
 }
 
-export function InfiniteCanvas({ media }) {
+export function InfiniteCanvas({ media, onSelect }) {
     const isTouchDevice = useIsTouchDevice()
     const labelRef = useRef(null)
     const dpr = Math.min(
@@ -599,7 +624,11 @@ export function InfiniteCanvas({ media }) {
                 >
                     <color attach="background" args={[BACKGROUND]} />
                     <fog attach="fog" args={[BACKGROUND, 120, 320]} />
-                    <SceneController media={media} labelRef={labelRef} />
+                    <SceneController
+                        media={media}
+                        labelRef={labelRef}
+                        onSelect={onSelect}
+                    />
                 </Canvas>
                 <div ref={labelRef} className="infinite-hover-label" />
             </div>

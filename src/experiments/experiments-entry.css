@@ -50,21 +50,21 @@ body {
     }
 }
 
-/* Matches main site `.sticky-nav` (Components.css) */
+/* Matches the information button size and chrome. */
 .experiments-home-link {
     position: fixed;
     z-index: 1000;
-    top: max(8px, env(safe-area-inset-top, 0px));
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 1rem 1rem;
-    padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    top: max(16px, env(safe-area-inset-top, 0px));
+    left: max(16px, env(safe-area-inset-left, 0px));
+    width: 36px;
+    height: 36px;
+    padding: 0;
     border-radius: 4px;
-    font-size: 0.875rem;
-    color: #fff;
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.55);
     text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     -webkit-tap-highlight-color: transparent;
@@ -73,25 +73,18 @@ body {
 
 .experiments-home-link:hover,
 .experiments-home-link:focus-visible {
-    background-color: rgba(0, 0, 0, 0.72);
-}
-
-@media (max-width: 480px) {
-    .experiments-home-link {
-        font-size: 0.8rem;
-        padding: 0.75rem 0.9rem;
-    }
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.52);
 }
 
 .experiments-info {
     position: fixed;
     z-index: 1000;
-    left: 50%;
+    left: max(16px, env(safe-area-inset-left, 0px));
     bottom: max(16px, env(safe-area-inset-bottom, 0px));
-    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
 }
 
@@ -103,8 +96,8 @@ body {
     border-radius: 4px;
     display: grid;
     place-items: center;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     cursor: pointer;
@@ -114,7 +107,8 @@ body {
 
 .experiments-info-button:hover,
 .experiments-info-button:focus-visible {
-    background-color: rgba(0, 0, 0, 0.72);
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.52);
 }
 
 .experiments-info-panel {
@@ -123,8 +117,28 @@ body {
     padding: 12px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(12, 12, 12, 0.92);
+    background: rgba(12, 12, 12, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    animation: experiments-info-in 0.4s ease;
+}
+
+.experiments-info-panel.is-closing {
+    animation: experiments-info-out 0.4s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes experiments-info-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes experiments-info-out {
+    to {
+        opacity: 0;
+    }
 }
 
 .experiments-info-panel p {
@@ -154,4 +168,303 @@ body {
 .experiments-info-panel a:hover,
 .experiments-info-panel a:focus-visible {
     opacity: 0.7;
+}
+
+.experiments-controls {
+    position: fixed;
+    z-index: 1000;
+    right: max(20px, env(safe-area-inset-right, 0px));
+    bottom: max(18px, env(safe-area-inset-bottom, 0px));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.72);
+    pointer-events: none;
+    user-select: none;
+}
+
+.experiments-controls-keys {
+    display: grid;
+    grid-template-columns: repeat(3, 22px);
+    gap: 4px;
+}
+
+.experiments-controls-key {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 4px;
+    background: rgba(12, 12, 12, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+}
+
+.experiments-controls-key.is-w {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.experiments-controls-key.is-a {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.experiments-controls-key.is-s {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.experiments-controls-key.is-d {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.experiments-controls-key.is-active {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.experiments-controls-mouse.is-active {
+    color: #fff;
+}
+
+.experiments-controls-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.experiments-controls-mouse {
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.72);
+    transition:
+        transform 0.22s ease-out,
+        color 0.15s ease;
+}
+
+.experiments-controls-mouse.is-dragging {
+    transition:
+        transform 0.08s ease-out,
+        color 0.15s ease;
+}
+
+/* Opacity on a wrapper, or overflow on the filtered element, stops
+   backdrop-filter from sampling the canvas. Fade the card directly. */
+.experiments-panel-backdrop,
+.experiments-panel {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+@starting-style {
+    .experiments-panel-backdrop,
+    .experiments-panel {
+        opacity: 0;
+    }
+}
+
+.experiments-panel-shell.is-closing .experiments-panel-backdrop,
+.experiments-panel-shell.is-closing .experiments-panel {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.experiments-panel-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.experiments-panel {
+    position: fixed;
+    z-index: 1101;
+    top: max(16px, env(safe-area-inset-top, 0px));
+    right: max(16px, env(safe-area-inset-right, 0px));
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+    width: min(420px, calc(100vw - 32px));
+    height: fit-content;
+    max-height: calc(100dvh - 32px);
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    background: rgba(12, 12, 12, 0.62);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.experiments-panel-body {
+    overflow: auto;
+    max-height: calc(100dvh - 32px);
+    padding: 14px 16px 20px;
+    border-radius: inherit;
+}
+
+.experiments-panel-close {
+    align-self: flex-end;
+    margin: 0 0 10px;
+    padding: 0;
+    border: 0;
+    background: none;
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+}
+
+.experiments-panel-close:hover,
+.experiments-panel-close:focus-visible {
+    color: #f5f5f5;
+}
+
+.experiments-panel-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--asset-aspect, 1.333);
+    max-height: min(58vh, 520px);
+    flex: none;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.experiments-panel-media-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.experiments-panel-media-layer.is-leaving {
+    z-index: 1;
+    pointer-events: none;
+}
+
+.experiments-panel-media-layer img,
+.experiments-panel-media-layer video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.experiments-panel-media-layer.is-entering img,
+.experiments-panel-media-layer.is-entering video {
+    animation: experiments-media-in var(--media-swap, 280ms) ease-out;
+}
+
+.experiments-panel-media-layer.is-leaving img {
+    animation: experiments-media-out var(--media-swap, 280ms) ease-out forwards;
+}
+
+@keyframes experiments-media-in {
+    from {
+        opacity: 0.45;
+    }
+}
+
+@keyframes experiments-media-out {
+    to {
+        filter: blur(6px);
+        opacity: 0;
+    }
+}
+
+.experiments-panel-copy {
+    animation: experiments-label-in var(--media-swap, 280ms) ease-out;
+}
+
+.experiments-panel-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.experiments-panel-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    color: #f5f5f5;
+}
+
+.experiments-panel-date {
+    flex: none;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: rgba(245, 245, 245, 0.5);
+}
+
+.experiments-panel-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.experiments-panel-tags li {
+    padding: 3px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    color: rgba(245, 245, 245, 0.82);
+}
+
+.experiments-panel-description {
+    margin: 12px 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.45;
+    color: rgba(245, 245, 245, 0.62);
+}
+
+@keyframes experiments-label-in {
+    from {
+        opacity: 0.35;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experiments-panel-backdrop,
+    .experiments-panel {
+        transition: none;
+    }
+
+    .experiments-info-panel,
+    .experiments-panel-copy,
+    .experiments-panel-media-layer.is-entering img,
+    .experiments-panel-media-layer.is-entering video,
+    .experiments-panel-media-layer.is-leaving img {
+        animation: none;
+    }
+
+    .experiments-controls-mouse {
+        transition: none;
+    }
 }

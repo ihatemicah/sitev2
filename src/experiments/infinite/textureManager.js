@@ -95,7 +95,9 @@ export function getTexture(item, onLoad) {
             notify(tex)
         },
         undefined,
-        (err) => console.error('Texture load failed:', key, err),
+        (err) => {
+            console.error('Texture load failed:', key, err)
+        },
     )
 
     textureCache.set(key, texture)
