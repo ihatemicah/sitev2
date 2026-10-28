@@ -10,9 +10,12 @@ function isVideoUrl(url) {
     return /\.(mp4|webm|ogg|mov)(\?|$)/i.test(url)
 }
 
-function finishTexture(texture) {
-    texture.minFilter = THREE.LinearFilter
+function finishTexture(texture, { mipmaps = false } = {}) {
     texture.magFilter = THREE.LinearFilter
+    texture.minFilter = mipmaps
+        ? THREE.LinearMipmapLinearFilter
+        : THREE.LinearFilter
+    texture.generateMipmaps = mipmaps
     texture.colorSpace = THREE.SRGBColorSpace
     texture.needsUpdate = true
 }
@@ -33,8 +36,7 @@ function createVideoTexture(url, onReady) {
     video.src = url
 
     const texture = new THREE.VideoTexture(video)
-    finishTexture(texture)
-    texture.generateMipmaps = false
+    finishTexture(texture, { mipmaps: true })
     videoTextures.add(texture)
 
     const ready = () => onReady(texture)
@@ -89,9 +91,8 @@ export function getTexture(item, onLoad) {
     const texture = loader.load(
         key,
         (tex) => {
-            tex.generateMipmaps = true
             tex.anisotropy = 4
-            finishTexture(tex)
+            finishTexture(tex, { mipmaps: true })
             notify(tex)
         },
         undefined,

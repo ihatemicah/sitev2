@@ -17,6 +17,11 @@ import {
     VELOCITY_LERP,
 } from './constants.js'
 import {
+    applyForegroundDepthOfField,
+    foregroundDofAmount,
+    foregroundDofCacheKey,
+} from './depthOfField.js'
+import {
     clamp,
     generateChunkPlanesCached,
     getChunkUpdateThrottleMs,
@@ -111,16 +116,30 @@ function MediaPlane({
 }) {
     const meshRef = useRef(null)
     const materialRef = useRef(null)
-    const localState = useRef({ opacity: 0, frame: 0, ready: false })
+    const focusUniform = useRef({ value: 0 })
+    const compileDof = useRef(null)
+    if (!compileDof.current) {
+        const uniform = focusUniform.current
+        compileDof.current = (shader) => applyForegroundDepthOfField(shader, uniform)
+    }
+    const localState = useRef({ opacity: 0, frame: 0, ready: false, focus: 0 })
     const displayScaleRef = useRef(scale)
     const [texture, setTexture] = useState(null)
     const [isReady, setIsReady] = useState(false)
 
-    useFrame(() => {
+    useFrame((_, delta) => {
         const material = materialRef.current
         const mesh = meshRef.current
         const state = localState.current
         if (!material || !mesh) return
+
+        const hovered = hoverMeshRef.current === mesh
+        if (hovered || state.focus > 0.001) {
+            const step = 1 - Math.exp(-Math.min(delta, 0.05) * 3.4)
+            state.focus = lerp(state.focus, hovered ? 1 : 0, step)
+            if (state.focus < 0.001) state.focus = 0
+            focusUniform.current.value = state.focus
+        }
 
         state.frame = (state.frame + 1) & 1
         if (state.opacity < INVIS_THRESHOLD && !mesh.visible && state.frame === 0) {
@@ -133,7 +152,8 @@ function MediaPlane({
             Math.abs(chunkCy - cam.cy),
             Math.abs(chunkCz - cam.cz),
         )
-        const absDepth = Math.abs(position.z - cam.camZ)
+        const viewZ = cam.camZ - position.z
+        const absDepth = Math.abs(viewZ)
 
         if (absDepth > DEPTH_FADE_END + 50) {
             state.opacity = 0
@@ -168,8 +188,9 @@ function MediaPlane({
                 : lerp(state.opacity, target, 0.18)
 
         const isFullyOpaque = state.opacity > 0.99
+        const dof = foregroundDofAmount(viewZ) * (1 - state.focus)
         material.opacity = isFullyOpaque ? 1 : state.opacity
-        material.depthWrite = isFullyOpaque
+        material.depthWrite = isFullyOpaque && dof < 0.08
         mesh.visible = state.opacity > INVIS_THRESHOLD
 
         const base = displayScaleRef.current
@@ -237,6 +258,8 @@ function MediaPlane({
                 transparent
                 opacity={0}
                 side={THREE.DoubleSide}
+                onBeforeCompile={compileDof.current}
+                customProgramCacheKey={foregroundDofCacheKey}
             />
         </mesh>
     )

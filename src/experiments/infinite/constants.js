@@ -10,6 +10,12 @@ export const VELOCITY_LERP = 0.16
 export const VELOCITY_DECAY = 0.9
 export const INITIAL_CAMERA_Z = 50
 
+// Foreground defocus. Planes stay sharp until DOF_FOCUS_FAR, then ease
+// toward a DOF_MAX_BLUR_PX screen-space blur as they reach DOF_FOCUS_NEAR.
+export const DOF_FOCUS_FAR = 34
+export const DOF_FOCUS_NEAR = 7
+export const DOF_MAX_BLUR_PX = 38
+
 const maxDist = RENDER_DISTANCE + CHUNK_FADE_MARGIN
 export const CHUNK_OFFSETS = []
 for (let dx = -maxDist; dx <= maxDist; dx++) {
