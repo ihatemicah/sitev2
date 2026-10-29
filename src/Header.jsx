@@ -7,8 +7,8 @@ function Header() {
                 <div> 
                   <h1>Micah Carroll</h1>
                   <p className='mobile-email-address'> work@micahcarroll.com</p>
-                  <p className='about-me-lite'> Designer partnering with brands across 3D, motion, and visual design.</p> 
-                  <p className='work-style-info'> Specializing in embedded, long-term collaborations.</p>
+                  <p className='about-me-lite'> A long-term creative partner for brands that want to stand out.</p> 
+                  <p className='work-style-info'> 3D, motion, and visual design, embedded with your team.</p>
                    
                 </div>
                     <div>
