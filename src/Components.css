@@ -307,6 +307,12 @@ header h1 {
     cursor: grab;
 }
 
+/* Let the page scroll vertically while Embla owns horizontal swipes (Embla's recommendation) */
+.embla,
+.creative-overlay-embla {
+    touch-action: pan-y pinch-zoom;
+}
+
 .embla::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
@@ -340,7 +346,14 @@ header h1 {
 .creative-canvas {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
     gap: 24px;
+}
+
+.creative-canvas > .gallery-card {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0;
 }
 
 .creative-container {
@@ -729,6 +742,10 @@ hr {
 
     .creative-canvas {
         flex-direction: column;
+    }
+
+    .creative-canvas > .gallery-card {
+        width: 100%;
     }
 
     .companies-why {

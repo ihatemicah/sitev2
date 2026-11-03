@@ -13,6 +13,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import PortfolioHoverVideo, {
     useEmblaDragSuppress,
 } from './PortfolioHoverVideo.jsx'
+import { emblaRowOptions, useEmblaClickReset } from './embla.js'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 
@@ -27,20 +28,14 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 
     const [overlayVisible, setOverlayVisible] = useState(false)
 
-    const [emblaRef, emblaApi] = useEmblaCarousel({
-        loop: false,
-        align: 'start',
-        dragFree: true,
-    })
+    const [emblaRef, emblaApi] = useEmblaCarousel(emblaRowOptions)
 
-    const [overlayEmblaRef, overlayEmblaApi] = useEmblaCarousel({
-        loop: false,
-        align: 'start',
-        dragFree: true,
-    })
+    const [overlayEmblaRef, overlayEmblaApi] = useEmblaCarousel(emblaRowOptions)
 
     const rowSuppressHover = useEmblaDragSuppress(emblaApi)
     const overlaySuppressHover = useEmblaDragSuppress(overlayEmblaApi)
+    useEmblaClickReset(emblaApi)
+    useEmblaClickReset(overlayEmblaApi)
 
     const renderSlideMedia = (item, suppressHover = false) => {
         if (item.type === 'video') {

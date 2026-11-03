@@ -205,17 +205,50 @@ export const row2Media = [
     },
 ]
 
+export const creativeAiCategories = [
+    { id: 'brand', label: 'Brand', description: 'Finished imagery made for a brand.' },
+    { id: 'concepts', label: 'Concepts', description: 'Directed ideas, still taking shape.' },
+    { id: 'exploration', label: 'Exploration', description: 'Earlier studies and open directions.' },
+]
+
 export const creativeAiImages = [
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%2011.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%2012.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%2021.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%202.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%2024.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%2025.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%204.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%205.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%203.jpg',
-    'https://zone-multi.b-cdn.net/Ai%20Images/image%2026.jpg',
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/product-image-8.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/product-image-9.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/product-image-5.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/product-image-7.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/experimental-2.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/experimental-3.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/product-image-4.jpg', category: 'brand' },
+
+
+
+
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/lifestyle-image-2.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/lifestyle-image-3.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/product-image-3.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/lifestyle-image-1.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/human-image-3.jpg', category: 'brand' },
+
+
+
+
+    
+
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%2011.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%2012.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%2024.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%2025.jpg', category: 'brand' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%2021.jpg', category: 'concepts' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%202.jpg', category: 'concepts' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%204.jpg', category: 'concepts' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%205.jpg', category: 'concepts' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%203.jpg', category: 'exploration' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/image%2026.jpg', category: 'exploration' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/experimental-1.jpg', category: 'exploration' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/experimental-4.jpg', category: 'exploration' },
+    { src: 'https://zone-multi.b-cdn.net/Ai%20Images/ai-sec-1/human-image-2.jpg', category: 'exploration' },
+
+
 ]
 
 export const creativeProofOfLife = [
