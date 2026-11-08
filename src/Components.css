@@ -94,6 +94,7 @@ header h1 {
     width: 100%;
     display: flex;
     gap: 1rem;
+    letter-spacing: -0.7px;
 }
 
 .projects-row + .projects-row {
@@ -105,12 +106,30 @@ header h1 {
     flex-direction: column;
     flex: 1 1 0;
     min-width: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.project-item--soon {
+    position: relative;
+    cursor: default;
 }
 
 .project-image {
+    position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
     display: block;
+}
+
+.project-soon-tag {
+    display: none;
 }
 
 .project-image img {
@@ -150,6 +169,78 @@ header h1 {
     font-size: 0.8rem;
     margin: 0;
     padding: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.coming-soon-label {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+    pointer-events: none;
+}
+
+.coming-soon-label__pill {
+    display: inline-flex;
+    height: 36px;
+    padding: 0 14px 0 12px;
+    border-radius: 18px;
+    gap: 8px;
+    align-items: center;
+    background: rgba(17, 17, 17, 0.78);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    backdrop-filter: blur(12px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.coming-soon-label__pill {
+    opacity: 0;
+    transform: scale(0.96);
+    transform-origin: top left;
+    transition: opacity 100ms ease-out, transform 100ms ease-out;
+}
+
+.coming-soon-label.is-visible .coming-soon-label__pill {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+}
+
+.coming-soon-label__icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .coming-soon-label__pill,
+    .coming-soon-label.is-visible .coming-soon-label__pill {
+        transform: none;
+        transition: opacity 150ms ease-out;
+    }
+}
+
+@media (hover: none) {
+    .coming-soon-label {
+        display: none;
+    }
 }
 
 .projects-header {
@@ -791,6 +882,28 @@ hr {
    .project-item {
     flex: 0 0 100%;
     max-width: 100%;
+   }
+
+   .project-soon-tag {
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    z-index: 1;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 14px;
+    background: rgba(17, 17, 17, 0.78);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    backdrop-filter: blur(12px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
    }
 
     .header-container {

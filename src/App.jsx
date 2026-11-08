@@ -17,16 +17,27 @@ import { emblaRowOptions, useEmblaClickReset } from './embla.js'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 
-const overlayEase = CustomEase.create('custom', 'M0,0 C0.274,0 -0.139,1 1,1 ')
+// Mirrors --ease-smooth-out in index.css (transitions.dev motion tokens).
+const smoothOut = CustomEase.create('smoothOut', '0.22,1,0.36,1')
+
+// Read a duration token (e.g. "400ms") from :root as seconds for GSAP.
+const tokenSeconds = (name, fallbackMs) => {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue(name)
+    return (parseFloat(raw) || fallbackMs) / 1000
+}
 
 function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
     const overlayRef = useRef(null)
     const overlayPanelRef = useRef(null)
     const overlayOpenRef = useRef(false)
+    const overlayTlRef = useRef(null)
     const pointerStartRef = useRef({ x: 0, y: 0 })
     const pointerDraggedRef = useRef(false)
 
     const [overlayVisible, setOverlayVisible] = useState(false)
+    // Real media mounts only after the panel has settled, so video setup and
+    // the Embla re-measure don't land on the first frames of the slide.
+    const [overlayMediaReady, setOverlayMediaReady] = useState(false)
 
     const [emblaRef, emblaApi] = useEmblaCarousel(emblaRowOptions)
 
@@ -48,22 +59,32 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                 />
             )
         }
-        return <img src={item.src} alt="" className="s-default" />
+        return (
+            <img
+                src={item.src}
+                alt=""
+                className="s-default"
+                loading="lazy"
+                decoding="async"
+            />
+        )
     }
 
     // Keep layout in the closed overlay with light placeholders; mount real media only when open
     const renderOverlaySlideMedia = (item) => {
-        if (!overlayVisible) {
+        if (!overlayMediaReady) {
             if (item.type === 'video') {
                 return (
                     <img
                         src={item.thumbnail}
                         alt=""
                         className="s-default"
+                        loading="lazy"
+                        decoding="async"
                     />
                 )
             }
-            return <img src={item.src} alt="" className="s-default" />
+            return <img src={item.src} alt="" className="s-default" loading="lazy" decoding="async" />
         }
         return renderSlideMedia(item, overlaySuppressHover)
     }
@@ -73,51 +94,64 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
         const panel = overlayPanelRef.current
         if (!backdrop || !panel) return
 
+        const reduceMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches
+
+        // Interrupting mid-animation: stop the running timeline and continue
+        // from wherever the panel currently is.
+        overlayTlRef.current?.kill()
+
         if (overlayOpenRef.current) {
+            overlayOpenRef.current = false
+            const duration = tokenSeconds('--duration-medium', 350)
             const tl = gsap.timeline({
                 onComplete: () => {
-                    overlayOpenRef.current = false
                     backdrop.style.visibility = 'hidden'
                     setOverlayVisible(false)
+                    setOverlayMediaReady(false)
                     gsap.set(panel, { yPercent: 100 })
                     gsap.set(backdrop, { opacity: 0 })
                 },
             })
-            tl.to(panel, {
-                yPercent: 100,
-                duration: 0.2,
-                ease: overlayEase,
+            if (!reduceMotion) {
+                tl.to(panel, { yPercent: 100, duration, ease: smoothOut }, 0)
+            }
+            tl.to(backdrop, { opacity: 0, duration, ease: 'power1.out' }, 0)
+            overlayTlRef.current = tl
+        } else {
+            const opening = backdrop.style.visibility !== 'visible'
+            overlayOpenRef.current = true
+            backdrop.style.visibility = 'visible'
+            setOverlayVisible(true)
+            if (opening) {
+                gsap.set(panel, { yPercent: reduceMotion ? 0 : 100 })
+                gsap.set(backdrop, { opacity: 0, xPercent: -50 })
+            }
+            const tl = gsap.timeline({
+                onComplete: () => setOverlayMediaReady(true),
             })
             tl.to(
                 backdrop,
                 {
-                    opacity: 0,
-                    duration: 0.12,
-                    ease: 'power2.in',
+                    opacity: 1,
+                    duration: tokenSeconds('--duration-fast', 250),
+                    ease: 'power1.out',
                 },
-                '-=0.07'
+                0
             )
-        } else {
-            overlayOpenRef.current = true
-            backdrop.style.visibility = 'visible'
-            setOverlayVisible(true)
-            gsap.set(panel, { yPercent: 100 })
-            gsap.set(backdrop, { opacity: 0, xPercent: -50 })
-            const tl = gsap.timeline()
-            tl.to(backdrop, {
-                opacity: 1,
-                duration: 0.2,
-                ease: 'power2.out',
-            })
-            tl.to(
-                panel,
-                {
-                    yPercent: 0,
-                    duration: 0.45,
-                    ease: overlayEase,
-                },
-                '-=0.15'
-            )
+            if (!reduceMotion) {
+                tl.to(
+                    panel,
+                    {
+                        yPercent: 0,
+                        duration: tokenSeconds('--duration-slow', 400) + 0.1,
+                        ease: smoothOut,
+                    },
+                    0
+                )
+            }
+            overlayTlRef.current = tl
         }
     }, [])
 
@@ -127,11 +161,13 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
         gsap.set(overlayPanelRef.current, { yPercent: 100 })
     }, [])
 
+    useEffect(() => () => overlayTlRef.current?.kill(), [])
+
     // Re-measure overlay carousel once real media mounts
     useEffect(() => {
-        if (!overlayVisible || !overlayEmblaApi) return
+        if (!overlayMediaReady || !overlayEmblaApi) return
         overlayEmblaApi.reInit()
-    }, [overlayVisible, overlayEmblaApi, mediaItems])
+    }, [overlayMediaReady, overlayEmblaApi, mediaItems])
 
     const handleRowPointerDown = (event) => {
         pointerStartRef.current = { x: event.clientX, y: event.clientY }

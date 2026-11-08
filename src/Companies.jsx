@@ -12,13 +12,13 @@ function Companies() {
     <div className="companies-container">
       <h3>My creative work has helped </h3>
         <div className='logo-grid'>
-            <img src={logoAritzia} alt="Aritzia" />
-            <img src={logoRedBull} alt="Red Bull" />
-            <img src={logoSalesforce} alt="Salesforce" />
-            <img src={logoAmazon} alt="Amazon" />
-            <img src={logoTYB} alt="TYB" />
-            <img src={logoSuperpower} alt="Superpower" />
-            <img src={logoRing} alt="Ring" />
+            <img src={logoAritzia} alt="Aritzia" loading="lazy" decoding="async" />
+            <img src={logoRedBull} alt="Red Bull" loading="lazy" decoding="async" />
+            <img src={logoSalesforce} alt="Salesforce" loading="lazy" decoding="async" />
+            <img src={logoAmazon} alt="Amazon" loading="lazy" decoding="async" />
+            <img src={logoTYB} alt="TYB" loading="lazy" decoding="async" />
+            <img src={logoSuperpower} alt="Superpower" loading="lazy" decoding="async" />
+            <img src={logoRing} alt="Ring" loading="lazy" decoding="async" />
         </div>
     </div>
   )

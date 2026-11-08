@@ -1,0 +1,298 @@
+.project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px;
+}
+
+/* The dim lives on a separate layer. Fading the modal itself (or the panel)
+   keeps backdrop-filter from sampling the page until opacity hits 1, so the
+   blur pops in at the end instead of easing. */
+.project-modal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    animation: project-modal-fade var(--duration-slow) var(--ease-out);
+}
+
+.project-modal--closing::before {
+    animation: project-modal-fade-out var(--duration-medium) var(--ease-out) forwards;
+}
+
+.project-modal__panel {
+    width: min(720px, 100%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: rgba(12, 12, 12, 0.55);
+    -webkit-backdrop-filter: blur(28px) saturate(1.3);
+    backdrop-filter: blur(28px) saturate(1.3);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    outline: none;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    will-change: transform;
+    /* Slides in from fully off-screen, so it arrives already frosted and
+       nothing has to fade (opacity would break backdrop-filter). */
+    animation: project-modal-slide var(--duration-slow) var(--ease-smooth-out);
+}
+
+.project-modal--closing .project-modal__panel {
+    animation: project-modal-slide-out var(--duration-medium) var(--ease-smooth-out) forwards;
+}
+
+.project-modal__scroll {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 14px 14px 72px;
+    scrollbar-width: none;
+    overscroll-behavior: contain;
+}
+
+.project-modal__scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.project-modal__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.project-modal__pill--name {
+    flex: 1;
+}
+
+.project-modal__close {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.project-modal__close:hover {
+    opacity: 0.7;
+}
+
+.project-modal__pill {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.project-modal__note {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 10px 12px 12px;
+    margin: 0;
+}
+
+.project-modal__note h3 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+.project-modal__note p {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    line-height: 1.35;
+    font-weight: 450;
+    opacity: 0.55;
+}
+
+.project-modal__figure {
+    margin: 0;
+}
+
+.project-modal__media {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: #161616;
+}
+
+.project-modal__caption {
+    margin: 8px 0 0;
+    font-size: 12.5px;
+    line-height: 1.35;
+    font-weight: 450;
+    opacity: 0.55;
+}
+
+.project-modal__text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 450;
+    opacity: 0.62;
+}
+
+.project-modal__statement {
+    max-width: 90%;
+}
+
+
+.project-modal__statement h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    font-weight: 560;
+    letter-spacing: -0.6px;
+    line-height: 1.15;
+}
+
+.project-modal__statement p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 450;
+    opacity: 0.62;
+}
+
+.project-modal__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0;
+}
+
+.project-modal__pair .project-modal__figure {
+    margin: 0;
+}
+
+.project-modal__pair img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    background: #161616;
+}
+
+.project-modal__edge {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 96px;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to top, #000 0%, transparent 100%);
+}
+
+.project-modal__edge--top {
+    top: 0;
+    bottom: auto;
+    height: 72px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, calc(0.55 * var(--top-fade, 0))),
+        transparent
+    );
+    -webkit-backdrop-filter: blur(calc(8px * var(--top-fade, 0)));
+    backdrop-filter: blur(calc(8px * var(--top-fade, 0)));
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+
+.project-modal__progress {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 10px;
+    z-index: 3;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+}
+
+.project-modal__progress span {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    background: #fff;
+    transform-origin: left center;
+}
+
+@keyframes project-modal-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes project-modal-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes project-modal-slide {
+    from { transform: translateX(calc(100% + 12px)); }
+    to { transform: translateX(0); }
+}
+
+@keyframes project-modal-slide-out {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(100% + 12px)); }
+}
+
+
+/* Reduced motion: dim layer fades, panel doesn't move. */
+@media (prefers-reduced-motion: reduce) {
+    .project-modal::before {
+        animation: project-modal-fade var(--duration-slow) var(--ease-in-out);
+    }
+
+    .project-modal--closing::before {
+        animation: project-modal-fade-out var(--duration-medium) var(--ease-in-out) forwards;
+    }
+
+    .project-modal__panel,
+    .project-modal--closing .project-modal__panel {
+        animation: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .project-modal {
+        padding: 0;
+    }
+
+    .project-modal__panel {
+        width: 100%;
+        border-radius: 0;
+        border: none;
+    }
+}

@@ -39,6 +39,12 @@ export function useEmblaDragSuppress(emblaApi) {
     return suppressHover
 }
 
+// Touch screens have no hover, so a hover-to-play video can never play there.
+// Checked once: it doesn't change during a visit.
+const canHover =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches
+
 /**
  * Hover-to-play video.
  * Playback is driven only by whether the pointer is over the tile.
@@ -81,6 +87,17 @@ function PortfolioHoverVideo({
 
     useEffect(() => () => clearPlayTimeout(), [])
 
+    // While the carousel is being dragged, stop playback but keep the DOM as is.
+    // Swapping the tile for an <img> unmounted and remounted every <video> in the
+    // row at the start and end of each swipe. (Pausing fires onPause, which
+    // brings the poster back.)
+    useEffect(() => {
+        if (!suppressHover) return
+        hoveringRef.current = false
+        clearPlayTimeout()
+        videoRef.current?.pause()
+    }, [suppressHover])
+
     const handleEnter = () => {
         hoveringRef.current = true
         clearPlayTimeout()
@@ -104,8 +121,16 @@ function PortfolioHoverVideo({
         setShowPoster(true)
     }
 
-    if (suppressHover) {
-        return <img src={thumbnail} alt="" className={className} />
+    if (!canHover) {
+        return (
+            <img
+                src={thumbnail}
+                alt=""
+                className={className}
+                loading="lazy"
+                decoding="async"
+            />
+        )
     }
 
     return (
@@ -131,6 +156,8 @@ function PortfolioHoverVideo({
                 src={thumbnail}
                 alt=""
                 className={className}
+                loading="lazy"
+                decoding="async"
                 style={{
                     position: 'absolute',
                     inset: 0,

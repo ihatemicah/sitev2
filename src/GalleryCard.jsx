@@ -173,7 +173,7 @@ function Media({ src, alt = '', playInView = false }) {
             />
         )
     }
-    return <img src={src} alt={alt} draggable="false" decoding="async" />
+    return <img src={src} alt={alt} draggable="false" decoding="async" loading="lazy" />
 }
 
 const ExpandIcon = () => (
