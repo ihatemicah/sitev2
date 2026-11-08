@@ -2,11 +2,36 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './ProjectModal.css'
 
+function RichText({ text }) {
+    const pattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g
+    const parts = []
+    let last = 0
+    let match
+    let key = 0
+    while ((match = pattern.exec(text))) {
+        if (match.index > last) parts.push(text.slice(last, match.index))
+        parts.push(
+            <a
+                key={key++}
+                className="project-modal__link"
+                href={match[2]}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {match[1]}
+            </a>
+        )
+        last = match.index + match[0].length
+    }
+    if (last < text.length) parts.push(text.slice(last))
+    return parts.length ? parts : text
+}
+
 function Note({ title, body }) {
     return (
         <div className="project-modal__note">
             <h3>{title}</h3>
-            {body ? <p>{body}</p> : null}
+            {body ? <p><RichText text={body} /></p> : null}
         </div>
     )
 }
@@ -50,12 +75,12 @@ function Section({ section }) {
         return (
             <div className="project-modal__statement">
                 {section.heading ? <h2>{section.heading}</h2> : null}
-                {section.body ? <p>{section.body}</p> : null}
+                {section.body ? <p><RichText text={section.body} /></p> : null}
             </div>
         )
     }
     if (section.type === 'text') {
-        return section.body ? <p className="project-modal__text">{section.body}</p> : null
+        return section.body ? <p className="project-modal__text"><RichText text={section.body} /></p> : null
     }
     if (section.type === 'pair') {
         return (

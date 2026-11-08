@@ -15,6 +15,8 @@
  *   { type: 'statement', heading?, body? }        large heading plus a paragraph
  *   { type: 'text', body }                        a paragraph on its own
  *
+ * A body can link a name with [Erman Malak](https://example.com/).
+ *
  * Omit caption, heading, or a text block when that spot has no copy.
  * Full-width images crop to 4:3. Pair images crop to 3:4.
  */
@@ -22,13 +24,120 @@
 export const featuredProjectRows = [
     [
         {
+            id: 4,
+            type: 'video',
+            thumbnail: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/superpower-thumbnail.jpg',
+            videoSrc:'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/superpower-2-compressed.mp4',
+            date: '2025',
+            title: 'Superpower | 3D Product Renders',
+            comingSoon: false,
+            caseStudy: {
+                label: '3D',
+                name: 'Superpower',
+                sections: [
+                    {
+                        type: 'note',
+                        title: 'Role',
+                        body: '3D Art Direction + Lighting + Composition',
+                    },
+                    {
+                        type: 'statement',
+                        heading: 'New packaging, seen first in 3D.',
+                        body: 'Superpower was making new packaging decisions and had no 3D products yet. [Erman Malak](https://www.ermanmalak.com/) modeled each one while I art directed, lit and composed the renders, giving the team a way to see the packaging before it was made.',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/superpower-product.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/vial-2.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/injectable-1.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/ghku-1.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/macro-pump.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/nasal-sprays-stacked.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/NAD.jpg',
+                    },
+                    {
+                        type: 'statement',
+                        heading: 'Finding the style, one render at a time',
+                        body: 'Before the look was locked in, we explored a range of directions, from soft clinical studio light to bold, graphic color. Each round helped the team see what Superpower could feel like and narrow in on a style.',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/stylized-4.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/stylized-1.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/stylized-2.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/solo-2.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/bubbles.jpg',
+                    },
+                    {
+                        type: 'media',
+                        mediaType: 'image',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/superpower/bathroom-stylized-1.jpg',
+                    },
+                    // {
+                    //     type: 'pair',
+                    //     items: [
+                    //         { src: 'https://zone-multi.b-cdn.net/Static/All%20Product%20Blokes.jpg' },
+                    //         { src: 'https://zone-multi.b-cdn.net/Static/j_b_thumbnail.jpg' },
+                    //     ],
+                    // },
+                    // {
+                    //     type: 'note',
+                    //     title: 'Solutions',
+                    //     body: 'Visualizing brand before it exists.',
+                    // },
+                ],
+            },
+        },
+        {
             id: 1,
             type: 'video',
             videoSrc:
                 'https://zone-multi.b-cdn.net/Motion%20Projects/jb_teaser_1.mp4',
             thumbnail:
                 'https://zone-multi.b-cdn.net/Static/j_b_thumbnail.jpg',
-            date: '2025.01',
+            date: '2025',
             title: 'J+B | Motion + 3D Product Renders',
             caseStudy: {
                 label: 'Motion',
@@ -131,7 +240,7 @@ export const featuredProjectRows = [
             'https://zone-multi.b-cdn.net/Motion%20Projects/batterypack-b.mp4',
             thumbnail:
             'https://zone-multi.b-cdn.net/Static/thumbnail-battery.jpg',
-            date: '2026.09',
+            date: '2026',
             title: 'Nexcharge (Smart Battery Pack) | 3D Renders',
             comingSoon: true,
             caseStudy: {
@@ -169,7 +278,7 @@ export const featuredProjectRows = [
             'https://zone-multi.b-cdn.net/Motion%20Projects/subframe_featured_c.mp4',
             thumbnail:
             'https://zone-multi.b-cdn.net/Static/subframe_feature.jpg',
-            date: '2026.09',
+            date: '2026',
             title: 'Subframe (AI Tool) | Brand (3D + Motion)',
             comingSoon: true,
             caseStudy: {
@@ -200,48 +309,6 @@ export const featuredProjectRows = [
                 ],
             },
         },
-        {
-            id: 4,
-            type: 'video',
-            thumbnail: 'https://zone-multi.b-cdn.net/Static/All%20Product%20Blokes.jpg',
-            videoSrc:'https://zone-multi.b-cdn.net/Motion%20Projects/joi-blokes-c.mp4',
-            date: '2023.02',
-            title: 'J+B | E-Commerce 3D Renders',
-            comingSoon: true,
-            caseStudy: {
-                label: 'Growth marketing',
-                name: 'Joi and Blokes',
-                sections: [
-                    {
-                        type: 'note',
-                        title: 'Challenge',
-                        body: 'Visualizing brand before it exists.',
-                    },
-                    {
-                        type: 'media',
-                        mediaType: 'image',
-                        src: 'https://zone-multi.b-cdn.net/Static/All%20Product%20Blokes.jpg',
-                    },
-                    {
-                        type: 'statement',
-                        heading: 'A clear path from first impression to lasting connection',
-                        body: 'Still renders for the store: the product, the pack, and the light treated as one system.',
-                    },
-                    {
-                        type: 'pair',
-                        items: [
-                            { src: 'https://zone-multi.b-cdn.net/Static/All%20Product%20Blokes.jpg' },
-                            { src: 'https://zone-multi.b-cdn.net/Static/j_b_thumbnail.jpg' },
-                        ],
-                    },
-                    {
-                        type: 'note',
-                        title: 'Solutions',
-                        body: 'Visualizing brand before it exists.',
-                    },
-                ],
-            },
-        },
     ],
     [
         {
@@ -249,7 +316,7 @@ export const featuredProjectRows = [
             type: 'video',
             thumbnail: 'https://zone-multi.b-cdn.net/Static/seedling-feature-thumb.jpg',
             videoSrc: 'https://zone-multi.b-cdn.net/Motion%20Projects/seedling-feature-row-compressed.mp4',
-            date: '2026.04',
+            date: '2026',
             title: 'Seedling | Interface + Brand Design',
             comingSoon: true,
             caseStudy: {
@@ -284,7 +351,7 @@ export const featuredProjectRows = [
             id: 6,
             type: 'image',
             src: 'https://zone-multi.b-cdn.net/Static/ring-neighbors.jpg',
-            date: '2023.02',
+            date: '2023',
             title: 'Ring | Product Design',
             comingSoon: true,
             caseStudy: {
@@ -318,7 +385,7 @@ export const featuredProjectRows = [
             id: 7,
             type: 'image',
             src: 'https://zone-multi.b-cdn.net/Static/landing-space.jpg',
-            date: '2023.02',
+            date: '2023',
             title: 'Landing | Product Design',
             comingSoon: true,
             caseStudy: {
@@ -352,7 +419,7 @@ export const featuredProjectRows = [
             id: 8,
             type: 'image',
             src: 'https://zone-multi.b-cdn.net/Static/aritzia.jpg',
-            date: '2023.02',
+            date: '2023',
             title: 'Aritzia | Experience Design',
             comingSoon: true,
             caseStudy: {

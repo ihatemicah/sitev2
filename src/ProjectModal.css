@@ -177,6 +177,12 @@
     opacity: 0.62;
 }
 
+.project-modal__link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .project-modal__pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
