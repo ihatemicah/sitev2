@@ -15,7 +15,7 @@ function ProjectMedia({ item }) {
       />
     )
   }
-  return <img src={item.src} alt="" loading="lazy" decoding="async" />
+  return <img src={item.src} alt="" decoding="async" />
 }
 
 function SoonIcon() {

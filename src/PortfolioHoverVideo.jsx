@@ -87,10 +87,8 @@ function PortfolioHoverVideo({
 
     useEffect(() => () => clearPlayTimeout(), [])
 
-    // While the carousel is being dragged, stop playback but keep the DOM as is.
-    // Swapping the tile for an <img> unmounted and remounted every <video> in the
-    // row at the start and end of each swipe. (Pausing fires onPause, which
-    // brings the poster back.)
+    // While the carousel is being dragged, stop playback but keep the video mounted.
+    // Swapping the tile for an image remounted every video in the row on each swipe.
     useEffect(() => {
         if (!suppressHover) return
         hoveringRef.current = false
@@ -121,27 +119,15 @@ function PortfolioHoverVideo({
         setShowPoster(true)
     }
 
-    if (!canHover) {
-        return (
-            <img
-                src={thumbnail}
-                alt=""
-                className={className}
-                loading="lazy"
-                decoding="async"
-            />
-        )
-    }
-
     return (
         <div
             className={`hover-video-player ${className}`}
-            onMouseEnter={handleEnter}
-            onMouseLeave={handleLeave}
+            onMouseEnter={canHover ? handleEnter : undefined}
+            onMouseLeave={canHover ? handleLeave : undefined}
         >
             <video
                 ref={videoRef}
-                src={videoSrc}
+                src={`${videoSrc}#t=0.1`}
                 className={className}
                 muted
                 loop
@@ -152,22 +138,23 @@ function PortfolioHoverVideo({
                 }}
                 onPause={() => setShowPoster(true)}
             />
-            <img
-                src={thumbnail}
-                alt=""
-                className={className}
-                loading="lazy"
-                decoding="async"
-                style={{
-                    position: 'absolute',
-                    inset: 0,
-                    zIndex: 1,
-                    opacity: showPoster ? 1 : 0,
-                    visibility: showPoster ? 'visible' : 'hidden',
-                    transition: 'opacity 200ms ease',
-                    pointerEvents: 'none',
-                }}
-            />
+            {thumbnail && showPoster ? (
+                <img
+                    src={thumbnail}
+                    alt=""
+                    className={className}
+                    decoding="async"
+                    onError={(event) => {
+                        event.currentTarget.style.display = 'none'
+                    }}
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        zIndex: 1,
+                        pointerEvents: 'none',
+                    }}
+                />
+            ) : null}
         </div>
     )
 }

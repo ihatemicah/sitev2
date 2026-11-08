@@ -69,27 +69,22 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                 src={item.src}
                 alt=""
                 className="s-default"
-                loading="lazy"
                 decoding="async"
             />
         )
     }
 
-    // Keep layout in the closed overlay with light placeholders; mount real media only when open
+    // Closed overlay shows the same thumbnail the row uses, then mounts the player once open.
     const renderOverlaySlideMedia = (item) => {
-        if (!overlayMediaReady) {
-            if (item.type === 'video') {
-                return (
-                    <img
-                        src={item.thumbnail}
-                        alt=""
-                        className="s-default"
-                        loading="lazy"
-                        decoding="async"
-                    />
-                )
-            }
-            return <img src={item.src} alt="" className="s-default" loading="lazy" decoding="async" />
+        if (!overlayMediaReady && item.type === 'video') {
+            return (
+                <img
+                    src={item.thumbnail}
+                    alt=""
+                    className="s-default"
+                    decoding="async"
+                />
+            )
         }
         return renderSlideMedia(item, overlaySuppressHover)
     }

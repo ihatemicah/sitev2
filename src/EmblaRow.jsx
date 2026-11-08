@@ -34,7 +34,6 @@ function EmblaRow({ title = '', mediaItems = [] }) {
                                     src={item.src}
                                     alt=""
                                     className="s-default"
-                                    loading="lazy"
                                     decoding="async"
                                 />
                             )}

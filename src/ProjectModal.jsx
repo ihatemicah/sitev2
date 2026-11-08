@@ -53,7 +53,7 @@ function Media({ section }) {
             playsInline
         />
     ) : (
-        <img className="project-modal__media" src={section.src} alt="" loading="lazy" decoding="async" />
+        <img className="project-modal__media" src={section.src} alt="" decoding="async" />
     )
 
     return (
@@ -87,7 +87,7 @@ function Section({ section }) {
             <div className="project-modal__pair">
                 {section.items?.map((item) => (
                     <figure key={item.src} className="project-modal__figure">
-                        <img src={item.src} alt="" loading="lazy" decoding="async" />
+                        <img src={item.src} alt="" decoding="async" />
                         <Caption>{item.caption}</Caption>
                     </figure>
                 ))}
