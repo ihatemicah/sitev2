@@ -94,7 +94,17 @@ function ProjectModal({ project, onClose }) {
         setClosing(true)
         const token = getComputedStyle(document.documentElement)
             .getPropertyValue('--duration-medium')
-        const ms = parseFloat(token) || 350
+            .trim()
+        const value = parseFloat(token)
+        // Production CSS rewrites 350ms to .35s. parseFloat(".35s") is 0.35,
+        // which would unmount the modal before the ease-out can play.
+        const ms = !Number.isFinite(value)
+            ? 350
+            : token.endsWith('ms')
+              ? value
+              : token.endsWith('s')
+                ? value * 1000
+                : 350
         window.setTimeout(() => onCloseRef.current(), ms)
     }, [])
 

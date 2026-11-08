@@ -20,10 +20,15 @@ import { CustomEase } from 'gsap/CustomEase'
 // Mirrors --ease-smooth-out in index.css (transitions.dev motion tokens).
 const smoothOut = CustomEase.create('smoothOut', '0.22,1,0.36,1')
 
-// Read a duration token (e.g. "400ms") from :root as seconds for GSAP.
+// Read a duration token from :root as seconds for GSAP.
+// The build minifier rewrites 350ms to .35s, so the unit has to be read too.
 const tokenSeconds = (name, fallbackMs) => {
-    const raw = getComputedStyle(document.documentElement).getPropertyValue(name)
-    return (parseFloat(raw) || fallbackMs) / 1000
+    const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+    const value = parseFloat(raw)
+    if (!Number.isFinite(value)) return fallbackMs / 1000
+    if (raw.endsWith('ms')) return value / 1000
+    if (raw.endsWith('s')) return value
+    return fallbackMs / 1000
 }
 
 function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
