@@ -377,6 +377,12 @@ export const featuredProjectRows = [
                     },
                     {
                         type: 'media',
+                        mediaType: 'video',
+                        src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/doormat/static%20assets/doormat-harddrive-c.mp4',
+                        poster: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/doormat/keychain-thumbnail-1-c.jpg',
+                    },
+                    {
+                        type: 'media',
                         mediaType: 'image',
                         src: 'https://zone-multi.b-cdn.net/Case%20Study%20Focus/doormat/static%20assets/doormat-4.jpg',
                         // caption: 'hello',
