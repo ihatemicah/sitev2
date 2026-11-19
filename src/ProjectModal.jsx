@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import BunnyImage from './BunnyImage.jsx'
 import './ProjectModal.css'
 
 function RichText({ text }) {
@@ -53,7 +54,7 @@ function Media({ section }) {
             playsInline
         />
     ) : (
-        <img className="project-modal__media" src={section.src} alt="" decoding="async" />
+        <BunnyImage className="project-modal__media" src={section.src} alt="" width={1600} decoding="async" />
     )
 
     return (
@@ -87,7 +88,7 @@ function Section({ section }) {
             <div className="project-modal__pair">
                 {section.items?.map((item) => (
                     <figure key={item.src} className="project-modal__figure">
-                        <img src={item.src} alt="" decoding="async" />
+                        <BunnyImage src={item.src} alt="" decoding="async" />
                         <Caption>{item.caption}</Caption>
                     </figure>
                 ))}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import BunnyImage from './BunnyImage.jsx'
 
 /**
  * True only while the pointer is down and Embla is actually scrolling.
@@ -151,15 +152,17 @@ function PortfolioHoverVideo({
                 onPause={() => setShowPoster(true)}
             />
             {thumbnail && showPoster ? (
-                <img
+                <BunnyImage
                     src={thumbnail}
                     alt=""
                     className={className}
                     decoding="async"
                     onError={(event) => {
-                        event.currentTarget.style.display = 'none'
+                        const img = event.currentTarget
+                        const wrapper = img.closest('.bunny-img') ?? img
+                        wrapper.style.display = 'none'
                     }}
-                    style={{
+                    wrapperStyle={{
                         position: 'absolute',
                         inset: 0,
                         zIndex: 1,

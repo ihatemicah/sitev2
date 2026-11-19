@@ -2,6 +2,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import PortfolioHoverVideo, {
     useEmblaDragSuppress,
 } from './PortfolioHoverVideo.jsx'
+import BunnyImage from './BunnyImage.jsx'
 import './Components.css'
 
 function EmblaRow({ title = '', mediaItems = [] }) {
@@ -30,7 +31,7 @@ function EmblaRow({ title = '', mediaItems = [] }) {
                                     suppressHover={suppressHover}
                                 />
                             ) : (
-                                <img
+                                <BunnyImage
                                     src={item.src}
                                     alt=""
                                     className="s-default"

@@ -3,6 +3,7 @@ import { createPortal, flushSync } from 'react-dom'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useEmblaDragSuppress } from './PortfolioHoverVideo.jsx'
 import { emblaRowOptions, useEmblaClickReset } from './embla.js'
+import BunnyImage from './BunnyImage.jsx'
 import './GalleryCard.css'
 
 const pad = (n) => String(n).padStart(2, '0')
@@ -173,7 +174,7 @@ function Media({ src, alt = '', playInView = false }) {
             />
         )
     }
-    return <img src={src} alt={alt} draggable="false" decoding="async" />
+    return <BunnyImage src={src} alt={alt} draggable="false" decoding="async" />
 }
 
 const CloseIcon = () => (

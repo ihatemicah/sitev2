@@ -4,7 +4,7 @@ import { creativeAiCategories, creativeAiImages, creativeProofOfLife } from './p
 
 function CreativeCanvas() {
     return (
-        <div className="creative-canvas">
+        <div className="creative-canvas" data-reveal>
             <GalleryCard
                 title="AI Creations"
                 description="Leveraging advanced AI workflows to create bespoke, brand-aligned visual assets that elevate your identity."
