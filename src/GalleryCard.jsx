@@ -176,11 +176,6 @@ function Media({ src, alt = '', playInView = false }) {
     return <img src={src} alt={alt} draggable="false" decoding="async" />
 }
 
-const ExpandIcon = () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-    </svg>
-)
 const CloseIcon = () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
         <path d="M6 6l12 12M18 6L6 18" />
@@ -309,12 +304,26 @@ function GalleryCard({ title, meta, description, items = [], categories = [] }) 
         })
     }
 
-    const open = (index) => {
+    // Decode the full-size slide images the open view lands on. The tile only decoded a small
+    // copy, so without this the big JPEG decodes during the first frames of the transition and
+    // the hero stutters or lands blank. Hovering a tile warms its slide ahead of the click.
+    const warmSlides = (i, count = 1) =>
+        Promise.all(
+            slides()
+                .slice(Math.max(0, i - 1), i + count)
+                .map((s) => s.querySelector('img'))
+                .filter(Boolean)
+                .map((img) => img.decode().catch(() => {}))
+        )
+
+    const open = async (index) => {
         if (isOpen || busyRef.current) return
         const strip = tiles()
         const i = index ?? (strip.length ? Number(strip[firstVisible(stripRef.current, strip)].dataset.index) : 0)
         lastFocusRef.current = document.activeElement
         busyRef.current = true
+        // Usually already done from hover; cap the wait so a slow network never holds the click
+        await Promise.race([warmSlides(i, 4), new Promise((resolve) => setTimeout(resolve, 100))])
         setNames('card')
         setHero(tileFor(i))
         run(() => {
@@ -469,13 +478,6 @@ function GalleryCard({ title, meta, description, items = [], categories = [] }) 
                         <h2>{title}</h2>
                         {meta && <span className="gallery-meta">{meta}</span>}
                     </div>
-                    <button className="gallery-cta" onClick={() => open()} aria-haspopup="dialog">
-                        <span className="gallery-cta-label">View gallery</span>
-                        <span className="gallery-cta-count">{total}</span>
-                        <span className="gallery-cta-icon" aria-hidden="true">
-                            <ExpandIcon />
-                        </span>
-                    </button>
                 </header>
                 {hasChapters && (
                     <div className="gallery-filters" role="group" aria-label={`Filter ${title}`}>
@@ -510,6 +512,8 @@ function GalleryCard({ title, meta, description, items = [], categories = [] }) 
                                     aria-label={`Open item ${m.index + 1} of ${media.length}`}
                                     // Embla swallows the click that ends a drag, so this only fires on a real click
                                     onClick={() => open(m.index)}
+                                    onPointerEnter={() => warmSlides(m.index)}
+                                    onFocus={() => warmSlides(m.index)}
                                 >
                                     <Media src={m.src} />
                                     {m.category && labelFor(m.category) && (

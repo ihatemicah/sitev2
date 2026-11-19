@@ -17,8 +17,11 @@
     box-sizing: border-box;
 }
 
+/* scrollbar-gutter keeps the page width fixed when the scrollbar hides. Otherwise, with
+   classic scrollbars, every carousel's ResizeObserver re-measures mid-transition. */
 html.gallery-open {
     overflow: hidden;
+    scrollbar-gutter: stable;
 }
 
 /* :where keeps the reset at zero specificity so component classes always win */
@@ -41,7 +44,7 @@ html.gallery-open {
 
 /* ---------- Card ---------- */
 .gallery-card {
-    background: var(--gallery-surface);
+    background: #0c0c0c47;
     border-radius: var(--gallery-radius);
     box-shadow: inset 0 0 0 1px var(--gallery-line);
     padding: 22px 0 24px;
@@ -78,6 +81,43 @@ html.gallery-open {
     background: #fff;
     flex-shrink: 0;
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+    position: relative;
+}
+
+/* A soft halo ripples out of the dot, then rests before the next one.
+   Only transform and opacity animate, so the loop stays on the compositor. */
+.gallery-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    animation: gallery-dot-pulse 3s infinite;
+}
+
+@keyframes gallery-dot-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+        animation-timing-function: var(--gallery-ease-out);
+    }
+    /* the ripple takes ~2s; the rest of the cycle is a quiet pause */
+    65% {
+        transform: scale(3);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gallery-dot::after {
+        animation: none;
+    }
 }
 
 .gallery-title h2 {
@@ -401,7 +441,7 @@ html.gallery-open {
 
 /* ---------- Filters (card) ---------- */
 .gallery-head:has(+ .gallery-filters) {
-    margin-bottom: 28px;
+    margin-bottom: 12px;
 }
 
 .gallery-filters {
@@ -424,15 +464,15 @@ html.gallery-open {
     flex-shrink: 0;
     height: 32px;
     padding: 0 14px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    /* box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); */
     font-size: 14px;
     font-weight: 500;
     transition: background-color 200ms ease, color 200ms ease, transform 160ms var(--gallery-ease-out);
 }
 
 .gallery-filter-count {
-    color: var(--gallery-muted);
+    color: #fff;
     font-variant-numeric: tabular-nums;
     transition: color 200ms ease;
 }
@@ -442,13 +482,13 @@ html.gallery-open {
 }
 
 .gallery-filter.is-active {
-    background: #fff;
-    color: #000;
+    background: #ffffff09;
+    color: #fff;
     box-shadow: none;
 }
 
 .gallery-filter.is-active .gallery-filter-count {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .gallery-filter:focus-visible {

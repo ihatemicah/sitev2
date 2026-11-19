@@ -56,6 +56,7 @@ function PortfolioHoverVideo({
     thumbnail,
     className = 's-default',
     suppressHover = false,
+    autoPlay = false,
 }) {
     const videoRef = useRef(null)
     const hoveringRef = useRef(false)
@@ -86,6 +87,17 @@ function PortfolioHoverVideo({
     }
 
     useEffect(() => () => clearPlayTimeout(), [])
+
+    // Mounted from a hover that already happened, so play without waiting for another enter.
+    useEffect(() => {
+        if (!autoPlay) return
+        hoveringRef.current = true
+        attemptPlay()
+        return () => {
+            hoveringRef.current = false
+            clearPlayTimeout()
+        }
+    }, [autoPlay])
 
     // While the carousel is being dragged, stop playback but keep the video mounted.
     // Swapping the tile for an image remounted every video in the row on each swipe.

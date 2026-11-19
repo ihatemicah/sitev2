@@ -562,6 +562,35 @@ header h1 {
 .creative-overlay.embla-row-overlay {
     transform: translateX(-50%);
     align-items: stretch;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* The blur stays on its own layer and is not faded. Fading an element that
+   blurs the page makes the browser redo that blur on every frame. */
+.embla-row-overlay__blur {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.9);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.embla-row-overlay .creative-overlay-content {
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+}
+
+.overlay-row-slide {
+    position: relative;
+}
+
+.overlay-row-slide .hover-video-player {
+    position: absolute;
+    inset: 0;
 }
 
 /* CreativeCanvas — same pattern (CreativeCanvas.jsx GSAP). */

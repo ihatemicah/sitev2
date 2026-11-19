@@ -31,6 +31,37 @@ const tokenSeconds = (name, fallbackMs) => {
     return fallbackMs / 1000
 }
 
+function OverlayRowSlide({ item, suppressHover }) {
+    const [playing, setPlaying] = useState(false)
+
+    useEffect(() => {
+        if (suppressHover) setPlaying(false)
+    }, [suppressHover])
+
+    const still = item.type === 'video' ? item.thumbnail : item.src
+
+    return (
+        <div
+            className="overlay-row-slide"
+            onMouseEnter={() => {
+                if (item.type === 'video' && !suppressHover) setPlaying(true)
+            }}
+            onMouseLeave={() => setPlaying(false)}
+        >
+            <img src={still} alt="" className="s-default" decoding="async" />
+            {playing ? (
+                <PortfolioHoverVideo
+                    videoSrc={item.videoSrc}
+                    thumbnail={item.thumbnail}
+                    className="s-default"
+                    suppressHover={suppressHover}
+                    autoPlay
+                />
+            ) : null}
+        </div>
+    )
+}
+
 function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
     const overlayRef = useRef(null)
     const overlayPanelRef = useRef(null)
@@ -40,9 +71,6 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
     const pointerDraggedRef = useRef(false)
 
     const [overlayVisible, setOverlayVisible] = useState(false)
-    // Real media mounts only after the panel has settled, so video setup and
-    // the Embla re-measure don't land on the first frames of the slide.
-    const [overlayMediaReady, setOverlayMediaReady] = useState(false)
 
     const [emblaRef, emblaApi] = useEmblaCarousel(emblaRowOptions)
 
@@ -74,20 +102,11 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
         )
     }
 
-    // Closed overlay shows the same thumbnail the row uses, then mounts the player once open.
-    const renderOverlaySlideMedia = (item) => {
-        if (!overlayMediaReady && item.type === 'video') {
-            return (
-                <img
-                    src={item.thumbnail}
-                    alt=""
-                    className="s-default"
-                    decoding="async"
-                />
-            )
-        }
-        return renderSlideMedia(item, overlaySuppressHover)
-    }
+    // The closed overlay, and every slide until it is hovered, stays an image.
+    // Mounting a video for every slide at the end of the open was the hitch.
+    const renderOverlaySlideMedia = (item, suppressHover) => (
+        <OverlayRowSlide item={item} suppressHover={suppressHover} />
+    )
 
     const toggleOverlay = useCallback(() => {
         const backdrop = overlayRef.current
@@ -109,15 +128,12 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                 onComplete: () => {
                     backdrop.style.visibility = 'hidden'
                     setOverlayVisible(false)
-                    setOverlayMediaReady(false)
                     gsap.set(panel, { yPercent: 100 })
-                    gsap.set(backdrop, { opacity: 0 })
                 },
             })
             if (!reduceMotion) {
-                tl.to(panel, { yPercent: 100, duration, ease: smoothOut }, 0)
+                tl.to(panel, { yPercent: 100, duration, ease: smoothOut, force3D: true }, 0)
             }
-            tl.to(backdrop, { opacity: 0, duration, ease: 'power1.out' }, 0)
             overlayTlRef.current = tl
         } else {
             const opening = backdrop.style.visibility !== 'visible'
@@ -126,30 +142,15 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
             setOverlayVisible(true)
             if (opening) {
                 gsap.set(panel, { yPercent: reduceMotion ? 0 : 100 })
-                gsap.set(backdrop, { opacity: 0, xPercent: -50 })
             }
-            const tl = gsap.timeline({
-                onComplete: () => setOverlayMediaReady(true),
-            })
-            tl.to(
-                backdrop,
-                {
-                    opacity: 1,
-                    duration: tokenSeconds('--duration-fast', 250),
-                    ease: 'power1.out',
-                },
-                0
-            )
+            const tl = gsap.timeline()
             if (!reduceMotion) {
-                tl.to(
-                    panel,
-                    {
-                        yPercent: 0,
-                        duration: tokenSeconds('--duration-slow', 400) + 0.1,
-                        ease: smoothOut,
-                    },
-                    0
-                )
+                tl.to(panel, {
+                    yPercent: 0,
+                    duration: tokenSeconds('--duration-slow', 400) + 0.1,
+                    ease: smoothOut,
+                    force3D: true,
+                })
             }
             overlayTlRef.current = tl
         }
@@ -157,17 +158,10 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 
     useEffect(() => {
         if (!overlayRef.current || !overlayPanelRef.current) return
-        gsap.set(overlayRef.current, { opacity: 0, xPercent: -50 })
         gsap.set(overlayPanelRef.current, { yPercent: 100 })
     }, [])
 
     useEffect(() => () => overlayTlRef.current?.kill(), [])
-
-    // Re-measure overlay carousel once real media mounts
-    useEffect(() => {
-        if (!overlayMediaReady || !overlayEmblaApi) return
-        overlayEmblaApi.reInit()
-    }, [overlayMediaReady, overlayEmblaApi, mediaItems])
 
     const handleRowPointerDown = (event) => {
         pointerStartRef.current = { x: event.clientX, y: event.clientY }
@@ -227,6 +221,7 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                     visibility: overlayVisible ? 'visible' : 'hidden',
                 }}
             >
+                <div className="embla-row-overlay__blur" aria-hidden="true" />
                 <div ref={overlayPanelRef} className="creative-overlay-content">
                     <div className="overlay-layout">
                         <div>
@@ -244,7 +239,7 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
                                             key={index}
                                             className="creative-overlay-embla__slide"
                                         >
-                                            {renderOverlaySlideMedia(item)}
+                                            {renderOverlaySlideMedia(item, overlaySuppressHover)}
                                         </div>
                                     ))}
                                 </div>
@@ -272,6 +267,7 @@ function App() {
                 <PersonalBio />
             </div>
             <Footer />
+            <div className="page-edge" aria-hidden="true" />
         </>
     )
 }
