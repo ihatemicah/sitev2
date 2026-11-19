@@ -558,13 +558,98 @@ header h1 {
     overflow: hidden;
 }
 
-/* App ExpandableEmblaRow — backdrop fades in; inner panel slides separately (see App.jsx GSAP). */
+/* App ExpandableEmblaRow — the clicked image grows out of the row through a view
+   transition (App.jsx). This plain fade only runs without one: older browsers and
+   reduced motion. */
 .creative-overlay.embla-row-overlay {
     transform: translateX(-50%);
     align-items: stretch;
     background: none;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 200ms ease-out, visibility 0s linear 200ms;
+}
+
+.creative-overlay.embla-row-overlay.is-open {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 250ms ease-out;
+}
+
+/* Inside a view transition the snapshots do the animating. A running CSS fade would
+   be captured at opacity 0 and the overlay would flash in at the end. */
+html.row-vt .creative-overlay.embla-row-overlay {
+    transition: none;
+}
+
+/* The page and the dimmed overlay cross-fade; the hero image morphs on top.
+   Scoped to html.row-vt so the gallery's own view transitions are untouched. */
+html.row-vt::view-transition-group(*) {
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+html.row-vt::view-transition-old(root) {
+    animation: row-vt-fade-out 250ms ease-out both;
+}
+
+html.row-vt::view-transition-new(root) {
+    animation: row-vt-fade-in 250ms ease-out both;
+}
+
+/* Keep the image's crop while it changes size. The row tile can be showing a video
+   frame while the overlay shows the thumbnail, so a cross-fade would double-expose:
+   the outgoing picture sits on top and clears quickly over the solid incoming one. */
+html.row-vt::view-transition-old(row-hero),
+html.row-vt::view-transition-new(row-hero) {
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: normal;
+}
+
+html.row-vt::view-transition-old(row-hero) {
+    z-index: 1;
+    animation: row-vt-fade-out 150ms ease-out both;
+}
+
+html.row-vt::view-transition-new(row-hero) {
+    animation: none;
+}
+
+/* the rest of the overlay's images rise in just behind the hero */
+html.row-vt::view-transition-new(row-rest) {
+    animation: row-vt-rise 320ms cubic-bezier(0.23, 1, 0.32, 1) 80ms both;
+}
+
+/* exit faster than enter */
+html.row-vt-closing::view-transition-group(*) {
+    animation-duration: 320ms;
+}
+
+html.row-vt-closing::view-transition-old(root),
+html.row-vt-closing::view-transition-new(root) {
+    animation-duration: 200ms;
+}
+
+@keyframes row-vt-fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes row-vt-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes row-vt-rise {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
 }
 
 /* The blur stays on its own layer and is not faded. Fading an element that
@@ -581,7 +666,6 @@ header h1 {
 .embla-row-overlay .creative-overlay-content {
     position: relative;
     z-index: 1;
-    will-change: transform;
 }
 
 .overlay-row-slide {

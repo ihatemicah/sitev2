@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import PortfolioHoverVideo from './PortfolioHoverVideo.jsx'
 import ProjectModal from './ProjectModal.jsx'
+import BunnyImage from './BunnyImage.jsx'
 import './Components.css'
 import { featuredProjectRows } from './portfolioMedia.js'
 
@@ -15,7 +16,7 @@ function ProjectMedia({ item }) {
       />
     )
   }
-  return <img src={item.src} alt="" decoding="async" />
+  return <BunnyImage src={item.src} alt="" decoding="async" />
 }
 
 function SoonIcon() {
@@ -197,16 +198,16 @@ function FeatureProjects() {
   return (
     <section className="projects">
 
-      <div className='projects-header'>
+      <div className='projects-header' data-reveal>
         <div className='project-header-1'>
           <p> Recent favorites</p>
         </div>
         <div className='project-header-2'>
-        <p> Last updated: October 2026</p>
+        <p> Last updated: November 2026</p>
         </div>
       </div>
       {featuredProjectRows.map((row, rowIndex) => (
-        <div key={rowIndex} className="projects-row">
+        <div key={rowIndex} className="projects-row" data-reveal>
           {row.map((item) => {
             const soon = Boolean(item.comingSoon)
             const caption = (

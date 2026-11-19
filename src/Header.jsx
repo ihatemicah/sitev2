@@ -2,7 +2,7 @@ import './Components.css'
 
 function Header() {
   return (
-    <header>
+    <header data-reveal>
         <div className="header-container">
                 <div> 
                   <h1>Micah Carroll</h1>

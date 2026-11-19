@@ -7,6 +7,12 @@ import App from './App.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Set before the first render so sections start hidden instead of flashing in, then
+// fading out and back (see useReveal.js).
+if ('IntersectionObserver' in window) {
+  document.documentElement.classList.add('reveal-ready')
+}
+
 function ensureHeadLink(rel, attrs) {
   let el = document.querySelector(`link[rel="${rel}"]`)
   if (!el) {

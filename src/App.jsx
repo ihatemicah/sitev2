@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import Header from './Header.jsx'
 import FeatureProjects from './Featureprojects.jsx'
 import StickyNav from './StickyNav.jsx'
 import Links from './Links.jsx'
 import CreativeCanvas from './CreativeCanvas.jsx'
+import BunnyImage from './BunnyImage.jsx'
 import Companies from './Companies.jsx'
 import PersonalBio from './PersonalBio.jsx'
 import Footer from './Footer.jsx'
@@ -14,21 +15,42 @@ import PortfolioHoverVideo, {
     useEmblaDragSuppress,
 } from './PortfolioHoverVideo.jsx'
 import { emblaRowOptions, useEmblaClickReset } from './embla.js'
-import { gsap } from 'gsap'
-import { CustomEase } from 'gsap/CustomEase'
+import { flushSync } from 'react-dom'
+import { useReveal } from './useReveal.js'
 
-// Mirrors --ease-smooth-out in index.css (transitions.dev motion tokens).
-const smoothOut = CustomEase.create('smoothOut', '0.22,1,0.36,1')
+const canVT =
+    typeof document !== 'undefined' &&
+    typeof document.startViewTransition === 'function'
+const prefersReducedMotion = () =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const nextFrame = () => new Promise((resolve) => requestAnimationFrame(resolve))
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-// Read a duration token from :root as seconds for GSAP.
-// The build minifier rewrites 350ms to .35s, so the unit has to be read too.
-const tokenSeconds = (name, fallbackMs) => {
-    const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
-    const value = parseFloat(raw)
-    if (!Number.isFinite(value)) return fallbackMs / 1000
-    if (raw.endsWith('ms')) return value / 1000
-    if (raw.endsWith('s')) return value
-    return fallbackMs / 1000
+// View-transition names. They only exist on the row being animated, so both rows can share them.
+const HERO = 'row-hero'
+const REST = 'row-rest'
+
+// The slide sitting closest to the carousel's left edge
+function firstVisible(api) {
+    if (!api) return 0
+    const left = api.rootNode().getBoundingClientRect().left
+    let best = 0
+    let bestD = Infinity
+    api.slideNodes().forEach((el, i) => {
+        const d = Math.abs(el.getBoundingClientRect().left - left)
+        if (d < bestD) {
+            bestD = d
+            best = i
+        }
+    })
+    return best
+}
+
+// Embla scrolls by snap, and the last few slides can share one snap
+function snapFor(api, slideIndex) {
+    const registry = api.internalEngine().slideRegistry
+    const snap = registry.findIndex((slides) => slides.includes(slideIndex))
+    return snap === -1 ? 0 : snap
 }
 
 function OverlayRowSlide({ item, suppressHover }) {
@@ -48,7 +70,7 @@ function OverlayRowSlide({ item, suppressHover }) {
             }}
             onMouseLeave={() => setPlaying(false)}
         >
-            <img src={still} alt="" className="s-default" decoding="async" />
+            <BunnyImage src={still} alt="" className="s-default" decoding="async" />
             {playing ? (
                 <PortfolioHoverVideo
                     videoSrc={item.videoSrc}
@@ -63,14 +85,12 @@ function OverlayRowSlide({ item, suppressHover }) {
 }
 
 function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
-    const overlayRef = useRef(null)
     const overlayPanelRef = useRef(null)
-    const overlayOpenRef = useRef(false)
-    const overlayTlRef = useRef(null)
+    const busyRef = useRef(false)
     const pointerStartRef = useRef({ x: 0, y: 0 })
     const pointerDraggedRef = useRef(false)
 
-    const [overlayVisible, setOverlayVisible] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     const [emblaRef, emblaApi] = useEmblaCarousel(emblaRowOptions)
 
@@ -93,7 +113,7 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
             )
         }
         return (
-            <img
+            <BunnyImage
                 src={item.src}
                 alt=""
                 className="s-default"
@@ -108,60 +128,89 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
         <OverlayRowSlide item={item} suppressHover={suppressHover} />
     )
 
-    const toggleOverlay = useCallback(() => {
-        const backdrop = overlayRef.current
-        const panel = overlayPanelRef.current
-        if (!backdrop || !panel) return
+    const rowSlides = () => emblaApi?.slideNodes() ?? []
+    const overlaySlides = () => overlayEmblaApi?.slideNodes() ?? []
 
-        const reduceMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-        ).matches
+    const clearNames = () => {
+        ;[...rowSlides(), ...overlaySlides()].forEach((el) => {
+            el.style.viewTransitionName = ''
+        })
+        if (overlayPanelRef.current) overlayPanelRef.current.style.viewTransitionName = ''
+    }
 
-        // Interrupting mid-animation: stop the running timeline and continue
-        // from wherever the panel currently is.
-        overlayTlRef.current?.kill()
-
-        if (overlayOpenRef.current) {
-            overlayOpenRef.current = false
-            const duration = tokenSeconds('--duration-medium', 350)
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    backdrop.style.visibility = 'hidden'
-                    setOverlayVisible(false)
-                    gsap.set(panel, { yPercent: 100 })
-                },
-            })
-            if (!reduceMotion) {
-                tl.to(panel, { yPercent: 100, duration, ease: smoothOut, force3D: true }, 0)
-            }
-            overlayTlRef.current = tl
-        } else {
-            const opening = backdrop.style.visibility !== 'visible'
-            overlayOpenRef.current = true
-            backdrop.style.visibility = 'visible'
-            setOverlayVisible(true)
-            if (opening) {
-                gsap.set(panel, { yPercent: reduceMotion ? 0 : 100 })
-            }
-            const tl = gsap.timeline()
-            if (!reduceMotion) {
-                tl.to(panel, {
-                    yPercent: 0,
-                    duration: tokenSeconds('--duration-slow', 400) + 0.1,
-                    ease: smoothOut,
-                    force3D: true,
-                })
-            }
-            overlayTlRef.current = tl
+    // Runs a DOM update inside a view transition when available. Without one, or with
+    // reduced motion, the overlay's CSS fade (Components.css) is the whole animation.
+    const run = (update, closing = false) => {
+        if (!canVT || prefersReducedMotion()) {
+            update()
+            return Promise.resolve()
         }
-    }, [])
+        const html = document.documentElement
+        html.classList.add('row-vt')
+        html.classList.toggle('row-vt-closing', closing)
+        const t = document.startViewTransition(update)
+        // a resize or tab switch mid-animation aborts it; the DOM update still applies
+        t.ready.catch(() => {})
+        return t.finished
+            .catch(() => {})
+            .finally(() => html.classList.remove('row-vt', 'row-vt-closing'))
+    }
 
-    useEffect(() => {
-        if (!overlayRef.current || !overlayPanelRef.current) return
-        gsap.set(overlayPanelRef.current, { yPercent: 100 })
-    }, [])
+    // The clicked image grows out of the row into its place in the overlay
+    const open = async (index) => {
+        if (isOpen || busyRef.current || !emblaApi || !overlayEmblaApi) return
+        busyRef.current = true
+        const i = index ?? firstVisible(emblaApi)
 
-    useEffect(() => () => overlayTlRef.current?.kill(), [])
+        // Line the overlay carousel up on the clicked image while it is still hidden,
+        // and decode its larger copy so it doesn't stutter on the first frames.
+        overlayEmblaApi.scrollTo(snapFor(overlayEmblaApi, i), true)
+        const img = overlaySlides()[i]?.querySelector('img')
+        await Promise.race([img?.decode().catch(() => {}), wait(100)])
+        // Embla applies the jump on the next frame
+        await nextFrame()
+
+        const tile = rowSlides()[i]
+        if (tile) tile.style.viewTransitionName = HERO
+        await run(() => {
+            flushSync(() => setIsOpen(true))
+            if (tile) tile.style.viewTransitionName = ''
+            const target = overlaySlides()[i]
+            if (target) target.style.viewTransitionName = HERO
+            if (overlayPanelRef.current) overlayPanelRef.current.style.viewTransitionName = REST
+        })
+        clearNames()
+        busyRef.current = false
+    }
+
+    // The image in view shrinks back into its tile in the row
+    const close = async () => {
+        if (!isOpen || busyRef.current || !emblaApi || !overlayEmblaApi) return
+        busyRef.current = true
+        const i = firstVisible(overlayEmblaApi)
+        const tile = rowSlides()[i]
+
+        // Bring the matching tile into view first. The overlay still covers the row,
+        // so the jump isn't seen, and the image lands where it came from.
+        if (tile) {
+            const r = tile.getBoundingClientRect()
+            const v = emblaApi.rootNode().getBoundingClientRect()
+            if (r.left < v.left || r.right > v.right) {
+                emblaApi.scrollTo(snapFor(emblaApi, i), true)
+                await nextFrame()
+            }
+        }
+
+        const source = overlaySlides()[i]
+        if (source) source.style.viewTransitionName = HERO
+        await run(() => {
+            flushSync(() => setIsOpen(false))
+            if (source) source.style.viewTransitionName = ''
+            if (tile) tile.style.viewTransitionName = HERO
+        }, true)
+        clearNames()
+        busyRef.current = false
+    }
 
     const handleRowPointerDown = (event) => {
         pointerStartRef.current = { x: event.clientX, y: event.clientY }
@@ -183,15 +232,22 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
         window.addEventListener('pointerup', onUp, { once: true })
     }
 
-    const handleRowClick = () => {
+    const handleRowClick = (event) => {
         if (pointerDraggedRef.current) return
-        toggleOverlay()
+        // Open on the tile that was clicked; a click between tiles uses the first in view
+        const slide =
+            event.target instanceof Element
+                ? event.target.closest('.embla__slide')
+                : null
+        const index = slide ? rowSlides().indexOf(slide) : -1
+        open(index === -1 ? undefined : index)
     }
 
     return (
         <>
             <div
                 className="embla-row embla-row--expandable"
+                data-reveal
                 onPointerDown={handleRowPointerDown}
                 onClick={handleRowClick}
                 style={{ cursor: 'pointer' }}
@@ -214,12 +270,12 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
             </div>
 
             <div
-                ref={overlayRef}
-                className="creative-overlay embla-row-overlay"
-                onClick={toggleOverlay}
-                style={{
-                    visibility: overlayVisible ? 'visible' : 'hidden',
-                }}
+                className={
+                    isOpen
+                        ? 'creative-overlay embla-row-overlay is-open'
+                        : 'creative-overlay embla-row-overlay'
+                }
+                onClick={close}
             >
                 <div className="embla-row-overlay__blur" aria-hidden="true" />
                 <div ref={overlayPanelRef} className="creative-overlay-content">
@@ -253,6 +309,8 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
 }
 
 function App() {
+    useReveal()
+
     return (
         <>
             <Header />
@@ -262,7 +320,7 @@ function App() {
             <ExpandableEmblaRow title="" mediaItems={row2Media} />
             <Links />
             <CreativeCanvas />
-            <div className="companies-why">
+            <div className="companies-why" data-reveal>
                 <Companies />
                 <PersonalBio />
             </div>

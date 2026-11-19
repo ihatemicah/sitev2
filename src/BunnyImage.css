@@ -1,0 +1,48 @@
+/* Wrapper fills whatever box the bare <img> used to fill. */
+.bunny-img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Placeholder stays in flow: it holds the exact space (same classes,
+   same aspect ratio as the final image), so nothing shifts. */
+.bunny-img > .bunny-img__placeholder {
+    position: relative;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0s linear var(--duration-slow, 400ms);
+}
+
+/* Full image stacked on top, fades in when loaded and decoded. */
+.bunny-img > .bunny-img__full {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--duration-slow, 400ms) var(--ease-smooth-out, ease-out);
+}
+
+.bunny-img.is-loaded > .bunny-img__full {
+    opacity: 1;
+}
+
+/* Hide the placeholder after the fade so transparent PNGs don't show it through. */
+.bunny-img.is-loaded > .bunny-img__placeholder {
+    opacity: 0;
+}
+
+.bunny-img.is-instant > .bunny-img__full,
+.bunny-img.is-instant > .bunny-img__placeholder {
+    transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bunny-img > .bunny-img__full {
+        transition: none;
+    }
+}

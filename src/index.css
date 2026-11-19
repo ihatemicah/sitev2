@@ -18,6 +18,7 @@
   --duration-fast: 250ms;
   --duration-medium: 350ms;
   --duration-slow: 400ms;
+  --duration-reveal: 700ms;
   --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: ease-in-out;
   --ease-out: ease-out;
@@ -33,6 +34,33 @@ body {
 
 header {
   padding: 0 0 8px 0;
+}
+
+/* Section reveal (src/useReveal.js). Sections only hide once main.jsx has set
+   .reveal-ready, so without JS the page is simply shown. The waiting state is the
+   only override: once revealed, each section returns to its own opacity (the
+   projects header sits at 60%), and `translate` leaves any transform alone. */
+.reveal-ready [data-reveal] {
+  transition:
+    opacity var(--duration-reveal) var(--ease-smooth-out),
+    translate var(--duration-reveal) var(--ease-smooth-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-ready [data-reveal]:not(.is-in) {
+  opacity: 0;
+  translate: 0 12px;
+}
+
+/* Reduced motion: a quick fade in place, no rise and no cascade */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal] {
+    transition: opacity 300ms ease;
+  }
+
+  .reveal-ready [data-reveal]:not(.is-in) {
+    translate: none;
+  }
 }
 
 
