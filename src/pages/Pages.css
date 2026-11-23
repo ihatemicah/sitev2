@@ -1,0 +1,21 @@
+.page {
+    padding: 15vh 0 30vh;
+    max-width: 40rem;
+}
+
+.page-title {
+    font-weight: 500;
+    font-size: 2.5rem;
+    margin: 0 0 1.5rem;
+}
+
+.page-lede {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+.page-note {
+    margin: 0;
+    opacity: 0.55;
+}

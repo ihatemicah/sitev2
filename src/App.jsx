@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import './App.css'
 import Header from './Header.jsx'
 import FeatureProjects from './Featureprojects.jsx'
@@ -17,6 +17,11 @@ import PortfolioHoverVideo, {
 import { emblaRowOptions, useEmblaClickReset } from './embla.js'
 import { flushSync } from 'react-dom'
 import { useReveal } from './useReveal.js'
+import { useRoute } from './router.js'
+
+// Only the home page ships in the main bundle; the others load when first visited.
+const About = lazy(() => import('./pages/About.jsx'))
+const Writing = lazy(() => import('./pages/Writing.jsx'))
 
 const canVT =
     typeof document !== 'undefined' &&
@@ -308,13 +313,14 @@ function ExpandableEmblaRow({ title = '', mediaItems = [] }) {
     )
 }
 
-function App() {
+function Home() {
     useReveal()
 
     return (
         <>
             <Header />
-            <StickyNav />
+            {/* Sits in flow under the header, as before, and slides in once it scrolls past */}
+            <StickyNav route="work" />
             <FeatureProjects />
             <ExpandableEmblaRow title="" mediaItems={row1Media} />
             <ExpandableEmblaRow title="" mediaItems={row2Media} />
@@ -325,6 +331,25 @@ function App() {
                 <PersonalBio />
             </div>
             <Footer />
+        </>
+    )
+}
+
+function App() {
+    const route = useRoute()
+
+    return (
+        <>
+            {route === 'work' ? (
+                <Home />
+            ) : (
+                <>
+                    <StickyNav route={route} />
+                    <Suspense fallback={null}>
+                        {route === 'about' ? <About /> : <Writing />}
+                    </Suspense>
+                </>
+            )}
             <div className="page-edge" aria-hidden="true" />
         </>
     )
